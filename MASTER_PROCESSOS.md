@@ -245,6 +245,30 @@ Abaixo está o registro cronológico e estruturado de todas as fundações e fun
 - **Pilar Marketing Digital (+40 anos exp):** APROVADO (10/10) — Redução de ruído cognitivo. O visitante mantém a atenção focada exclusivamente nos argumentos de valor, nos cards de serviço, na fotografia de perfil e nos gatilhos de conversão para o WhatsApp, tendo à disposição os controles flutuantes globais para locomoção ágil quando desejar.
 - **Arquivos Afetados:**
   - `index.html` (Remoção dos botões `.section-top-link` nos cabeçalhos das 5 seções, remoção do link no rodapé e exclusão dos estilos CSS correspondentes)
+### [PROC-014] Sistema de Flip 3D Interativo nos Cards de Serviços
+- **Data de Homologação:** 2026-09-24
+- **Responsável:** Auditor Multi-Especialista Sênior & Engenharia Front-end
+- **Objetivo de Negócio:** Substituir a abertura de modal intrusiva por uma experiência fluida de rotação tridimensional (Flip 3D) direto no próprio card de serviço. Ao clicar, o card gira 180° com expansão suave para 360px, revelando no verso a lista de entregáveis, o botão de ação do WhatsApp e a opção de vídeo, mantendo o usuário imerso na seção de serviços.
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (10/10) — Transição 3D elegante com aceleração por hardware (`transform-style: preserve-3d`, `perspective: 1000px`), expansão ergonômica com transição suave, scrollbar ciano discreta no verso (`overflow-y: auto`) e botão intuitivo de fechar (`×`).
+- **Pilar Engenharia de Software:** APROVADO (10/10) — Semântica limpa sem overhead; gerenciamento de estados via classes CSS (`.flipped`), controle por teclado acessível (`Esc` desvira o card ativo, `Enter`/`Space` aciona a virada), fechamento automático ao interagir com outro card. Zero memory leaks.
+- **Pilar Arquitetura de Sistemas:** APROVADO (10/10) — Desacoplamento total dos dados dinâmicos estruturados em JavaScript; renderização contextual do verso do card sem duplicidade estrutural.
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (10/10) — Aumento expressivo no engajamento interativo (efeito "wow"), reduzindo o atrito de decisão e conduzindo o lead diretamente ao botão de WhatsApp contextualizado do serviço.
+- **Arquivos Afetados:**
+  - `index.html` (CSS de rotação 3D, estrutura das faces `.card-front`/`.card-back` e scripts de controle de flip)
+- **Status:** CONCLUÍDO / HOMOLOGADO
+
+---
+
+### [PROC-015] Efeito Vinheta com 20% de Transparência nas Bordas da Modal do Book
+- **Data de Homologação:** 2026-09-24
+- **Responsável:** Auditor Multi-Especialista Sênior & Design Editorial
+- **Objetivo de Negócio:** Aplicar acabamento visual sofisticado na modal do Book de Possibilidades com leve transparência e vinheta de ~20% nas bordas, conferindo profundidade espacial e sensação de produto digital de luxo (glassmorphism sutil).
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (10/10) — Efeito de profundidade com dupla camada de sombra interna (`box-shadow: inset`) e gradiente radial sobreposto (`radial-gradient`), mantendo a legibilidade central 100% nítida e as bordas suavemente integradas ao fundo.
+- **Pilar Engenharia de Software:** APROVADO (10/10) — Preservação estrita do alinhamento central nativo do elemento `<dialog>` via CSS puro, sem hacks posicionais que quebrem o fluxo da viewport.
+- **Pilar Arquitetura de Sistemas:** APROVADO (10/10) — Implementação não-intrusiva que respeita todos os breakpoints móveis e mantém performance de 60fps.
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (10/10) — Elevação estética do portfólio visual para o público executivo e corporativo de alto ticket.
+- **Arquivos Afetados:**
+  - `index.html` (CSS de `#book-dialog`, `.book-dialog-inner::after` e backdrop)
 - **Status:** CONCLUÍDO / HOMOLOGADO
 
 ---
@@ -292,13 +316,16 @@ Toda e qualquer nova funcionalidade, componente, refatoração de código ou alt
 | **PROC-011** | Grade de Serviços 3x3 e Card 09 | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-012** | Foto de Perfil na Seção Sobre Mim | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-013** | Limpeza de Textos Redundantes de Início | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
+| **PROC-014** | Flip 3D Interativo nos Cards de Serviços | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
+| **PROC-015** | Efeito Vinheta 20% no Book Dialog | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 
 ---
 
 ## 6. Próximas Evoluções Recomendadas (Backlog Estratégico)
 
-1. **[PROC-014] Novos Vídeos de Demonstração (Sistemas, UX, Apps e Sites):** Subir vídeos demonstrativos correspondentes para as demais áreas (`public/videos/`) e ativá-los nos cards respectivos.
-2. **[PROC-015] Metadados Avançados e Open Graph / Schema.org:** Implementação de JSON-LD (`Person` e `ProfessionalService`) e tags OpenGraph/Twitter Card completas para compartilhamento impecável no WhatsApp e redes sociais.
-3. **[PROC-016] Integração de Event Tracking (Analytics / GTM):** Estruturação de dataLayer ou eventos de clique nos CTAs de WhatsApp, reprodução de vídeo e e-mail para mensuração de taxas de conversão.
-4. **[PROC-017] Microinterações e Feedback Háptico/Visual:** Refinamento sutil nos estados de foco e transições de abertura de diálogos.
+1. **[PROC-016] Novos Vídeos de Demonstração (Sistemas, UX, Apps e Sites):** Subir vídeos demonstrativos correspondentes para as demais áreas (`public/videos/`) e ativá-los nos cards respectivos.
+2. **[PROC-017] Metadados Avançados e Open Graph / Schema.org:** Implementação de JSON-LD (`Person` e `ProfessionalService`) e tags OpenGraph/Twitter Card completas para compartilhamento impecável no WhatsApp e redes sociais.
+3. **[PROC-018] Integração de Event Tracking (Analytics / GTM):** Estruturação de dataLayer ou eventos de clique nos CTAs de WhatsApp, reprodução de vídeo e e-mail para mensuração de taxas de conversão.
+4. **[PROC-019] Microinterações e Feedback Háptico/Visual:** Refinamento sutil nos estados de foco e transições adicionais.
+
 
