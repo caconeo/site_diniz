@@ -287,6 +287,20 @@ Abaixo está o registro cronológico e estruturado de todas as fundações e fun
 
 ---
 
+### [PROC-017] Inserção da Tag Global do Google AdSense no Cabeçalho (&lt;head&gt;)
+- **Data de Homologação:** 2026-09-25
+- **Responsável:** Auditor Multi-Especialista Sênior & Marketing Digital
+- **Objetivo de Negócio:** Ativação da infraestrutura de anúncios e integração do domínio com a conta Google AdSense (`ca-pub-3607103005809834`), permitindo a verificação de propriedade do site e a posterior monetização controlada.
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (10/10) — Script carregado com atributo `async`, garantindo que o ciclo de renderização inicial da interface, fontes e layout não sofram bloqueio visual nem travamentos de frame.
+- **Pilar Engenharia de Software:** APROVADO (10/10) — Uso do script oficial assíncrono do Google Syndication com atributo `crossorigin="anonymous"`, posicionado de acordo com as especificações técnicas da plataforma, sem gerar CLS (Cumulative Layout Shift) ou degradar o INP da página.
+- **Pilar Arquitetura de Sistemas:** APROVADO (10/10) — Inclusão limpa e padronizada no `<head>`, mantendo a soberania do ecossistema Vanilla JS e total compatibilidade com os demais componentes interativos do site.
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (10/10) — Cumprimento indispensável dos requisitos da plataforma Google AdSense para indexação comercial e monetização do tráfego qualificado do portal.
+- **Arquivos Afetados:**
+  - `index.html` (Linhas 10-11, dentro de `<head>`)
+- **Status:** CONCLUÍDO / HOMOLOGADO
+
+---
+
 ## 4. Protocolo e Template Obrigatório para Novos Processos
 
 Toda e qualquer nova funcionalidade, componente, refatoração de código ou alteração de copy no site **DEVE** ser submetida à auditoria do **Agente Auditor Multi-Especialista** e registrada neste documento seguindo o padrão abaixo:
@@ -333,14 +347,15 @@ Toda e qualquer nova funcionalidade, componente, refatoração de código ou alt
 | **PROC-014** | Flip 3D Interativo nos Cards de Serviços | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-015** | Efeito Vinheta 20% no Book Dialog | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-016** | Padronização e Alinhamento dos Cards | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
+| **PROC-017** | Tag Global Google AdSense (<head>) | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 
 ---
 
 ## 6. Próximas Evoluções Recomendadas (Backlog Estratégico)
 
-1. **[PROC-017] Novos Vídeos de Demonstração (Sistemas, UX, Apps e Sites):** Subir vídeos demonstrativos correspondentes para as demais áreas (`public/videos/`) e ativá-los nos cards respectivos.
-2. **[PROC-018] Metadados Avançados e Open Graph / Schema.org:** Implementação de JSON-LD (`Person` e `ProfessionalService`) e tags OpenGraph/Twitter Card completas para compartilhamento impecável no WhatsApp e redes sociais.
-3. **[PROC-019] Integração de Event Tracking (Analytics / GTM):** Estruturação de dataLayer ou eventos de clique nos CTAs de WhatsApp, reprodução de vídeo e e-mail para mensuração de taxas de conversão.
-4. **[PROC-020] Microinterações e Feedback Háptico/Visual:** Refinamento sutil nos estados de foco e transições adicionais.
+1. **[PROC-018] Novos Vídeos de Demonstração (Sistemas, UX, Apps e Sites):** Subir vídeos demonstrativos correspondentes para as demais áreas (`public/videos/`) e ativá-los nos cards respectivos.
+2. **[PROC-019] Metadados Avançados e Open Graph / Schema.org:** Implementação de JSON-LD (`Person` e `ProfessionalService`) e tags OpenGraph/Twitter Card completas para compartilhamento impecável no WhatsApp e redes sociais.
+3. **[PROC-020] Integração de Event Tracking (Analytics / GTM):** Estruturação de dataLayer ou eventos de clique nos CTAs de WhatsApp, reprodução de vídeo e e-mail para mensuração de taxas de conversão.
+4. **[PROC-021] Microinterações e Feedback Háptico/Visual:** Refinamento sutil nos estados de foco e transições adicionais.
 
 
