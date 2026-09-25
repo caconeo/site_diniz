@@ -88,7 +88,31 @@
   .hero-art-scan{position:absolute;inset:0;pointer-events:none;z-index:3;background:linear-gradient(180deg,transparent 0%,rgba(103,213,197,.14) 50%,transparent 100%);height:38%;border-bottom:1px solid rgba(127,226,209,.4);animation:heroScan 4.5s cubic-bezier(.4,0,.6,1) infinite}
   @keyframes heroScan{0%{transform:translateY(-100%);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateY(280%);opacity:0}}
   @keyframes cyberPulse{0%{box-shadow:0 0 0 38px rgba(128,220,204,.04),0 0 0 80px rgba(128,220,204,.03)}100%{box-shadow:0 0 0 46px rgba(128,220,204,.08),0 0 0 98px rgba(128,220,204,.05)}}
-  .card:hover,.service-card:hover{border-color:rgba(103,213,197,.55);box-shadow:0 0 22px rgba(103,213,197,.13),0 20px 40px #122b3b13}
+  .card:hover:not(.is-flipped),.service-card:hover:not(.is-flipped){border-color:rgba(103,213,197,.55);box-shadow:0 0 22px rgba(103,213,197,.13),0 20px 40px #122b3b13}
+
+  /* ── Service Card Flip System ─────────────────────── */
+  .service-grid{perspective:1600px}
+  .service-card{transform-style:preserve-3d;cursor:pointer;transition:transform .65s cubic-bezier(.4,0,.2,1),height .65s cubic-bezier(.4,0,.2,1),box-shadow .3s,border-color .3s,z-index 0s .65s;height:280px;min-height:0;padding:0;background:transparent;border:0}
+  .service-card:focus-visible{outline:3px solid #168a81;outline-offset:4px;border-radius:16px}
+  .service-card.is-flipped{transform:rotateY(180deg) scale(1.05);height:360px;z-index:20;transition:transform .65s cubic-bezier(.4,0,.2,1),height .65s cubic-bezier(.4,0,.2,1),box-shadow .3s,border-color .3s,z-index 0s}
+  .card-face{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:24px;display:flex;flex-direction:column;overflow:hidden}
+  .card-front{background:#fff;border:1px solid var(--line);box-shadow:none;transition:box-shadow .2s,border-color .2s}
+  .service-card:hover:not(.is-flipped) .card-front{border-color:rgba(103,213,197,.55);box-shadow:0 0 22px rgba(103,213,197,.13),0 20px 40px #122b3b13}
+  .service-card.is-flipped .card-front{box-shadow:0 0 40px rgba(103,213,197,.22),0 30px 70px rgba(16,28,43,.28);border-color:rgba(103,213,197,.7)}
+  .card-back{transform:rotateY(180deg);background:var(--navy);color:#fff;border:1px solid rgba(103,213,197,.35);box-shadow:0 0 40px rgba(103,213,197,.2),0 30px 70px rgba(16,28,43,.3);overflow-y:auto;overflow-x:hidden;padding:20px;scrollbar-width:thin;scrollbar-color:rgba(103,213,197,.4) transparent}
+  .cb-kicker{font-size:.72rem;letter-spacing:.16em;color:var(--accent);font-weight:800;margin-bottom:5px;text-transform:uppercase}
+  .cb-title{font-size:1.1rem;letter-spacing:-.04em;line-height:1.2;font-weight:800;margin-bottom:7px;color:#f4fffd}
+  .cb-desc{font-size:.82rem;color:#b9cbd4;line-height:1.48;margin-bottom:8px}
+  .cb-ex-head{font-size:.68rem;letter-spacing:.12em;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:5px}
+  .cb-examples{padding:0;margin:0 0 auto;list-style:none;display:flex;flex-direction:column;gap:4px}
+  .cb-examples li{font-size:.78rem;color:#c8d8de;padding-left:15px;position:relative;line-height:1.33}
+  .cb-examples li::before{content:'↗';color:var(--accent);position:absolute;left:0;font-size:.72rem;top:1px}
+  .cb-cta{margin-top:10px;font-size:.79rem;min-height:36px;padding:0 14px;width:100%;justify-content:center;display:inline-flex;align-items:center;border-radius:7px;background:var(--accent);color:var(--navy);font-weight:750;cursor:pointer;border:0;font:inherit;text-decoration:none;flex-shrink:0}
+  .cb-cta:hover{background:#90e7db}
+  .cb-close{position:absolute;top:9px;right:9px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;line-height:1;font:inherit;flex-shrink:0}
+  .cb-close:hover{background:rgba(255,255,255,.25)}
+  .cb-close:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .cb-video-btn{margin-top:6px;font-size:.76rem;min-height:30px;padding:5px 10px;flex-shrink:0}
   .sample-card:hover{border-color:rgba(103,213,197,.55);box-shadow:0 0 22px rgba(103,213,197,.13),0 16px 30px #102c3c19}
 
   /* Floating Cyber Scroll-To-Top Button */
@@ -157,16 +181,16 @@
     <main><section class="hero wrap" aria-labelledby="hero-title"><div><p class="eyebrow">Analista de Sistemas Sênior · UI/UX Designer</p><h1 id="hero-title">Ideias que viram <em>experiências digitais.</em></h1><p class="lede">Sou Cássio Diniz. Uno análise de sistemas, design de interfaces e mais de 30 anos de experiência em design gráfico para criar soluções digitais com clareza e propósito.</p><div class="hero-actions"><a class="btn" href="#servicos">Conheça meus serviços <span aria-hidden="true" style="margin-left:14px">↗</span></a><a class="textlink" href="#sobre">Minha trajetória</a><a class="textlink" href="#contato">Entre em contato</a></div></div><div class="hero-mark" aria-label="Cássio Diniz — Estratégia, design e tecnologia. Do conceito à experiência."><span class="mark-caption mark-caption-top">ESTRATÉGIA / DESIGN / TECNOLOGIA</span><div class="hero-art" aria-hidden="true"><div class="hero-art-scan" aria-hidden="true"></div><span class="art-center">C<span style="color:var(--accent)">D</span></span></div><span class="mark-caption mark-caption-bottom">DO CONCEITO À EXPERIÊNCIA</span></div></section></main>
   </div>
   <div class="stat-strip"><div class="stats wrap"><div class="stat"><strong>30+ anos</strong><span>de experiência em design gráfico</span></div><div class="stat"><strong>Visão completa</strong><span>da análise à interface</span></div><div class="stat"><strong>Digital + visual</strong><span>soluções em diferentes formatos</span></div></div></div>
-  <section class="section wrap" id="servicos" aria-labelledby="services-title"><div class="section-head"><div><p class="kicker">O que faço</p><h2 id="services-title">Soluções para criar, conectar e comunicar.</h2></div><p class="section-intro">Projetos que combinam estrutura técnica, facilidade de uso e identidade visual.</p></div><div class="service-grid">
-    <button type="button" class="card service-card" data-service="sistemas" aria-label="Ver exemplos de sistemas"><span class="number">01 / TECNOLOGIA</span><h3>Desenvolvimento de sistemas</h3><p>Planejamento e construção de soluções para organizar processos, dados e rotinas de trabalho.</p><span class="card-more">Ver exemplos ↗</span></button>
-    <button type="button" class="card service-card" data-service="ux" aria-label="Ver exemplos de ux"><span class="number">02 / EXPERIÊNCIA</span><h3>UI/UX Design</h3><p>Fluxos, interfaces e protótipos pensados para tornar produtos digitais mais simples de usar.</p><span class="card-more">Ver exemplos ↗</span></button>
-    <button type="button" class="card service-card" data-service="sites" aria-label="Ver exemplos de sites"><span class="number">03 / WEB</span><h3>Sites e convites virtuais</h3><p>Presença digital e experiências para apresentar marcas, serviços e momentos especiais.</p><span class="card-more">Ver exemplos ↗</span></button>
-    <button type="button" class="card service-card" data-service="mobile" aria-label="Ver exemplos de mobile"><span class="number">04 / MOBILE</span><h3>Aplicativos mobile</h3><p>Concepção e desenvolvimento de experiências para dispositivos móveis.</p><span class="card-more">Ver exemplos ↗</span></button>
-    <button type="button" class="card service-card" data-service="integracao" aria-label="Ver exemplos de integracao"><span class="number">05 / CONEXÕES</span><h3>Integração entre interfaces</h3><p>Conexão entre sistemas, canais e pontos de contato para jornadas mais consistentes.</p><span class="card-more">Ver exemplos ↗</span></button>
-    <button type="button" class="card service-card" data-service="conteudo" aria-label="Ver exemplos de conteudo"><span class="number">06 / CONTEÚDO</span><h3>E-books e podcasts</h3><p>Desenvolvimento de formatos digitais para compartilhar conhecimento e contar histórias.</p><span class="card-more">Ver exemplos ↗</span></button>
-    <button type="button" class="card service-card" data-service="maquetes" aria-label="Ver exemplos de maquetes"><span class="number">07 / VISUALIZAÇÃO</span><h3>Maquetes virtuais e renderização</h3><p>Representações visuais e renderizações de protótipos para dar forma às ideias antes da execução.</p><span class="card-more">Ver exemplos ↗</span></button>
-    <button type="button" class="card service-card" data-service="grafico" aria-label="Ver exemplos de grafico"><span class="number">08 / IDENTIDADE</span><h3>Design gráfico</h3><p>Criação visual apoiada em mais de três décadas de prática com comunicação e composição.</p><span class="card-more">Ver exemplos ↗</span></button>
-    <button type="button" class="card service-card" data-service="fotografia" aria-label="Ver exemplos de fotografia"><span class="number">09 / FOTOGRAFIA</span><h3>Fotografia de produtos</h3><p>Captação e tratamento profissional de imagens para valorizar itens em catálogos, sites, e-books e materiais comerciais.</p><span class="card-more">Ver exemplos ↗</span></button>
+  <section class="section wrap" id="servicos" aria-labelledby="services-title"><div class="section-head"><div><p class="kicker">O que faço</p><h2 id="services-title">Soluções para criar, conectar e comunicar.</h2></div><p class="section-intro">Clique em um card para ver detalhes — ele vira e revela mais informações.</p></div><div class="service-grid">
+    <div class="card service-card" data-service="sistemas" tabindex="0" role="button" aria-expanded="false" aria-label="Desenvolvimento de sistemas — clique para ver detalhes"><div class="card-face card-front"><span class="number">01 / TECNOLOGIA</span><h3>Desenvolvimento de sistemas</h3><p>Planejamento e construção de soluções para organizar processos, dados e rotinas de trabalho.</p><span class="card-more">Ver detalhes ↗</span></div><div class="card-face card-back" aria-hidden="true"></div></div>
+    <div class="card service-card" data-service="ux" tabindex="0" role="button" aria-expanded="false" aria-label="UI/UX Design — clique para ver detalhes"><div class="card-face card-front"><span class="number">02 / EXPERIÊNCIA</span><h3>UI/UX Design</h3><p>Fluxos, interfaces e protótipos pensados para tornar produtos digitais mais simples de usar.</p><span class="card-more">Ver detalhes ↗</span></div><div class="card-face card-back" aria-hidden="true"></div></div>
+    <div class="card service-card" data-service="sites" tabindex="0" role="button" aria-expanded="false" aria-label="Sites e convites virtuais — clique para ver detalhes"><div class="card-face card-front"><span class="number">03 / WEB</span><h3>Sites e convites virtuais</h3><p>Presença digital e experiências para apresentar marcas, serviços e momentos especiais.</p><span class="card-more">Ver detalhes ↗</span></div><div class="card-face card-back" aria-hidden="true"></div></div>
+    <div class="card service-card" data-service="mobile" tabindex="0" role="button" aria-expanded="false" aria-label="Aplicativos mobile — clique para ver detalhes"><div class="card-face card-front"><span class="number">04 / MOBILE</span><h3>Aplicativos mobile</h3><p>Concepção e desenvolvimento de experiências para dispositivos móveis.</p><span class="card-more">Ver detalhes ↗</span></div><div class="card-face card-back" aria-hidden="true"></div></div>
+    <div class="card service-card" data-service="integracao" tabindex="0" role="button" aria-expanded="false" aria-label="Integração entre interfaces — clique para ver detalhes"><div class="card-face card-front"><span class="number">05 / CONEXÕES</span><h3>Integração entre interfaces</h3><p>Conexão entre sistemas, canais e pontos de contato para jornadas mais consistentes.</p><span class="card-more">Ver detalhes ↗</span></div><div class="card-face card-back" aria-hidden="true"></div></div>
+    <div class="card service-card" data-service="conteudo" tabindex="0" role="button" aria-expanded="false" aria-label="E-books e podcasts — clique para ver detalhes"><div class="card-face card-front"><span class="number">06 / CONTEÚDO</span><h3>E-books e podcasts</h3><p>Desenvolvimento de formatos digitais para compartilhar conhecimento e contar histórias.</p><span class="card-more">Ver detalhes ↗</span></div><div class="card-face card-back" aria-hidden="true"></div></div>
+    <div class="card service-card" data-service="maquetes" tabindex="0" role="button" aria-expanded="false" aria-label="Maquetes virtuais e renderização — clique para ver detalhes"><div class="card-face card-front"><span class="number">07 / VISUALIZAÇÃO</span><h3>Maquetes virtuais e renderização</h3><p>Representações visuais e renderizações de protótipos para dar forma às ideias antes da execução.</p><span class="card-more">Ver detalhes ↗</span></div><div class="card-face card-back" aria-hidden="true"></div></div>
+    <div class="card service-card" data-service="grafico" tabindex="0" role="button" aria-expanded="false" aria-label="Design gráfico — clique para ver detalhes"><div class="card-face card-front"><span class="number">08 / IDENTIDADE</span><h3>Design gráfico</h3><p>Criação visual apoiada em mais de três décadas de prática com comunicação e composição.</p><span class="card-more">Ver detalhes ↗</span></div><div class="card-face card-back" aria-hidden="true"></div></div>
+    <div class="card service-card" data-service="fotografia" tabindex="0" role="button" aria-expanded="false" aria-label="Fotografia de produtos — clique para ver detalhes"><div class="card-face card-front"><span class="number">09 / FOTOGRAFIA</span><h3>Fotografia de produtos</h3><p>Captação e tratamento profissional de imagens para valorizar itens em catálogos, sites, e-books e materiais comerciais.</p><span class="card-more">Ver detalhes ↗</span></div><div class="card-face card-back" aria-hidden="true"></div></div>
   </div></section>
   <section class="section samples" id="amostras" aria-labelledby="samples-title"><div class="wrap"><div class="section-head"><div><p class="kicker">Exploração de possibilidades</p><h2 id="samples-title">Um book de possibilidades.</h2></div><p class="section-intro">Explore formatos e soluções que podemos desenvolver para o seu projeto.</p></div><div class="sample-grid">
     <button class="sample-card" type="button" data-book="sistemas"><span class="sample-visual"><img src="imagens/book-sistemas.webp" alt="Painel digital de processos e indicadores em tela de computador" loading="lazy" width="1536" height="1024"></span><span class="sample-body"><small>SISTEMAS</small><strong>Portal de processos internos</strong><span>Solicitações, acompanhamento de etapas e painéis de gestão.</span><em>Ver detalhes ↗</em></span></button>
@@ -217,7 +241,7 @@
   <section class="section contact" id="contato" aria-labelledby="contact-title"><div class="wrap contact-grid"><div><p class="kicker">Contato</p><h2 id="contact-title">Vamos conversar sobre seu projeto?</h2><p>Conte o que você deseja desenvolver. Podemos começar pelo WhatsApp ou por e-mail.</p><div class="contact-actions"><a class="btn" href="https://wa.me/5531993963275" target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp ↗</a><a class="mail-link" href="mailto:cassio.diniz@uol.com.br">cassio.diniz@uol.com.br ↗</a></div><p class="contact-number">WhatsApp: +55 (31) 99396-3275</p></div><div class="qr-card"><img src="whatsapp-qr.svg" width="256" height="256" alt="QR code para conversar com Cássio Diniz pelo WhatsApp"><strong>Aponte a câmera para conversar</strong><span>O código abre o WhatsApp no número informado.</span></div></div></section>
   <section class="closing wrap" aria-labelledby="closing-title"><div class="closing-inner"><div><p class="kicker">Cássio Diniz</p><h2 id="closing-title">Tecnologia e design no mesmo projeto.</h2><p>Sistemas, interfaces, conteúdo e visualização concebidos com atenção à forma e ao funcionamento.</p></div><div class="closing-mark" aria-hidden="true">CD</div></div></section>
   <dialog id="book-dialog" aria-labelledby="book-title"><div class="book-dialog-inner"><button type="button" class="book-close dialog-close" aria-label="Fechar projeto">×</button><img id="book-image" src="imagens/book-sistemas.webp" alt="" width="1536" height="1024"><div class="book-detail"><p class="kicker" id="book-category"></p><h2 id="book-title"></h2><p id="book-description"></p><h3>O que pode incluir</h3><ul id="book-features"></ul><button type="button" id="book-video-btn" class="btn-video-example" style="display:none">▶ Ver modelo em vídeo da maquete ↗</button><a class="btn" id="book-contact" target="_blank" rel="noopener noreferrer" href="https://wa.me/5531993963275">Quero conversar sobre esta ideia ↗</a></div></div></dialog>
-  <dialog id="service-dialog" aria-labelledby="dialog-title"><div class="dialog-inner"><button type="button" class="dialog-close" aria-label="Fechar janela">×</button><p class="kicker" id="dialog-kicker"></p><h2 id="dialog-title"></h2><p id="dialog-description"></p><h3>Exemplos de aplicação</h3><ul id="dialog-examples"></ul><button type="button" id="dialog-video-btn" class="btn-video-example" style="display:none">▶ Ver modelo em vídeo da maquete ↗</button><a class="btn" id="dialog-contact" href="https://wa.me/5531993963275" target="_blank" rel="noopener noreferrer">Conversar sobre este serviço ↗</a></div></dialog>
+
   <dialog id="video-modal" aria-labelledby="video-modal-title"><div class="video-modal-inner"><div class="video-modal-header"><h3 id="video-modal-title">Modelo em vídeo</h3><button type="button" class="dialog-close video-modal-close" aria-label="Fechar vídeo">×</button></div><div class="video-modal-player-wrap"><video id="video-modal-player" controls playsinline preload="metadata"></video></div><div class="video-modal-controls"><button type="button" id="video-btn-play" class="video-ctrl-btn">▶ Play</button><button type="button" id="video-btn-pause" class="video-ctrl-btn">❚❚ Pausar</button><a id="video-btn-whatsapp" class="video-ctrl-contact" target="_blank" rel="noopener noreferrer" href="https://wa.me/5531993963275">Conversar no WhatsApp ↗</a></div></div></dialog>
   <!-- Navigation: Floating Back-to-Top Button -->
   <button type="button" id="back-to-top" class="scroll-top-btn" aria-label="Voltar ao início da página" title="Voltar ao início">
@@ -278,12 +302,6 @@ const bookDialog=document.getElementById('book-dialog');
 const bookClose=bookDialog.querySelector('.book-close');
 const bookVideoBtn=document.getElementById('book-video-btn');
 let bookTrigger=null;
-
-const dialog=document.getElementById('service-dialog');
-const closeButton=dialog.querySelector('.dialog-close');
-const dialogVideoBtn=document.getElementById('dialog-video-btn');
-let trigger=null;
-
 const videoModal=document.getElementById('video-modal');
 const videoPlayer=document.getElementById('video-modal-player');
 const videoTitle=document.getElementById('video-modal-title');
@@ -325,42 +343,111 @@ document.querySelectorAll('[data-book]').forEach(button=>button.addEventListener
  const list=document.getElementById('book-features');list.replaceChildren();
  item.features.forEach(feature=>{const li=document.createElement('li');li.textContent=feature;list.append(li)});
  document.getElementById('book-contact').href='https://wa.me/5531993963275?text='+encodeURIComponent('Olá, Cássio! Gostaria de conversar sobre uma ideia de '+item.title+'.');
-
  if(item.video){
   bookVideoBtn.style.display='inline-flex';
   bookVideoBtn.onclick=()=>openVideoModal(item.video, item.title + ' — Modelo de Criação', bookVideoBtn);
  } else {
   bookVideoBtn.style.display='none';
  }
-
  bookDialog.showModal();bookClose.focus();
 }));
 bookClose.addEventListener('click',()=>bookDialog.close());
 bookDialog.addEventListener('click',event=>{if(event.target===bookDialog)bookDialog.close()});
 bookDialog.addEventListener('close',()=>bookTrigger?.focus());
 
-document.querySelectorAll('[data-service]').forEach(button=>button.addEventListener('click',()=>{
- const item=services[button.dataset.service]; if(!item)return;
- trigger=button;
- document.getElementById('dialog-kicker').textContent=item.tag;
- document.getElementById('dialog-title').textContent=item.title;
- document.getElementById('dialog-description').textContent=item.description;
- const list=document.getElementById('dialog-examples');list.replaceChildren();
- item.examples.forEach(example=>{const li=document.createElement('li');li.textContent=example;list.append(li)});
- document.getElementById('dialog-contact').href='https://wa.me/5531993963275?text='+encodeURIComponent('Olá, Cássio! Gostaria de conversar sobre '+item.title+'.');
+// ── Service Card Flip System ──────────────────────────────
+let flippedCard = null;
 
- if(item.video){
-  dialogVideoBtn.style.display='inline-flex';
-  dialogVideoBtn.onclick=()=>openVideoModal(item.video, item.title + ' — Modelo de Criação', dialogVideoBtn);
- } else {
-  dialogVideoBtn.style.display='none';
+function buildCardBack(back, item, card) {
+ back.innerHTML = '';
+ // Close button
+ const closeBtn = document.createElement('button');
+ closeBtn.type = 'button';
+ closeBtn.className = 'cb-close';
+ closeBtn.setAttribute('aria-label', 'Fechar detalhes');
+ closeBtn.textContent = '×';
+ closeBtn.addEventListener('click', e => { e.stopPropagation(); flipCard(card, false); });
+ back.appendChild(closeBtn);
+ // Kicker
+ const kicker = document.createElement('span');
+ kicker.className = 'cb-kicker';
+ kicker.textContent = item.tag;
+ back.appendChild(kicker);
+ // Title
+ const title = document.createElement('span');
+ title.className = 'cb-title';
+ title.textContent = item.title;
+ back.appendChild(title);
+ // Desc
+ const desc = document.createElement('span');
+ desc.className = 'cb-desc';
+ desc.textContent = item.description;
+ back.appendChild(desc);
+ // Examples heading
+ const exHead = document.createElement('span');
+ exHead.className = 'cb-ex-head';
+ exHead.textContent = 'Exemplos:';
+ back.appendChild(exHead);
+ // Examples list
+ const list = document.createElement('ul');
+ list.className = 'cb-examples';
+ item.examples.forEach(ex => { const li = document.createElement('li'); li.textContent = ex; list.appendChild(li); });
+ back.appendChild(list);
+ // Video button if applicable
+ if (item.video) {
+  const vBtn = document.createElement('button');
+  vBtn.type = 'button';
+  vBtn.className = 'btn-video-example cb-video-btn';
+  vBtn.textContent = '▶ Ver modelo em vídeo';
+  vBtn.addEventListener('click', e => { e.stopPropagation(); openVideoModal(item.video, item.title + ' — Modelo de Criação', vBtn); });
+  back.appendChild(vBtn);
  }
+ // CTA button (uses button + window.open to avoid nested interactive content issues)
+ const cta = document.createElement('button');
+ cta.type = 'button';
+ cta.className = 'cb-cta';
+ cta.textContent = 'Conversar sobre este serviço ↗';
+ cta.addEventListener('click', e => { e.stopPropagation(); window.open('https://wa.me/5531993963275?text='+encodeURIComponent('Olá, Cássio! Gostaria de conversar sobre '+item.title+'.'), '_blank', 'noopener,noreferrer'); });
+ back.appendChild(cta);
+}
 
- dialog.showModal();closeButton.focus();
-}));
-closeButton.addEventListener('click',()=>dialog.close());
-dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
-dialog.addEventListener('close',()=>trigger?.focus());
+function flipCard(card, open) {
+ if (open) {
+  if (flippedCard && flippedCard !== card) flipCard(flippedCard, false);
+  flippedCard = card;
+  card.classList.add('is-flipped');
+  card.setAttribute('aria-expanded', 'true');
+  card.querySelector('.card-back')?.removeAttribute('aria-hidden');
+  setTimeout(() => card.querySelector('.cb-close')?.focus(), 380);
+ } else {
+  card.classList.remove('is-flipped');
+  card.setAttribute('aria-expanded', 'false');
+  card.querySelector('.card-back')?.setAttribute('aria-hidden', 'true');
+  card.focus({ preventScroll: true });
+  if (flippedCard === card) flippedCard = null;
+ }
+}
+
+document.querySelectorAll('.service-card').forEach(card => {
+ const item = services[card.dataset.service];
+ if (!item) return;
+ const back = card.querySelector('.card-back');
+ if (back) buildCardBack(back, item, card);
+ card.addEventListener('click', e => {
+  if (e.target.closest('.card-back')) return;
+  flipCard(card, !card.classList.contains('is-flipped'));
+ });
+ card.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('.card-back')) {
+   e.preventDefault();
+   flipCard(card, !card.classList.contains('is-flipped'));
+  }
+ });
+});
+
+document.addEventListener('keydown', e => {
+ if (e.key === 'Escape' && flippedCard) flipCard(flippedCard, false);
+});
 
 // Ambient Matrix Digital Stream
 (function() {
