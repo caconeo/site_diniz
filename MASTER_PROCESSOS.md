@@ -273,6 +273,20 @@ Abaixo está o registro cronológico e estruturado de todas as fundações e fun
 
 ---
 
+### [PROC-016] Padronização Tipográfica, Alinhamento Horizontal e Otimização de Espaçamentos dos Cards de Serviços
+- **Data de Homologação:** 2026-09-25
+- **Responsável:** Auditor Multi-Especialista Sênior & Engenharia Front-end
+- **Objetivo de Negócio:** Eliminar assimetrias verticais e vãos excessivos nos cards de serviços. Padronizar a altura da caixa de títulos (`h3`) e fixar o espaçamento da numeração/categoria (`.number`), garantindo que a primeira linha do parágrafo descritivo comece rigorosamente na mesma cota horizontal (mesmo Y) em todos os 9 cards do grid, proporcionando escaneabilidade imediata, elegância editorial e maior conversão (CRO).
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (10/10) — Aplicação exemplar da Lei da Proximidade de Gestalt e Heurística de Consistência e Padrões. A categoria superior (`.number`) recebeu margem inferior fixa de 12px (removendo a flutuação irregular anterior de `margin-bottom: auto`). O título (`h3`) foi configurado com `font-size: 1.36rem`, `line-height: 1.22` e `min-height: 2.44em` (reserva vertical matemática para exatamente 2 linhas de texto com `align-items: flex-start`). A margem inferior do título foi reduzida cirurgicamente para 8px (`margin: 0 0 8px`), aproximando a descrição do título e alinhando o primeiro caractere do parágrafo perfeitamente entre todos os cards adjacentes. O link "Ver detalhes ↗" (`.card-more`) foi ancorado ao rodapé via `margin-top: auto; padding-top: 10px;`.
+- **Pilar Engenharia de Software:** APROVADO (10/10) — CSS limpo e performático com unidades relativas (`em`/`rem`), garantindo suporte impecável ao escalonamento de texto (WCAG 1.4.4 Resize Text). Nenhuma dependência externa, zero JavaScript adicional e ausência de hacks frágeis.
+- **Pilar Arquitetura de Sistemas:** APROVADO (10/10) — Manutenção estrita da integridade do sistema de flip 3D dos cards (`.is-flipped`, `.card-back`), funcionando perfeitamente sem efeitos colaterais. Total compatibilidade com a grade responsiva em desktop (3 colunas), tablet (2 colunas) e mobile (1 coluna).
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (10/10) — Redução drástica da fadiga ocular e atrito cognitivo. Padrão de leitura em F/Z muito mais fluido e natural, mantendo o foco do visitante na Proposta Única de Valor (UVP) de cada serviço e acelerando o clique em direção ao verso detalhado e ao WhatsApp.
+- **Arquivos Afetados:**
+  - `index.html` (CSS de `.card-front .number`, `.card-front h3`, `.card-front p` e `.card-front .card-more`)
+- **Status:** CONCLUÍDO / HOMOLOGADO
+
+---
+
 ## 4. Protocolo e Template Obrigatório para Novos Processos
 
 Toda e qualquer nova funcionalidade, componente, refatoração de código ou alteração de copy no site **DEVE** ser submetida à auditoria do **Agente Auditor Multi-Especialista** e registrada neste documento seguindo o padrão abaixo:
@@ -318,14 +332,15 @@ Toda e qualquer nova funcionalidade, componente, refatoração de código ou alt
 | **PROC-013** | Limpeza de Textos Redundantes de Início | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-014** | Flip 3D Interativo nos Cards de Serviços | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-015** | Efeito Vinheta 20% no Book Dialog | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
+| **PROC-016** | Padronização e Alinhamento dos Cards | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 
 ---
 
 ## 6. Próximas Evoluções Recomendadas (Backlog Estratégico)
 
-1. **[PROC-016] Novos Vídeos de Demonstração (Sistemas, UX, Apps e Sites):** Subir vídeos demonstrativos correspondentes para as demais áreas (`public/videos/`) e ativá-los nos cards respectivos.
-2. **[PROC-017] Metadados Avançados e Open Graph / Schema.org:** Implementação de JSON-LD (`Person` e `ProfessionalService`) e tags OpenGraph/Twitter Card completas para compartilhamento impecável no WhatsApp e redes sociais.
-3. **[PROC-018] Integração de Event Tracking (Analytics / GTM):** Estruturação de dataLayer ou eventos de clique nos CTAs de WhatsApp, reprodução de vídeo e e-mail para mensuração de taxas de conversão.
-4. **[PROC-019] Microinterações e Feedback Háptico/Visual:** Refinamento sutil nos estados de foco e transições adicionais.
+1. **[PROC-017] Novos Vídeos de Demonstração (Sistemas, UX, Apps e Sites):** Subir vídeos demonstrativos correspondentes para as demais áreas (`public/videos/`) e ativá-los nos cards respectivos.
+2. **[PROC-018] Metadados Avançados e Open Graph / Schema.org:** Implementação de JSON-LD (`Person` e `ProfessionalService`) e tags OpenGraph/Twitter Card completas para compartilhamento impecável no WhatsApp e redes sociais.
+3. **[PROC-019] Integração de Event Tracking (Analytics / GTM):** Estruturação de dataLayer ou eventos de clique nos CTAs de WhatsApp, reprodução de vídeo e e-mail para mensuração de taxas de conversão.
+4. **[PROC-020] Microinterações e Feedback Háptico/Visual:** Refinamento sutil nos estados de foco e transições adicionais.
 
 

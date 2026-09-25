@@ -97,6 +97,10 @@
   .service-card.is-flipped{transform:rotateY(180deg) scale(1.05);height:360px;z-index:20;transition:transform .65s cubic-bezier(.4,0,.2,1),height .65s cubic-bezier(.4,0,.2,1),box-shadow .3s,border-color .3s,z-index 0s}
   .card-face{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:24px;display:flex;flex-direction:column;overflow:hidden}
   .card-front{background:#fff;border:1px solid var(--line);box-shadow:none;transition:box-shadow .2s,border-color .2s}
+  .card-front .number{margin-bottom:12px;flex-shrink:0}
+  .card-front h3{font-size:1.36rem;letter-spacing:-.035em;line-height:1.22;margin:0 0 8px;min-height:2.44em;display:flex;align-items:flex-start}
+  .card-front p{color:var(--muted);line-height:1.52;font-size:.9rem;margin:0}
+  .card-front .card-more{margin-top:auto;padding-top:10px;display:inline-flex;align-items:center}
   .service-card:hover:not(.is-flipped) .card-front{border-color:rgba(103,213,197,.55);box-shadow:0 0 22px rgba(103,213,197,.13),0 20px 40px #122b3b13}
   .service-card.is-flipped .card-front{box-shadow:0 0 40px rgba(103,213,197,.22),0 30px 70px rgba(16,28,43,.28);border-color:rgba(103,213,197,.7)}
   .card-back{transform:rotateY(180deg);background:var(--navy);color:#fff;border:1px solid rgba(103,213,197,.35);box-shadow:0 0 40px rgba(103,213,197,.2),0 30px 70px rgba(16,28,43,.3);overflow-y:auto;overflow-x:hidden;padding:20px;scrollbar-width:thin;scrollbar-color:rgba(103,213,197,.4) transparent}
