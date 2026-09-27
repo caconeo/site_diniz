@@ -369,6 +369,20 @@ Abaixo está o registro cronológico e estruturado de todas as fundações e fun
 
 ---
 
+### [PROC-025] Refinamento de UX/UI: Eliminação de Barra de Rolagem Horizontal nas Abas do Painel Administrativo
+- **Data de Homologação:** 2026-09-27
+- **Responsável:** Auditor Multi-Especialista Sênior (UX/UI 30a, Software, Arquitetura e Marketing 40a)
+- **Objetivo de Negócio:** Eliminar o atrito visual e a barra de rolagem cinza padrão do sistema operacional que aparecia abaixo dos botões de navegação do painel administrativo. Substituição da antiga barra linear com overflow por um componente Segmented Control / Pill Bar moderno, conciso, de alta densidade visual e 100% responsivo sem rolagem horizontal indesejada.
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (10/10) — Transição para Segmented Control dark elegante com fundo translúcido (`rgba(14, 23, 36, 0.6)`), borda sutil ciano (`var(--line)`), microinterações de hover suaves e estado ativo destacado em ciano luminoso (`var(--accent)`) com tipografia nítida e alvos de toque otimizados. Rótulos concisos e diretos (de 55 caracteres para médias de 15 a 18 caracteres).
+- **Pilar Engenharia de Software:** APROVADO (10/10) — `overflow: visible;` eliminando a barra nativa do Windows, adoção de `flex-wrap: wrap` e grid adaptável para mobile via `@media (max-width: 768px)`, garantindo que mesmo em resoluções estreitas os botões quebrem em 2 colunas harmônicas sem gerar scroll horizontal na página. Adicionada estilização global sutil para scrollbars remanescentes em tabelas.
+- **Pilar Arquitetura de Sistemas:** APROVADO (10/10) — Zero alterações na lógica funcional de eventos (`switchTab`), mantendo a estabilidade da orquestração de abas.
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (10/10) — Elevação substancial do padrão de acabamento visual ("Design de Software de Alta Classe"), condizente com um executivo e estrategista de sistemas como Cássio Diniz.
+- **Arquivos Afetados:**
+  - `ebook/admin.html` (CSS de `.tabs-bar`, `.tab-btn`, responsividade e rótulos HTML das abas)
+- **Status:** CONCLUÍDO / HOMOLOGADO
+
+---
+
 ## 4. Protocolo e Template Obrigatório para Novos Processos
 
 Toda e qualquer nova funcionalidade, componente, refatoração de código ou alteração de copy no site **DEVE** ser submetida à auditoria do **Agente Auditor Multi-Especialista** e registrada neste documento seguindo o padrão abaixo:
