@@ -1,0 +1,3 @@
+Plataforma: Hotmart
+Ebook: Guia Avançado de Python para Automação
+Caminho: ebook/hotmart/python-automacao/

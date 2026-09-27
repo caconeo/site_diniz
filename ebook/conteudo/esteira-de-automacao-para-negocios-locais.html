@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esteira de Automação para Negócios Locais — Livro Digital Oficial | SVD Lumex</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --bg: #090e17;
+      --surface: #0f172a;
+      --surface-card: #1e293b;
+      --border: #334155;
+      --primary: #10b981;
+      --primary-glow: rgba(16, 185, 129, 0.25);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --gold: #f59e0b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --code-bg: #030712;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .container {
+      max-width: 920px;
+      width: 100%;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 70px 60px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+
+    /* CAPA */
+    .cover-page {
+      text-align: center;
+      padding: 30px 20px 60px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 60px;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: var(--primary-glow);
+      color: var(--primary);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 6px 20px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    .cover-image-container {
+      margin: 20px auto 35px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cover-3d-mockup {
+      max-width: 340px;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 45px var(--primary-glow);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: transform 0.4s ease;
+    }
+
+    .cover-3d-mockup:hover {
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    .cover-page h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .cover-page h2 {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--accent);
+      max-width: 720px;
+      margin: 0 auto 36px;
+      line-height: 1.5;
+    }
+
+    .cover-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .cover-meta span {
+      background: var(--surface-card);
+      padding: 8px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    /* FICHA CATALOGRÁFICA */
+    .catalog-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      margin: 50px 0 60px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .catalog-card h4 {
+      color: #ffffff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* SUMÁRIO */
+    .toc-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 36px 30px;
+      margin-bottom: 60px;
+    }
+
+    .toc-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toc-card ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .toc-card li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .toc-card li:last-child {
+      border-bottom: none;
+    }
+
+    .toc-card a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .toc-card a:hover {
+      color: var(--accent);
+    }
+
+    .toc-card span.page-num {
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    /* SEÇÕES E CAPÍTULOS */
+    .chapter-divider {
+      margin: 60px 0 30px;
+      border-top: 1px solid var(--border);
+    }
+
+    h2.chapter-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-top: 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      line-height: 1.25;
+    }
+
+    h3.section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-top: 40px;
+      margin-bottom: 16px;
+    }
+
+    h4.subsection-title {
+      font-size: 1.15rem;
+      color: var(--primary);
+      margin-top: 26px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 0 0 24px 28px;
+      color: #cbd5e1;
+      font-size: 1.03rem;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* ILUSTRAÇÕES DE CAPÍTULO */
+    .chapter-figure {
+      margin: 40px auto;
+      text-align: center;
+    }
+
+    .chapter-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .chapter-caption {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* CALLOUTS */
+    .callout {
+      background: var(--surface-card);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 12px 12px 0;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .callout.alert {
+      border-left-color: var(--gold);
+    }
+
+    .callout-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #ffffff;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* SCRIPTS DE ATENDIMENTO */
+    .script-box {
+      background: var(--code-bg);
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin: 16px 0 32px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      color: #93c5fd;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      max-width: 100%;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .script-box a {
+      color: var(--accent);
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      text-decoration: underline;
+    }
+
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .script-tag {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 24px;
+      margin-bottom: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* TABELAS */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 30px 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+      background: var(--surface-card);
+      border-radius: 10px;
+      overflow: hidden;
+      border: none;
+    }
+
+    th, td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+    }
+
+    /* CARTÃO DO DESENVOLVEDOR */
+    .developer-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 16px;
+      padding: 36px 32px;
+      margin: 60px 0 35px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.08);
+    }
+
+    .developer-badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 5px 16px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .developer-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .developer-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .developer-desc strong {
+      color: #ffffff;
+    }
+
+    .developer-action {
+      display: flex;
+      justify-content: center;
+    }
+
+    .developer-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #030712;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 13px 30px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.4);
+    }
+
+    .developer-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px -4px rgba(16, 185, 129, 0.6);
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      color: #000000;
+    }
+
+    .developer-btn-arrow {
+      transition: transform 0.2s ease;
+    }
+
+    .developer-btn:hover .developer-btn-arrow {
+      transform: translateX(4px);
+    }
+
+    /* RODAPÉ */
+    .footer-page {
+      text-align: center;
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    /* BARRA DE NAVEGAÇÃO DE CAPÍTULO */
+    .chapter-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin: 45px 0 20px;
+      padding: 16px 22px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .chapter-nav-left, .chapter-nav-right {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chapter-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .chapter-nav-btn:hover {
+      background: var(--primary-glow);
+      color: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .chapter-nav-btn.primary {
+      background: var(--primary-glow);
+      color: var(--primary);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .chapter-nav-btn.primary:hover {
+      background: var(--primary);
+      color: #030712;
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    /* BOTÃO FLUTUANTE DE SUMÁRIO */
+    .floating-toc-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      color: var(--primary);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      padding: 11px 20px;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .floating-toc-btn:hover {
+      background: var(--primary);
+      color: #030712;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 30px -5px rgba(16, 185, 129, 0.5);
+    }
+
+    /* RESPONSIVIDADE MOBILE & TABLET */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px 10px;
+        line-height: 1.7;
+      }
+
+      .container {
+        padding: 32px 18px;
+        border-radius: 14px;
+      }
+
+      .cover-page {
+        padding: 20px 8px 36px;
+        margin-bottom: 36px;
+      }
+
+      .cover-page h1 {
+        font-size: 1.95rem;
+        line-height: 1.2;
+      }
+
+      .cover-page h2 {
+        font-size: 1.1rem;
+        line-height: 1.45;
+        margin-bottom: 24px;
+      }
+
+      .cover-meta {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .cover-meta span {
+        text-align: center;
+        font-size: 0.82rem;
+        padding: 6px 12px;
+      }
+
+      .catalog-card, .toc-card, .callout {
+        padding: 20px 16px;
+        margin: 28px 0;
+      }
+
+      .toc-card h3 {
+        font-size: 1.2rem;
+      }
+
+      .toc-card li {
+        font-size: 0.92rem;
+        gap: 10px;
+      }
+
+      h2.chapter-title {
+        font-size: 1.45rem;
+        line-height: 1.3;
+      }
+
+      h3.section-title {
+        font-size: 1.2rem;
+      }
+
+      h4.subsection-title {
+        font-size: 1.05rem;
+      }
+
+      p {
+        font-size: 0.98rem;
+        text-align: left;
+      }
+
+      ul, ol {
+        margin: 0 0 20px 20px;
+        font-size: 0.98rem;
+      }
+
+      .script-box {
+        padding: 16px 14px;
+        font-size: 0.86rem;
+        margin: 14px 0 24px;
+      }
+
+      .chapter-nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .chapter-nav-left, .chapter-nav-right {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .chapter-nav-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 11px 16px;
+      }
+
+      .floating-toc-btn {
+        bottom: 16px;
+        right: 16px;
+        padding: 9px 15px;
+        font-size: 0.82rem;
+      }
+
+      table {
+        font-size: 0.85rem;
+      }
+
+      th, td {
+        padding: 12px 14px;
+      }
+
+      .developer-card {
+        padding: 26px 18px;
+        margin: 40px 0 24px;
+      }
+
+      .developer-title {
+        font-size: 1.25rem;
+      }
+
+      .developer-desc {
+        font-size: 0.92rem;
+        text-align: center;
+      }
+
+      .developer-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 18px;
+        font-size: 0.88rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px 6px;
+      }
+
+      .container {
+        padding: 24px 12px;
+        border-radius: 10px;
+      }
+
+      .cover-page h1 {
+        font-size: 1.6rem;
+      }
+
+      .cover-page h2 {
+        font-size: 0.98rem;
+      }
+
+      .cover-badge {
+        font-size: 0.75rem;
+        padding: 5px 14px;
+      }
+
+      h2.chapter-title {
+        font-size: 1.3rem;
+      }
+
+      .script-box {
+        padding: 14px 12px;
+        font-size: 0.8rem;
+      }
+
+      .callout {
+        padding: 16px 12px;
+      }
+    }
+
+    /* REGRAS PROFISSIONAIS DE IMPRESSÃO / PDF */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 100% !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 10mm !important;
+      }
+      .cover-page {
+        page-break-after: always;
+        padding-top: 60px !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      .chapter-title {
+        color: #0f172a !important;
+        page-break-before: always;
+      }
+      .section-title {
+        color: #0284c7 !important;
+      }
+      p, li {
+        color: #334155 !important;
+      }
+      strong {
+        color: #0f172a !important;
+      }
+      .script-box {
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #0f172a !important;
+        page-break-inside: avoid;
+      }
+      .callout {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        border-left: 4px solid #10b981 !important;
+        page-break-inside: avoid;
+      }
+      .toc-card, .catalog-card {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        page-break-after: always;
+      }
+      .developer-card {
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #0f172a !important;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+      }
+      .developer-title {
+        color: #0f172a !important;
+      }
+      .developer-desc {
+        color: #334155 !important;
+      }
+      .developer-btn {
+        background: #e2e8f0 !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+      }
+      th {
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
+      }
+      th, td {
+        border-color: #cbd5e1 !important;
+      }
+      .chapter-nav, .floating-toc-btn {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BOTÃO FLUTUANTE DE ACESSO RÁPIDO AO SUMÁRIO -->
+  <a href="#sumario" class="floating-toc-btn" id="btn-flutuante-sumario">📑 Sumário</a>
+
+  <div class="container">
+
+    <!-- CAPA -->
+    <header class="cover-page" id="topo">
+      <div class="cover-badge">Infoproduto Oficial • SVD Lumex</div>
+      
+      <div class="cover-image-container">
+        <img src="assets/capa-esteira-automacao.jpg" alt="Capa 3D Oficial — Esteira de Automação para Negócios Locais" class="cover-3d-mockup" />
+      </div>
+
+      <h1>Esteira de Automação para Negócios Locais</h1>
+      <h2>O Guia Definitivo para Criar um Funil de Atendimento, Agendamento e Vendas no Piloto Automático</h2>
+      
+      <div class="cover-meta">
+        <span>✍️ Autoria: SVD Lumex & Digital Product Factory</span>
+        <span>📅 1ª Edição Oficial — 2026</span>
+        <span>📍 Estratégia, Tecnologia & Vendas</span>
+      </div>
+    </header>
+
+    <!-- FICHA CATALOGRÁFICA -->
+    <div class="catalog-card">
+      <h4>Dados Internacionais de Catalogação na Publicação (CIP)</h4>
+      <p><strong>SVD Lumex & Digital Product Factory</strong><br>
+      Esteira de Automação para Negócios Locais: O Guia Definitivo para Criar um Funil de Atendimento, Agendamento e Vendas no Piloto Automático / SVD Lumex. — 1. ed. — São Paulo, SP: Lumex Edições Digitais, 2026.<br>
+      Formato: Digital (HTML5 / PDF / ePub).<br>
+      ISBN: 978-65-00-98765-4 (Recurso Eletrônico).<br>
+      1. Negócios Locais. 2. Automação de Processos. 3. Vendas no WhatsApp. 4. Inteligência Artificial Aplicada. 5. Marketing de Proximidade. I. Título.</p>
+      <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-dim);">
+        © 2026 SVD Lumex. Todos os direitos reservados. Nenhuma parte desta obra pode ser reproduzida, transmitida ou arquivada em qualquer sistema sem a prévia autorização por escrito dos detentores dos direitos autorais.
+      </p>
+    </div>
+
+    <!-- SUMÁRIO -->
+    <div class="toc-card" id="sumario">
+      <h3>📑 Sumário Geral da Obra</h3>
+      <ul>
+        <li><a href="#apresentacao">Apresentação: Por que Este Livro Existe?</a> <span class="page-num">Pág. 04</span></li>
+        <li><a href="#intro">Introdução: O Paradoxo do Negócio Local e a Torneira Aberta</a> <span class="page-num">Pág. 07</span></li>
+        <li><a href="#cap1">Capítulo 1: O Funil Invisível do Comércio Local</a> <span class="page-num">Pág. 12</span></li>
+        <li><a href="#cap2">Capítulo 2: Os 4 Pilares da Esteira de Automação</a> <span class="page-num">Pág. 19</span></li>
+        <li><a href="#cap3">Capítulo 3: O Motor da Operação — WhatsApp com IA Humanizada</a> <span class="page-num">Pág. 26</span></li>
+        <li><a href="#cap4">Capítulo 4: A Stack de Ferramentas Recomendadas (Custo Zero ou Baixo)</a> <span class="page-num">Pág. 33</span></li>
+        <li><a href="#cap5">Capítulo 5: O Plano de Ação Prático de 7 Dias para Implementação</a> <span class="page-num">Pág. 40</span></li>
+        <li><a href="#cap6">Capítulo 6: Playbooks de Implementação por Nicho Específico</a> <span class="page-num">Pág. 47</span></li>
+        <li><a href="#cap7">Capítulo 7: Blindagem de Linha, Aquecimento e Diretrizes Anti-Ban</a> <span class="page-num">Pág. 54</span></li>
+        <li><a href="#cap8">Capítulo 8: O Grande Pack com 25 Scripts Prontos de Alta Conversão</a> <span class="page-num">Pág. 60</span></li>
+        <li><a href="#conclusao">Conclusão: A Oportunidade de Prestar Serviços na Sua Cidade</a> <span class="page-num">Pág. 78</span></li>
+      </ul>
+    </div>
+
+    <!-- APRESENTAÇÃO -->
+    <div class="page-break"></div>
+    <div class="chapter-divider"></div>
+    <h2 class="chapter-title" id="apresentacao">🧭 Apresentação: Por que Este Livro Existe?</h2>
+    
+    <p>Caminhe pela avenida comercial mais movimentada da sua cidade ou abra o Google Maps agora e pesquise por qualquer serviço próximo: uma clínica odontológica, um centro de estética, uma oficina mecânica, uma imobiliária ou um restaurante.</p>
+
+    <p>Todas essas empresas têm algo em comum: <strong>estão desesperadas por mais clientes</strong>.</p>
+
+    <p>Muitas delas investem R$ 1.000, R$ 3.000 ou até R$ 10.000 por mês em tráfego pago no Instagram, Facebook ou Google Ads. No entanto, quando você envia uma mensagem no WhatsApp dessas empresas para pedir um orçamento ou agendar um horário às 19h30 de uma terça-feira, o que acontece?</p>
+
+    <ul>
+      <li><strong>42%</strong> dessas empresas <strong>não respondem</strong> até o dia seguinte;</li>
+      <li><strong>35%</strong> respondem após 4 a 6 horas com uma mensagem fria e burocrática: <em>"Olá, como posso ajudar?"</em> (quando o cliente já fechou com o concorrente);</li>
+      <li><strong>18%</strong> respondem despejando um PDF pesado de 30 páginas ou um texto confuso e ilegível que ninguém lê;</li>
+      <li>Apenas <strong>5%</strong> respondem imediatamente, qualificam o cliente em tempo recorde e colocam o compromisso na agenda em menos de 3 minutos.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">💡 A Missão deste Livro</div>
+      <p>Este material foi escrito para acabar com esse amadorismo. Aqui você aprenderá como construir uma <strong>Esteira de Automação Inteligente</strong> que atende, qualifica, agenda e recupera clientes de forma humanizada, profissional e automática — gerando lucro previsível todos os dias do ano.</p>
+    </div>
+
+    <nav class="chapter-nav">
+      <div class="chapter-nav-left">
+        <a href="#sumario" class="chapter-nav-btn">📑 Voltar ao Sumário</a>
+        <a href="#topo" class="chapter-nav-btn">⬆️ Início do Livro</a>
+      </div>
+      <div class="chapter-nav-right">
+        <a href="#intro" class="chapter-nav-btn primary">Avançar: Introdução ➡️</a>
+      </div>
+    </nav>
+
+    <!-- INTRODUÇÃO -->
+    <div class="chapter-divider"></div>
+    <h2 class="chapter-title" id="intro">🚀 Introdução: O Paradoxo do Negócio Local e a Torneira Aberta</h2>
+
+    <p>Imagine um restaurante que possui um vazamento colossal na caixa d'água principal. Em vez de consertar o cano quebrado, o proprietário decide pagar caminhões-pipa todos os dias para continuar enchendo a caixa d'água. Isso parece absurdo? Pois é exatamente o que 95% dos donos de negócios locais fazem todos os meses!</p>
+
+    <p>Eles pagam caro para atrair visitantes até o WhatsApp através de anúncios pagos, panfletos ou indicações (o caminhão-pipa), mas deixam a torneira do atendimento aberta: mensagens esquecidas, falta de acompanhamento com quem pediu orçamento e sumiu, e taxas alarmantes de ausência no comparecimento.</p>
+
+    <div class="callout alert">
+      <div class="callout-title">⚠️ A Lei dos 5 Minutos (Harvard Business Review & MIT)</div>
+      <p>Estudos comprovam que responder a um lead comercial em até <strong>5 minutos</strong> aumenta as chances de qualificação e fechamento em até <strong>21 vezes</strong> se comparado a um atendimento iniciado após 30 minutos. A cada 10 minutos adicionais de espera, o interesse do cliente despenca em mais de 400%.</p>
+    </div>
+
+    <nav class="chapter-nav">
+      <div class="chapter-nav-left">
+        <a href="#sumario" class="chapter-nav-btn">📑 Voltar ao Sumário</a>
+        <a href="#topo" class="chapter-nav-btn">⬆️ Início do Livro</a>
+      </div>
+      <div class="chapter-nav-right">
+        <a href="#cap1" class="chapter-nav-btn primary">Avançar: Capítulo 1 ➡️</a>
+      </div>
+    </nav>
+
+    <!-- CAPÍTULO 1 -->
+    <div class="chapter-divider"></div>
+    <h2 class="chapter-title" id="cap1">🔍 Capítulo 1: O Funil Invisível do Comércio Local</h2>
+
+    <p>Para consertar uma operação, você precisa primeiro enxergar com clareza a jornada do cliente. O funil de um negócio físico ou de serviço de proximidade possui 5 fases fundamentais:</p>
+
+    <div class="chapter-figure">
+      <img src="assets/infografico-funil-esteira.jpg" alt="Infográfico Estratégico do Funil Automatizado" class="chapter-img" />
+      <div class="chapter-caption">Figura 1.1: A arquitetura do funil automatizado conectando Google Maps, Instagram, WhatsApp com IA e agendamento instantâneo.</div>
+    </div>
+
+    <h3 class="section-title">Os 3 Maiores Vazamentos de Faturamento</h3>
+
+    <h4 class="subsection-title">1. O Vácuo da Demora no Primeiro Contato</h4>
+    <p>O cliente clica no anúncio no horário de almoço ou à noite, enquanto descansa no sofá. Ele envia: <em>"Olá, quanto custa o procedimento X?"</em>. Se a recepção estiver almoçando ou o expediente tiver encerrado, o lead fica abandonado. Quando o atendente responde horas depois, o cliente já perdeu o momento emocional da compra.</p>
+
+    <h4 class="subsection-title">2. A Ilusão do "Vou Ver e Te Aviso"</h4>
+    <p>Quantas vezes sua equipe enviou um orçamento e, após o cliente responder <em>"Obrigado, vou falar com meu esposo e te aviso"</em>, a conversa morreu para sempre? Em operações manuais, ninguém tem tempo de abrir 200 conversas passadas para fazer acompanhamento. Mais de 60% das vendas locais são fechadas entre o 2º e o 5º contato, mas 90% das empresas nunca realizam o segundo contato.</p>
+
+    <h4 class="subsection-title">3. O Custo Oculto do No-Show (Faltas sem Aviso)</h4>
+    <p>Em clínicas odontológicas, salões e consultórios, uma hora de cadeira vazia é receita perdida para sempre. O custo da estrutura continua correndo. Se uma clínica tem 4 faltas por dia em procedimentos com ticket de R$ 150, são R$ 600 perdidos por dia — totalizando mais de R$ 13.000 jogados no lixo todos os meses.</p>
+
+    <nav class="chapter-nav">
+      <div class="chapter-nav-left">
+        <a href="#sumario" class="chapter-nav-btn">📑 Voltar ao Sumário</a>
+        <a href="#topo" class="chapter-nav-btn">⬆️ Início do Livro</a>
+      </div>
+      <div class="chapter-nav-right">
+        <a href="#cap2" class="chapter-nav-btn primary">Avançar: Capítulo 2 ➡️</a>
+      </div>
+    </nav>
+
+    <!-- CAPÍTULO 2 -->
+    <div class="chapter-divider"></div>
+    <h2 class="chapter-title" id="cap2">⚙️ Capítulo 2: Os 4 Pilares da Esteira de Automação</h2>
+
+    <div class="chapter-figure">
+      <img src="assets/pilares-esteira-automacao.jpg" alt="Os 4 Pilares da Automação de Negócios" class="chapter-img" />
+      <div class="chapter-caption">Figura 2.1: Os 4 Pilares da Automação Comercial (Captação, Triagem Inteligente, Agendamento Anti-Falta e Reativação).</div>
+    </div>
+
+    <h3 class="section-title">Pilar 1: Captação Ativa & Gatilhos Multicanal</h3>
+    <p>A esteira unifica leads vindos do Google Meu Negócio, Instagram Ads, Facebook Ads e QR Codes espalhados na loja física, direcionando todos para um canal centralizado e rastreado no WhatsApp.</p>
+
+    <h3 class="section-title">Pilar 2: Triagem e Qualificação Inteligente</h3>
+    <p>A esteira realiza de 2 a 3 perguntas rápidas para entender a necessidade real do cliente, segmentando-o automaticamente com etiquetas no CRM (Ex: <code>#PrioridadeAlta</code>, <code>#OrçamentoPendente</code>, <code>#NovoCliente</code>).</p>
+
+    <h3 class="section-title">Pilar 3: Agendamento Automático e Blindagem Anti-No-Show</h3>
+    <p>Consulta em tempo real a agenda digital e reserva o horário, disparando a sequência de blindagem: confirmação imediata com rota do GPS, lembrete interativo 24 horas antes e lembrete amigo 2 horas antes da consulta. Essa sequência reduz o no-show para menos de 5%.</p>
+
+    <h3 class="section-title">Pilar 4: Reativação de Clientes Inativos</h3>
+    <p>Monitora o banco de dados e identifica clientes que não retornam há mais de 45 dias, disparando convites personalizados com condições exclusivas e recuperando de 12% a 25% da base adormecida.</p>
+
+    <nav class="chapter-nav">
+      <div class="chapter-nav-left">
+        <a href="#sumario" class="chapter-nav-btn">📑 Voltar ao Sumário</a>
+        <a href="#topo" class="chapter-nav-btn">⬆️ Início do Livro</a>
+      </div>
+      <div class="chapter-nav-right">
+        <a href="#cap3" class="chapter-nav-btn primary">Avançar: Capítulo 3 ➡️</a>
+      </div>
+    </nav>
+
+    <!-- CAPÍTULO 3 -->
+    <div class="chapter-divider"></div>
+    <h2 class="chapter-title" id="cap3">💬 Capítulo 3: O Motor da Operação — WhatsApp com IA Humanizada</h2>
+
+    <div class="chapter-figure">
+      <img src="assets/fluxo-automacao-whatsapp.jpg" alt="Fluxo de Decisão do WhatsApp com IA e Transbordo Humano" class="chapter-img" />
+      <div class="chapter-caption">Figura 3.1: Diagrama da arquitetura de processamento conversacional, consulta de banco de dados e transbordo para atendentes humanos.</div>
+    </div>
+
+    <p>O maior receio do empresário é o cliente se sentir mal atendido por um robô mecânico. A esteira resolve isso através de:</p>
+    <ul>
+      <li><strong>Transparência Simpática:</strong> Apresenta-se como assistente digital eficiente, focado em agilizar o tempo do cliente;</li>
+      <li><strong>Perguntas Fechadas:</strong> Opções objetivas que evitam respostas ambíguas;</li>
+      <li><strong>Delays Humanizados:</strong> Pausas de digitação naturais (2 a 3 segundos) antes de cada envio;</li>
+      <li><strong>Transbordo Humano Imediato (Handoff):</strong> Se o cliente pedir para falar com uma pessoa, a automação é pausada e a equipe humana recebe uma notificação instantânea no celular.</li>
+    </ul>
+
+    <nav class="chapter-nav">
+      <div class="chapter-nav-left">
+        <a href="#sumario" class="chapter-nav-btn">📑 Voltar ao Sumário</a>
+        <a href="#topo" class="chapter-nav-btn">⬆️ Início do Livro</a>
+      </div>
+      <div class="chapter-nav-right">
+        <a href="#cap4" class="chapter-nav-btn primary">Avançar: Capítulo 4 ➡️</a>
+      </div>
+    </nav>
+
+    <!-- CAPÍTULO 4 -->
+    <div class="chapter-divider"></div>
+    <h2 class="chapter-title" id="cap4">🛠️ Capítulo 4: A Stack de Ferramentas Recomendadas</h2>
+
+    <div class="chapter-figure">
+      <img src="assets/stack-tecnologica-integrada.jpg" alt="Stack Tecnológica Integrada" class="chapter-img" />
+      <div class="chapter-caption">Figura 4.1: Arquitetura integrada conectando Make.com, Typebot, Chatwoot, Google Calendar e WhatsApp API.</div>
+    </div>
+
+    <p>Para construir uma esteira profissional sem custos astronômicos de desenvolvimento, utilizamos o que há de mais eficiente no mercado no-code e open source:</p>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Ferramenta</th>
+            <th>Função na Esteira</th>
+            <th>Custo Estimado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Make.com</strong></td>
+            <td>Cérebro da integração entre WhatsApp, Planilhas, CRM e Agenda</td>
+            <td>Grátis (até 1.000 operações/mês) ou US$ 9/mês</td>
+          </tr>
+          <tr>
+            <td><strong>Typebot.io</strong></td>
+            <td>Construtor visual de fluxos conversacionais inteligentes</td>
+            <td>Plano gratuito ou Self-Hosted Open Source</td>
+          </tr>
+          <tr>
+            <td><strong>Chatwoot</strong></td>
+            <td>Central de atendimento com múltiplos operadores humanos</td>
+            <td>Gratuito / Open Source</td>
+          </tr>
+          <tr>
+            <td><strong>API de WhatsApp</strong></td>
+            <td>Conector de envio e recebimento de mensagens</td>
+            <td>API Oficial da Meta ou Gateways (Evolution / Z-API)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="section-title">Como Conectar as Peças (Passo a Passo)</h3>
+    <ol>
+      <li><strong>Instalação do Typebot:</strong> Crie um bot de qualificação com blocos de texto curtos, botões de escolha rápida e coleta de nome e telefone.</li>
+      <li><strong>Integração via Webhook no Make.com:</strong> Quando o cliente finaliza o fluxo no Typebot, ele dispara um Webhook para o Make com os dados estruturados.</li>
+      <li><strong>Gravação no Google Sheets / CRM:</strong> O Make adiciona uma nova linha na planilha comercial com data, nome, serviço e etiqueta de prioridade.</li>
+      <li><strong>Reserva no Google Calendar / Cal.com:</strong> O Make consulta horários vagos e cria o evento automaticamente, gerando a confirmação com o link de mapa.</li>
+    </ol>
+
+    <nav class="chapter-nav">
+      <div class="chapter-nav-left">
+        <a href="#sumario" class="chapter-nav-btn">📑 Voltar ao Sumário</a>
+        <a href="#topo" class="chapter-nav-btn">⬆️ Início do Livro</a>
+      </div>
+      <div class="chapter-nav-right">
+        <a href="#cap5" class="chapter-nav-btn primary">Avançar: Capítulo 5 ➡️</a>
+      </div>
+    </nav>
+
+    <!-- CAPÍTULO 5 -->
+    <div class="chapter-divider"></div>
+    <h2 class="chapter-title" id="cap5">📅 Capítulo 5: O Plano de Ação Prático de 7 Dias</h2>
+
+    <div class="chapter-figure">
+      <img src="assets/roadmap-7-dias-implementacao.jpg" alt="Cronograma de 7 Dias para Implementação" class="chapter-img" />
+      <div class="chapter-caption">Figura 5.1: O Roadmap de 7 Dias de Implementação Prática, do mapeamento inicial ao lançamento oficial.</div>
+    </div>
+
+    <p>Siga rigorosamente este roteiro diário para colocar a sua esteira rodando em produção em apenas uma semana:</p>
+
+    <h4 class="subsection-title">Dia 1: Mapeamento de Rotas e Ofertas</h4>
+    <p>Reúna a equipe de recepção e liste as 10 perguntas mais comuns enviadas no WhatsApp. Defina com clareza o preço, formas de parcelamento e a oferta irresistível de entrada para atrair novos clientes.</p>
+
+    <h4 class="subsection-title">Dia 2: Criação dos Gatilhos de Entrada</h4>
+    <p>Gere links de WhatsApp com mensagens pré-preenchidas rastreadas (Ex: <em>"Olá, vim do Google Maps e quero agendar"</em>). Atualize o botão de contato do Perfil da Empresa no Google e o link da bio no Instagram.</p>
+
+    <h4 class="subsection-title">Dia 3: Construção do Fluxo no Typebot</h4>
+    <p>Desenhe o fluxo com boas-vindas simpáticas, as 3 perguntas de triagem e o roteamento para orçamentos ou horários. Ative delays de digitação de 2 segundos para dar sensação humana.</p>
+
+    <h4 class="subsection-title">Dia 4: Conexão com Agenda e Lembretes</h4>
+    <p>Configure o cenário no Make.com para registrar o agendamento no Google Agenda e programar as mensagens de confirmação imediata, lembrete de 24h e lembrete de 2h antes.</p>
+
+    <h4 class="subsection-title">Dia 5: Campanha de Reativação da Base Antiga</h4>
+    <p>Exporte sua lista de clientes dos últimos 6 meses. Filtre aqueles que não voltam há mais de 45 dias e prepare o disparo de uma condição exclusiva de retorno.</p>
+
+    <h4 class="subsection-title">Dia 6: Testes Controlados e Estresse</h4>
+    <p>Peça para colaboradores e familiares enviarem mensagens simulando dúvidas difíceis, reagendamentos e pedidos de atendente humano. Valide se todos os alertas chegam no celular da equipe.</p>
+
+    <h4 class="subsection-title">Dia 7: Lançamento Oficial</h4>
+    <p>Vincule o número principal da empresa à esteira. Acompanhe as conversas em tempo real nas primeiras horas e assista aos primeiros agendamentos sendo realizados no piloto automático!</p>
+
+    <nav class="chapter-nav">
+      <div class="chapter-nav-left">
+        <a href="#sumario" class="chapter-nav-btn">📑 Voltar ao Sumário</a>
+        <a href="#topo" class="chapter-nav-btn">⬆️ Início do Livro</a>
+      </div>
+      <div class="chapter-nav-right">
+        <a href="#cap6" class="chapter-nav-btn primary">Avançar: Capítulo 6 ➡️</a>
+      </div>
+    </nav>
+
+    <!-- CAPÍTULO 6 -->
+    <div class="chapter-divider"></div>
+    <h2 class="chapter-title" id="cap6">🏢 Capítulo 6: Playbooks de Implementação por Nicho Específico</h2>
+
+    <div class="chapter-figure">
+      <img src="assets/playbooks-nichos-locais.jpg" alt="Playbooks para Nichos Locais" class="chapter-img" />
+      <div class="chapter-caption">Figura 6.1: A esteira de automação aplicada aos principais modelos de negócios locais da sua cidade.</div>
+    </div>
+
+    <p>Cada segmento local possui dinâmicas operacionais únicas. Abaixo estão os modelos validados para os principais mercados:</p>
+
+    <h3 class="section-title">1. Clínicas Médicas, Odontológicas e Estética Avançada</h3>
+    <ul>
+      <li><strong>Principal Dor:</strong> Pacientes que marcam avaliação e faltam (no-show de 35% a 45%) e esquecimento de manutenções semestrais.</li>
+      <li><strong>Fluxo da Esteira:</strong> Triagem por especialidade ➔ Escolha do dia da semana ➔ Confirmação com lembrete interativo 24h antes com botão de confirmação ➔ Disparo de recall semestral (limpeza dental, retoque de botox, exames preventivos).</li>
+    </ul>
+
+    <h3 class="section-title">2. Salões de Beleza, Barbearias e Spas</h3>
+    <ul>
+      <li><strong>Principal Dor:</strong> Profissionais ocupados cortando ou lavando cabelo sem conseguir responder o celular durante o dia.</li>
+      <li><strong>Fluxo da Esteira:</strong> Menu com foto dos serviços ➔ Escolha do profissional preferido ➔ Seleção de horário em calendário digital ➔ Lembrete amigável no dia com rota de trânsito.</li>
+    </ul>
+
+    <h3 class="section-title">3. Oficinas Mecânicas e Auto Centers</h3>
+    <ul>
+      <li><strong>Principal Dor:</strong> Clientes em situação de estresse/urgência que precisam de socorro ou previsão rápida de custo.</li>
+      <li><strong>Fluxo da Esteira:</strong> Menu com 2 opções diretas: [Emergência] ou [Revisão Preventiva] ➔ Coleta rápida de Marca/Modelo/Ano do carro ➔ Envio de estimativa e agendamento com box reservado.</li>
+    </ul>
+
+    <h3 class="section-title">4. Imobiliárias e Corretores de Imóveis</h3>
+    <ul>
+      <li><strong>Principal Dor:</strong> Leads que entram nos finais de semana e esfriam antes da segunda-feira de manhã.</li>
+      <li><strong>Fluxo da Esteira:</strong> Pergunta qualificadora: Compra vs. Locação ➔ Faixa de valor pretendida ➔ Bairro de interesse ➔ Agendamento automático da visita presencial com o corretor da região.</li>
+    </ul>
+
+    <h3 class="section-title">5. Academias, Studios de Pilates e Lutas</h3>
+    <ul>
+      <li><strong>Principal Dor:</strong> Leads que pedem preço e somem sem agendar a aula experimental.</li>
+      <li><strong>Fluxo da Esteira:</strong> Apresentação da estrutura em vídeo curto ➔ Oferta de aula experimental gratuita com dia marcado ➔ Lembrete 3h antes com orientações de roupa e chegada.</li>
+    </ul>
+
+    <h3 class="section-title">6. Restaurantes, Cafés e Delivery</h3>
+    <ul>
+      <li><strong>Principal Dor:</strong> Mensagens acumuladas no horário de pico (almoço e jantar) causando atrasos nos pedidos.</li>
+      <li><strong>Fluxo da Esteira:</strong> Envio imediato do cardápio digital interativo ➔ Atendimento automatizado de reserva de mesas com envio de voucher de cortesia na primeira visita.</li>
+    </ul>
+
+    <nav class="chapter-nav">
+      <div class="chapter-nav-left">
+        <a href="#sumario" class="chapter-nav-btn">📑 Voltar ao Sumário</a>
+        <a href="#topo" class="chapter-nav-btn">⬆️ Início do Livro</a>
+      </div>
+      <div class="chapter-nav-right">
+        <a href="#cap7" class="chapter-nav-btn primary">Avançar: Capítulo 7 ➡️</a>
+      </div>
+    </nav>
+
+    <!-- CAPÍTULO 7 -->
+    <div class="chapter-divider"></div>
+    <h2 class="chapter-title" id="cap7">🛡️ Capítulo 7: Blindagem de Linha, Aquecimento e Diretrizes Anti-Ban</h2>
+
+    <div class="chapter-figure">
+      <img src="assets/blindagem-aquecimento-whatsapp.jpg" alt="Blindagem e Aquecimento de Linha do WhatsApp" class="chapter-img" />
+      <div class="chapter-caption">Figura 7.1: Sistema de blindagem de linha e protocolo de aquecimento de 14 dias para proteção contra banimentos.</div>
+    </div>
+
+    <p>O WhatsApp possui filtros algorítmicos rigorosos para proteger os usuários contra spam. Para operar com segurança e estabilidade, siga este protocolo:</p>
+
+    <h3 class="section-title">O Protocolo de Aquecimento de 14 Dias (Para Novos Números)</h3>
+    <ul>
+      <li><strong>Dias 1 a 3:</strong> Configure o perfil no WhatsApp Business com logotipo, endereço e horário. Troque mensagens normais com 5 a 10 contatos da sua confiança.</li>
+      <li><strong>Dias 4 a 7:</strong> Participe de grupos de empreendedores locais e interaja normalmente. Mantenha conversas bidirecionais (onde a outra pessoa responde).</li>
+      <li><strong>Dias 8 a 11:</strong> Inicie o recebimento de mensagens de clientes vindos de anúncios ou do Google Meu Negócio (tráfego receptivo não gera risco de ban).</li>
+      <li><strong>Dias 12 a 14:</strong> Comece disparos de reativação em lotes pequenos (máximo de 20 por hora, com intervalos de 20 a 40 segundos entre cada envio).</li>
+    </ul>
+
+    <div class="callout alert">
+      <div class="callout-title">⚠️ Regra de Ouro da Meta & LGPD</div>
+      <p>Sempre inclua ao final de qualquer mensagem de reativação ou promocional uma cláusula de saída simples: <em>"Caso não queira mais receber nossos lembretes, basta responder SAIR a qualquer momento."</em> Isso zera o risco de o cliente clicar no botão de "Denunciar como Spam".</p>
+    </div>
+
+    <nav class="chapter-nav">
+      <div class="chapter-nav-left">
+        <a href="#sumario" class="chapter-nav-btn">📑 Voltar ao Sumário</a>
+        <a href="#topo" class="chapter-nav-btn">⬆️ Início do Livro</a>
+      </div>
+      <div class="chapter-nav-right">
+        <a href="#cap8" class="chapter-nav-btn primary">Avançar: Capítulo 8 ➡️</a>
+      </div>
+    </nav>
+
+    <!-- CAPÍTULO 8 -->
+    <div class="chapter-divider"></div>
+    <h2 class="chapter-title" id="cap8">🎁 Capítulo 8: O Grande Pack com 25 Scripts Prontos na Íntegra</h2>
+
+    <div class="chapter-figure">
+      <img src="assets/pack-scripts-conversao.jpg" alt="Biblioteca de Scripts de Alta Conversão" class="chapter-img" />
+      <div class="chapter-caption">Figura 8.1: A central de scripts testados e validados para conduzir o cliente do primeiro contato até o fechamento.</div>
+    </div>
+
+    <p>Abaixo estão os 25 scripts de alta conversão, sem abreviações, prontos para copiar e colar na sua esteira de atendimento:</p>
+
+    <!-- BLOCO A -->
+    <h3 class="section-title">Bloco A: Boas-Vindas e Acolhimento Imediato (5 Scripts)</h3>
+
+    <div class="script-tag">Script 01 • Boas-Vindas Geral / Prestação de Serviços</div>
+    <div class="script-box">Olá, {{primeiro_nome}}! Que alegria ter você por aqui. Seja muito bem-vindo(a) à {{nome_da_empresa}}! 😊
+
+Eu sou o assistente digital da nossa equipe e estou aqui para agilizar seu atendimento em segundos.
+
+Para que eu possa te direcionar para a pessoa certa da equipe, me conte: qual destes assuntos você gostaria de resolver hoje?
+
+1️⃣ Conhecer nossos serviços e tabela de valores
+2️⃣ Agendar um horário para esta semana
+3️⃣ Tirar dúvidas sobre um orçamento em andamento
+4️⃣ Falar diretamente com um atendente humano
+
+Basta digitar o número da opção desejada! 👇</div>
+
+    <div class="script-tag">Script 02 • Clínicas de Saúde, Odontologia e Estética</div>
+    <div class="script-box">Olá, {{primeiro_nome}}! Bem-vindo(a) à {{nome_da_empresa}}. 🩺✨
+
+Meu nome é Lucca, assistente virtual da clínica. Nosso foco é cuidar do seu bem-estar com o máximo de agilidade e carinho.
+
+Você já é paciente da nossa clínica ou esta será a sua primeira consulta com a gente?
+
+[A] Sou paciente cadastrado
+[B] É a minha primeira vez
+
+(Pode responder apenas com a letra A ou B!)</div>
+
+    <div class="script-tag">Script 03 • Restaurantes, Bares e Delivery</div>
+    <div class="script-box">Opa, {{primeiro_nome}}! Bateu aquela fome boa por aí? 🍔🍕
+
+Você está no canal oficial de atendimento da {{nome_da_empresa}}. Como podemos fazer o seu dia mais gostoso hoje?
+
+1️⃣ Ver o cardápio completo com fotos e preços
+2️⃣ Fazer um pedido para entrega rápida
+3️⃣ Reservar uma mesa para hoje à noite
+4️⃣ Falar com a nossa recepção
+
+Digite o número da sua escolha:</div>
+
+    <div class="script-tag">Script 04 • Automotivo / Oficinas e Auto Centers</div>
+    <div class="script-box">Olá! Bem-vindo à {{nome_da_empresa}}, seu centro automotivo de confiança aqui em {{cidade}}. 🚗🔧
+
+Para te atendermos com a rapidez que seu carro precisa: você está passando por alguma emergência neste momento ou deseja agendar uma revisão preventiva?
+
+1️⃣ Emergência (carro quebrado / pneu / socorro)
+2️⃣ Revisão preventiva / Troca de óleo
+3️⃣ Orçamento de peças e serviços
+4️⃣ Falar com o chefe de oficina</div>
+
+    <div class="script-tag">Script 05 • Imobiliárias e Corretores</div>
+    <div class="script-box">Olá, {{primeiro_nome}}! Agradecemos seu contato com a {{nome_da_empresa}}. 🏡✨
+
+Encontrar o imóvel perfeito para morar ou investir é um momento especial. Para te apresentar as opções certas hoje:
+
+Qual o seu objetivo principal?
+1️⃣ Comprar um imóvel residencial
+2️⃣ Alugar um imóvel
+3️⃣ Colocar meu imóvel para vender ou alugar
+4️⃣ Falar sobre um anúncio específico que vi no portal</div>
+
+    <!-- BLOCO B -->
+    <h3 class="section-title">Bloco B: Envio de Orçamentos e Quebra de Objeções (5 Scripts)</h3>
+
+    <div class="script-tag">Script 06 • Orçamento com Ancoragem e Bônus Rápido</div>
+    <div class="script-box">{{primeiro_nome}}, preparei a proposta personalizada para o seu caso com todo o cuidado que você merece! 📄✨
+
+O investimento completo para o serviço de {{nome_do_servico}}, incluindo:
+✔️ Todos os materiais e garantia integral de 12 meses
+✔️ Acompanhamento exclusivo da nossa equipe especializada
+✔️ Suporte prioritário pós-atendimento
+
+Fica em apenas {{valor_parcelado}} em até {{numero_parcelas}}x sem juros (ou {{valor_a_vista}} com desconto especial no Pix).
+
+🎁 Condição especial: confirmando o fechamento até hoje às 18h, nós incluímos o bônus de {{nome_do_bonus}} totalmente de cortesia para você.
+
+Podemos reservar a sua vaga para darmos início?</div>
+
+    <div class="script-tag">Script 07 • Follow-up de Orçamento (Após 2 Horas sem Resposta)</div>
+    <div class="script-box">Oi, {{primeiro_nome}}! Tudo bem? Vi que você visualizou nossa proposta há pouco.
+
+Ficou alguma dúvida sobre o que está incluso no pacote ou sobre as formas de pagamento? 
+
+Estou à disposição para ajustar o que for necessário para viabilizar o seu projeto hoje! 😊</div>
+
+    <div class="script-tag">Script 08 • Quebra de Objeção de Preço ("Achei Caro")</div>
+    <div class="script-box">Eu entendo perfeitamente a sua preocupação com o orçamento, {{primeiro_nome}}! 
+
+O mercado realmente tem opções com preços variados. Mas o nosso diferencial é que não abrimos mão de {{diferencial_qualidade_ou_garantia}}, o que evita dores de cabeça futuras e retrabalhos que costumam custar o dobro.
+
+O que acha de darmos um primeiro passo com o plano {{nome_plano_de_entrada}}, que atende exatamente o que você precisa agora por apenas {{valor_menor}}?</div>
+
+    <div class="script-tag">Script 09 • Follow-up de 24 Horas ("O Cliente Sumiu")</div>
+    <div class="script-box">Olá, {{primeiro_nome}}! Passando rapidinho só para te dar um alô.
+
+Ainda estamos com a sua condição especial de {{nome_do_servico}} reservada aqui no sistema, mas os horários da agenda desta semana estão quase esgotados.
+
+Você ainda tem interesse em realizar o atendimento esta semana ou prefere deixar para o próximo mês?</div>
+
+    <div class="script-tag">Script 10 • O Fechamento por Escassez Real</div>
+    <div class="script-box">{{primeiro_nome}}, um aviso importante: nossa tabela de valores atual será atualizada na próxima segunda-feira devido aos reajustes de fornecedores.
+
+Como conversamos ontem, se você confirmar seu pedido até amanhã às 12h, consigo travar o valor antigo de {{valor_antigo}} para você.
+
+Podemos garantir o seu pedido com esse valor promocional?</div>
+
+    <!-- BLOCO C -->
+    <h3 class="section-title">Bloco C: Confirmação de Agendamento Anti-Falta (5 Scripts)</h3>
+
+    <div class="script-tag">Script 11 • Confirmação com Link de GPS</div>
+    <div class="script-box">Agendamento Confirmado com Sucesso! 🎉📅
+
+Olá, {{primeiro_nome}}, sua consulta para {{nome_do_procedimento}} está agendada!
+
+🗓️ Data: {{data_agendamento}}
+⏰ Horário: {{horario_agendamento}}
+📍 Endereço: {{endereco_completo}}
+🗺️ Link de rota fácil (Google Maps / Waze): {{link_mapa}}
+
+💡 Dica: Temos estacionamento gratuito no local. Recomendamos chegar com 10 minutinhos de antecedência para tomar um café com a gente. Até breve!</div>
+
+    <div class="script-tag">Script 12 • Lembrete 24 Horas Antes com Confirmação Interativa</div>
+    <div class="script-box">Olá, {{primeiro_nome}}! Tudo bem? Passando para lembrar do seu compromisso amanhã na {{nome_da_empresa}}! ⏰
+
+🗓️ Amanhã, {{data_amanha}}, às {{horario_agendamento}}.
+Especialista responsável: {{nome_do_profissional}}.
+
+Para mantermos a sua sala reservada e nossa equipe pronta para te receber, por favor, clique em uma das opções abaixo:
+
+1️⃣ Sim, confirmo minha presença amanhã!
+2️⃣ Preciso remarcar para outro dia/horário.
+
+Aguardamos sua resposta! 🙏</div>
+
+    <div class="script-tag">Script 13 • Lembrete de 2 Horas Antes (Dia do Atendimento)</div>
+    <div class="script-box">Opa, {{primeiro_nome}}! Daqui a pouco é a sua vez! 🚗💨
+
+Nossa equipe já está deixando tudo preparado para o seu atendimento às {{horario_agendamento}}.
+
+Se precisar de qualquer ajuda com a localização ou rota, estamos à disposição por aqui. Tenha um excelente caminho até aqui!</div>
+
+    <div class="script-tag">Script 14 • Reagendamento Amigável (Quando o Cliente Avisa que Vai Faltar)</div>
+    <div class="script-box">Sem problemas, {{primeiro_nome}}! Imprevistos acontecem e nós entendemos perfeitamente. Muito obrigado por nos avisar com antecedência! 🙏
+
+Para não deixar seu cuidado para depois, já tenho duas opções livres na agenda:
+Opção 1: {{dia_1}} às {{horario_1}}
+Opção 2: {{dia_2}} às {{horario_2}}
+
+Qual desses dois horários fica melhor para você?</div>
+
+    <div class="script-tag">Script 15 • Recuperação de No-Show (Para Quem Faltou sem Avisar)</div>
+    <div class="script-box">Oi, {{primeiro_nome}}! Sentimos sua falta hoje no horário das {{horario_agendamento}}. Esperamos de coração que esteja tudo bem com você e sua família! ❤️
+
+Sabemos que a rotina às vezes é corrida. Quando tiver um tempinho, nos dê um alô por aqui para reagendarmos o seu horário sem nenhum custo ou problema. Um abraço!</div>
+
+    <!-- BLOCO D -->
+    <h3 class="section-title">Bloco D: Reativação de Clientes Inativos (5 Scripts)</h3>
+
+    <div class="script-tag">Script 16 • O Gancho da Saudade Sincera (30 a 60 Dias)</div>
+    <div class="script-box">Olá, {{primeiro_nome}}! Tudo bem por aí? Faz um tempinho que não vemos você por aqui na {{nome_da_empresa}} e ficamos com saudades! 😊
+
+Como você é um cliente muito especial para nós, liberamos um voucher exclusivo de R$ {{valor_desconto}} para você usar em qualquer serviço ou produto durante esta semana.
+
+Quer que eu envie os horários livres para você aproveitar o seu presente?</div>
+
+    <div class="script-tag">Script 17 • O Recall Preventivo (Manutenção Periódica Obrigatória)</div>
+    <div class="script-box">Olá, {{primeiro_nome}}! Aqui é da equipe técnica da {{nome_da_empresa}}.
+
+Consultando nosso sistema, vi que já se passaram {{numero_meses}} meses desde o seu último procedimento de {{nome_do_servico}}.
+
+Para garantir que os resultados continuem impecáveis e evitar problemas maiores, o ideal é realizar a revisão preventiva nesta época do ano.
+
+Abrimos 4 vagas prioritárias na agenda desta quinta e sexta para clientes em período de revisão. Podemos agendar o seu retorno?</div>
+
+    <div class="script-tag">Script 18 • O Presente de Aniversário</div>
+    <div class="script-box">Parabéns pelo seu dia, {{primeiro_nome}}! 🎂🎉🎈
+
+Toda a equipe da {{nome_da_empresa}} deseja um ano repleto de conquistas, saúde e muitas alegrias para você!
+
+E como aniversário bom tem comemoração, preparamos um presente especial: durante todo o mês do seu aniversário, você tem {{porcentagem_desconto}}% de desconto em qualquer serviço nosso, além de um brinde exclusivo na sua visita.
+
+Quando quiser vir comemorar com a gente, basta me chamar aqui para reservar seu momento! 🎁</div>
+
+    <div class="script-tag">Script 19 • A Pesquisa de Satisfação com Reativação Oculta</div>
+    <div class="script-box">Olá, {{primeiro_nome}}! Tudo bem? Estamos realizando uma rápida melhoria em nossos atendimentos e a sua opinião é fundamental para nós.
+
+De 0 a 10, que nota você daria para a sua última experiência conosco?
+
+Como agradecimento sincero pelo seu tempo, após responder a nota você receberá uma cortesia especial para sua próxima visita. Leva menos de 10 segundos! 👇</div>
+
+    <div class="script-tag">Script 20 • Convite VIP para Testar Novo Serviço / Produto</div>
+    <div class="script-box">{{primeiro_nome}}, estamos selecionando apenas 10 dos nossos clientes mais fiéis para uma experiência exclusiva de lançamento do nosso novo {{nome_novo_servico}} antes de abrirmos para o público geral.
+
+Como você sempre esteve com a gente, gostaríamos muito de convidar você para experimentar essa novidade com 50% de desconto nesta primeira sessão.
+
+Você tem interesse em fazer parte deste grupo VIP? Responda SIM que te passo os detalhes! ✨</div>
+
+    <!-- BLOCO E -->
+    <h3 class="section-title">Bloco E: Avaliações 5 Estrelas no Google Meu Negócio (5 Scripts)</h3>
+
+    <div class="script-tag">Script 21 • Pedido Pós-Atendimento Imediato (Pico Emocional de Satisfação)</div>
+    <div class="script-box">Oi, {{primeiro_nome}}! Ficamos imensamente felizes em receber você hoje na {{nome_da_empresa}}! Esperamos que tenha amado a experiência tanto quanto nós amamos te atender. 🥰
+
+Para uma empresa local como a nossa, a recomendação de clientes especiais faz toda a diferença do mundo.
+
+Poderia nos presentear com uma avaliação rápida no Google? Leva apenas 30 segundos e nos ajuda muito a continuar crescendo!
+
+Basta tocar neste link e deixar suas estrelas:
+⭐ {{link_google_avaliacoes}}
+
+Muito obrigado pelo carinho e até a próxima visita!</div>
+
+    <div class="script-tag">Script 22 • O Sorteio / Benefício por Avaliação</div>
+    <div class="script-box">{{primeiro_nome}}, como foi o seu atendimento hoje? Esperamos que tenha sido nota 10! ⭐
+
+Sabia que quem deixa um comentário com foto no nosso Perfil do Google concorre automaticamente a um {{premio_ou_voucher}} no final deste mês?
+
+Para participar do sorteio, é só tocar no link e deixar sua avaliação sincera:
+👉 {{link_google_avaliacoes}}
+
+Boa sorte! Torcemos por você! 🍀</div>
+
+    <div class="script-tag">Script 23 • Pedido Pessoal do Fundador da Empresa</div>
+    <div class="script-box">Olá, {{primeiro_nome}}, aqui é o {{nome_do_fundador}}, fundador da {{nome_da_empresa}}.
+
+Estou passando pessoalmente para agradecer pela confiança em nosso trabalho hoje. Criamos este negócio com o sonho de entregar o melhor atendimento da nossa região.
+
+Se nosso time fez um bom trabalho hoje, você poderia nos ajudar compartilhando sua opinião no Google? Seu feedback pessoal significa muito para mim e para toda a equipe.
+
+Link direto para avaliar: {{link_google_avaliacoes}}
+
+Um grande abraço e conte sempre conosco!</div>
+
+    <div class="script-tag">Script 24 • Agradecimento de Indicação com Pedido de Review</div>
+    <div class="script-box">{{primeiro_nome}}, vimos que o seu amigo {{nome_amigo_indicado}} veio nos visitar hoje e disse que veio por sua recomendação! Ficamos lisonjeados com a sua confiança em nosso trabalho. ❤️
+
+Você já deixou sua avaliação no nosso Google? Se puder registrar lá o que você acha dos nossos serviços, será um presente maravilhoso para nós:
+⭐ {{link_google_avaliacoes}}
+
+Gratidão imensa!</div>
+
+    <div class="script-tag">Script 25 • Follow-up Gentil do Pedido de Avaliação</div>
+    <div class="script-box">Oi, {{primeiro_nome}}! Sei que a sua rotina é corrida, então estou passando só para te lembrar com todo carinho daquele pedido de avaliação no Google. 
+
+Se tiver 1 minutinho livre no seu dia, sua nota nos ajudará demais:
+👉 {{link_google_avaliacoes}}
+
+Tenha uma semana extraordinária! ✨</div>
+
+    <nav class="chapter-nav">
+      <div class="chapter-nav-left">
+        <a href="#sumario" class="chapter-nav-btn">📑 Voltar ao Sumário</a>
+        <a href="#topo" class="chapter-nav-btn">⬆️ Início do Livro</a>
+      </div>
+      <div class="chapter-nav-right">
+        <a href="#conclusao" class="chapter-nav-btn primary">Avançar: Conclusão ➡️</a>
+      </div>
+    </nav>
+
+    <!-- CONCLUSÃO -->
+    <div class="chapter-divider"></div>
+    <h2 class="chapter-title" id="conclusao">🚀 Conclusão: A Oportunidade de Prestar Serviços na Sua Cidade</h2>
+
+    <p>Existem mais de <strong>20 milhões de empresas ativas no Brasil</strong>. Quase todas sofrem diariamente com demora no atendimento, cancelamentos e falta de tempo para fazer follow-up.</p>
+
+    <p>Profissionais que dominam a implementação dessa esteira cobram de <strong>R$ 1.500 a R$ 5.000 por setup</strong>, além de mensalidades de <strong>R$ 500 a R$ 1.500</strong> por empresa. Com apenas 5 clientes fixos, você constrói uma renda previsível de até R$ 10.000 por mês entregando um serviço de alto impacto.</p>
+
+    <nav class="chapter-nav">
+      <div class="chapter-nav-left">
+        <a href="#sumario" class="chapter-nav-btn">📑 Voltar ao Sumário</a>
+        <a href="#topo" class="chapter-nav-btn primary">⬆️ Voltar ao Início do Livro</a>
+      </div>
+    </nav>
+
+    <!-- SOBRE O DESENVOLVEDOR & CONTATO -->
+    <div class="developer-card" id="sobre-o-desenvolvedor">
+      <div class="developer-badge">👨‍💻 Criação & Engenharia Digital</div>
+      <h3 class="developer-title">Sobre o Desenvolvedor</h3>
+      <p class="developer-desc">
+        Este ecossistema de conteúdo, automações e estratégias digitais foi concebido e estruturado por <strong>Diniz</strong> — especialista em desenvolvimento de automações comerciais de alta performance, esteiras para WhatsApp e plataformas web modernas.
+      </p>
+      <div class="developer-action">
+        <a href="https://designerdiniz.vercel.app/" target="_blank" rel="noopener noreferrer" class="developer-btn">
+          <span>🌐 Conhecer Portfólio & Contato Oficial</span>
+          <span class="developer-btn-arrow">➔</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="footer-page">
+      <p><strong>Esteira de Automação para Negócios Locais</strong> — 1ª Edição Oficial (2026)</p>
+      <p>© 2026 SVD Lumex & Digital Product Factory. Todos os direitos reservados.</p>
+      <p style="margin-top: 10px; font-size: 0.82rem;"><em>Dica de Impressão: Pressione <strong>Ctrl + P</strong> no seu navegador e escolha <strong>"Salvar como PDF"</strong> para gerar seu livro digital com diagramação de editora.</em></p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livraria Digital & Manuais Estratégicos — Cássio Diniz</title>
+  <meta name="description" content="Manuais digitais estratégicos com soluções definitivas em automação de processos, tráfego hiperlocal, copywriting e programação. Acesso imediato no leitor seguro.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23101c2b'/><text x='16' y='21' font-family='sans-serif' font-weight='800' font-size='14' fill='%2367d5c5' text-anchor='middle'>CD</text></svg>">
+  <style>
+    :root {
+      --ink: #111f30;
+      --navy: #101c2b;
+      --mid: #23394f;
+      --accent: #67d5c5;
+      --accent-hover: #8be1d4;
+      --paper: #f4f7f8;
+      --line: #d7e0e5;
+      --muted: #546575;
+      --white: #ffffff;
+      --gold: #f59e0b;
+      --green: #10b981;
+      --card-bg: #152233;
+      --card-border: rgba(103, 213, 197, 0.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--navy);
+      color: #f1f6f8;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 4vw, 36px);
+    }
+
+    /* Header Nav */
+    .store-header {
+      background: rgba(16, 28, 43, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(103, 213, 197, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-link span { color: var(--accent); }
+    .brand-tag {
+      font-size: 0.72rem;
+      background: rgba(103, 213, 197, 0.14);
+      color: var(--accent);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(103, 213, 197, 0.3);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn-portal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid rgba(103, 213, 197, 0.4);
+      color: var(--accent);
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-portal:hover {
+      background: rgba(103, 213, 197, 0.12);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* Hero Section */
+    .store-hero {
+      padding: clamp(48px, 7vw, 90px) 0 clamp(32px, 5vw, 60px);
+      text-align: center;
+      position: relative;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: rgba(103, 213, 197, 0.08);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(103, 213, 197, 0.2);
+    }
+    .hero-title {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      color: #fff;
+      font-weight: 900;
+      max-width: 900px;
+      margin: 0 auto 20px;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--accent);
+      background: linear-gradient(135deg, #67d5c5 0%, #a4f4e7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: #a1b8c8;
+      max-width: 680px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .hero-trust-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(12px, 3vw, 32px);
+      padding: 16px 24px;
+      background: rgba(22, 34, 51, 0.7);
+      border: 1px solid rgba(103, 213, 197, 0.15);
+      border-radius: 14px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: #d1e2ec;
+      font-weight: 600;
+    }
+    .trust-icon { color: var(--accent); font-size: 1.05rem; }
+
+    /* Store Grid */
+    .catalog-section {
+      padding: clamp(30px, 4vw, 60px) 0 clamp(60px, 8vw, 100px);
+    }
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    .book-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .book-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(103, 213, 197, 0.55);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45), 0 0 25px rgba(103, 213, 197, 0.18);
+    }
+    .card-top-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--accent);
+      color: var(--navy);
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      z-index: 2;
+    }
+    .card-media {
+      background: radial-gradient(circle at center, #1b2f44 0%, #101c2b 100%);
+      padding: 30px 24px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(103, 213, 197, 0.1);
+      position: relative;
+    }
+    .card-media img {
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 25px rgba(0,0,0,0.6));
+      transition: transform 0.4s ease;
+    }
+    .book-card:hover .card-media img {
+      transform: scale(1.04) rotate(-1deg);
+    }
+
+    .card-body {
+      padding: 26px 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .card-kicker {
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 8px;
+    }
+    .card-title {
+      font-size: 1.25rem;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: -0.025em;
+    }
+    .card-desc {
+      font-size: 0.88rem;
+      color: #a4b7c6;
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+    .card-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card-bullets li {
+      font-size: 0.82rem;
+      color: #cbdbe4;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+    }
+    .card-bullets li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .card-pricing {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(103, 213, 197, 0.12);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .price-box {
+      display: flex;
+      flex-direction: column;
+    }
+    .price-original {
+      font-size: 0.8rem;
+      color: #6d8495;
+      text-decoration: line-through;
+    }
+    .price-current {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .price-current small {
+      font-size: 0.95rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-right: 2px;
+    }
+    .price-pix-badge {
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 700;
+      background: rgba(103, 213, 197, 0.1);
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(103, 213, 197, 0.25);
+    }
+
+    .btn-buy {
+      width: 100%;
+      min-height: 48px;
+      background: var(--accent);
+      color: var(--navy);
+      border: none;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.96rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(103, 213, 197, 0.3);
+    }
+    .btn-buy:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 6px 20px rgba(103, 213, 197, 0.45);
+      transform: translateY(-2px);
+    }
+
+    /* Modal Checkout */
+    dialog {
+      background: transparent;
+      border: none;
+      max-width: 540px;
+      width: 92%;
+      margin: auto;
+      padding: 0;
+      overflow: visible;
+    }
+    dialog::backdrop {
+      background: rgba(9, 15, 23, 0.85);
+      backdrop-filter: blur(8px);
+    }
+    .modal-box {
+      background: #142030;
+      border: 1px solid rgba(103, 213, 197, 0.35);
+      border-radius: 20px;
+      padding: clamp(24px, 5vw, 36px);
+      color: #fff;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(103, 213, 197, 0.15);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(255, 255, 255, 0.2); }
+
+    .modal-head {
+      margin-bottom: 24px;
+      padding-right: 28px;
+    }
+    .modal-kicker {
+      font-size: 0.74rem;
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .modal-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+    }
+    .modal-price-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(16, 28, 43, 0.6);
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(103, 213, 197, 0.2);
+      margin-top: 12px;
+    }
+    .modal-price-bar span { font-size: 0.85rem; color: #a4b7c6; }
+    .modal-price-bar strong { font-size: 1.15rem; color: var(--accent); }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #d1e2ec;
+      margin-bottom: 6px;
+    }
+    .form-group input {
+      width: 100%;
+      background: #0d1723;
+      border: 1px solid rgba(103, 213, 197, 0.25);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(103, 213, 197, 0.25);
+    }
+    .form-hint {
+      font-size: 0.74rem;
+      color: #7b93a5;
+      margin-top: 4px;
+    }
+
+    /* Pix Container */
+    .pix-container {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .qr-frame {
+      background: #fff;
+      padding: 12px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 16px 0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+    .qr-frame img {
+      width: 180px;
+      height: 180px;
+      display: block;
+    }
+    .pix-copia-cola {
+      background: #0d1723;
+      border: 1px solid rgba(103, 213, 197, 0.3);
+      padding: 10px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: #a4cbd4;
+      word-break: break-all;
+      max-height: 64px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .pix-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .btn-copy {
+      background: rgba(103, 213, 197, 0.15);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-copy:hover {
+      background: var(--accent);
+      color: var(--navy);
+    }
+    .btn-simulate {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--gold);
+      color: #fbbf24;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+    .btn-simulate:hover { background: var(--gold); color: #000; }
+
+    .pulse-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: #a4cbd4;
+      margin-top: 14px;
+    }
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+
+    /* Success Container */
+    .success-container {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+    .success-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.2);
+      border: 2px solid var(--green);
+      color: var(--green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+    .access-key-box {
+      background: #09121d;
+      border: 1px dashed var(--accent);
+      padding: 16px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    .access-key-box span {
+      display: block;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .access-key-box strong {
+      font-size: 1.45rem;
+      font-family: monospace;
+      color: #fff;
+      letter-spacing: 0.08em;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      background: rgba(13, 23, 36, 0.6);
+      border-top: 1px solid rgba(103, 213, 197, 0.12);
+      padding: clamp(50px, 7vw, 90px) 0;
+    }
+    .faq-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 40px;
+      letter-spacing: -0.03em;
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid rgba(103, 213, 197, 0.15);
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+    .faq-item h3 {
+      font-size: 1.05rem;
+      font-weight: 750;
+      color: #fff;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .faq-item h3::before { content: '✦'; color: var(--accent); font-size: 0.85rem; }
+    .faq-item p {
+      font-size: 0.88rem;
+      color: #9cb2c2;
+      line-height: 1.55;
+    }
+
+    /* Store Footer */
+    .store-footer {
+      border-top: 1px solid rgba(103, 213, 197, 0.12);
+      padding: 40px 0;
+      text-align: center;
+      font-size: 0.84rem;
+      color: #647d91;
+    }
+    .store-footer a { color: var(--accent); text-decoration: none; }
+    .store-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .header-inner { height: 68px; }
+      .catalog-grid { grid-template-columns: 1fr; }
+      .book-card { max-width: 440px; margin: 0 auto; width: 100%; }
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Nav -->
+  <header class="store-header">
+    <div class="wrap header-inner">
+      <a href="../index.html" class="brand-link" aria-label="Voltar para a página inicial de Cássio Diniz">
+        Cássio<span>.</span> Diniz
+        <span class="brand-tag">Livraria Digital</span>
+      </a>
+      <div class="nav-actions">
+        <a href="../index.html" style="color:#a4cbd4; font-size:0.86rem; text-decoration:none; font-weight:600;">← Voltar ao Início</a>
+        <a href="login.html" class="btn-portal">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
+          Acessar Meu E-book
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="store-hero">
+    <div class="wrap">
+      <span class="hero-eyebrow">✦ Catálogo Oficial de Infoprodutos & Manuais Digitais</span>
+      <h1 class="hero-title">Manuais Estratégicos com <em>Aplicação Imediata</em> no seu Negócio.</h1>
+      <p class="hero-subtitle">
+        Projetados sob o rigor da engenharia de processos e três décadas de comunicação visual. Sem enrolação teórica: passos práticos, templates e código para execução no mundo real.
+      </p>
+
+      <div class="hero-trust-bar">
+        <div class="trust-item"><span class="trust-icon">⚡</span> Leitor Seguro no Navegador</div>
+        <div class="trust-item"><span class="trust-icon">🔒</span> Licença e Chave Exclusiva</div>
+        <div class="trust-item"><span class="trust-icon">🛡️</span> Garantia Total de 7 Dias</div>
+        <div class="trust-item"><span class="trust-icon">📱</span> Leitura Responsiva Mobile & PC</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catálogo Oficial de 4 E-books -->
+  <main class="catalog-section">
+    <div class="wrap">
+      <div class="catalog-grid">
+
+        <!-- Produto 1: Esteira de Automação -->
+        <article class="book-card" data-ebook-id="esteira-automacao">
+          <span class="card-top-tag">MAIS VENDIDO</span>
+          <div class="card-media">
+            <img src="assets/capa-esteira-automacao.jpg" alt="Capa 3D Esteira de Automação para Negócios Locais" width="220" height="280" loading="lazy">
+          </div>
+          <div class="card-body">
+            <span class="card-kicker">AUTOMAÇÃO COMERCIAL & IA</span>
+            <h2 class="card-title">Esteira de Automação para Negócios Locais</h2>
+            <p class="card-desc">Transforme o WhatsApp e o atendimento da sua empresa em uma máquina automática de captação, agendamento e vendas 24/7 com Make e Typebot.</p>
+            <ul class="card-bullets">
+              <li>Os 4 Pilares da Esteira de Alta Conversão</li>
+              <li>Configuração prática de Typebot, Make e WhatsApp API</li>
+              <li>Blindagem Anti-No-Show: redução de até 80% em faltas</li>
+              <li><strong>BÔNUS:</strong> Pack com 15 Scripts Prontos de Conversão</li>
+            </ul>
+            <div class="card-pricing">
+              <div class="price-box">
+                <span class="price-original">R$ 97,00</span>
+                <span class="price-current"><small>R$</small> 47,00</span>
+              </div>
+              <span class="price-pix-badge">Pix Imediato</span>
+            </div>
+            <button class="btn-buy" type="button" onclick="openCheckout('esteira-automacao')">
+              Comprar com Acesso Imediato ↗
+            </button>
+          </div>
+        </article>
+
+        <!-- Produto 2: Tráfego Hiperlocal -->
+        <article class="book-card" data-ebook-id="trafego-hiperlocal">
+          <span class="card-top-tag">ALTO ROI</span>
+          <div class="card-media">
+            <img src="assets/capa-trafego-hiperlocal.jpg" alt="Capa 3D Manual Prático de Tráfego Pago Hiperlocal" width="220" height="280" loading="lazy">
+          </div>
+          <div class="card-body">
+            <span class="card-kicker">TRÁFEGO PAGO REGIONAL</span>
+            <h2 class="card-title">Manual Prático de Tráfego Pago Hiperlocal</h2>
+            <p class="card-desc">Pare de queimar dinheiro com cliques de curiosos de outras cidades. Domine o raio de 3 km a 15 km com anúncios de precisão cirúrgica no Google Maps e Instagram.</p>
+            <ul class="card-bullets">
+              <li>A Fórmula do Raio de Ouro (3 km, 5 km e 10 km)</li>
+              <li>Pino de Destaque no Google Maps e Topo das Buscas Locais</li>
+              <li>Lista Negra com 150+ palavras-chave negativas</li>
+              <li><strong>BÔNUS:</strong> 20 Modelos de Anúncios Prontos para Negócios</li>
+            </ul>
+            <div class="card-pricing">
+              <div class="price-box">
+                <span class="price-original">R$ 97,00</span>
+                <span class="price-current"><small>R$</small> 37,00</span>
+              </div>
+              <span class="price-pix-badge">Pix Imediato</span>
+            </div>
+            <button class="btn-buy" type="button" onclick="openCheckout('trafego-hiperlocal')">
+              Comprar com Acesso Imediato ↗
+            </button>
+          </div>
+        </article>
+
+        <!-- Produto 3: Copywriting Black -->
+        <article class="book-card" data-ebook-id="copywriting-black">
+          <span class="card-top-tag">ALTA ESCALA</span>
+          <div class="card-media">
+            <img src="assets/capa-copywriting-black.jpg" alt="Capa 3D Templates de Copywriting para Infoprodutos Black" width="220" height="280" loading="lazy">
+          </div>
+          <div class="card-body">
+            <span class="card-kicker">COPYWRITING & PERSUASÃO</span>
+            <h2 class="card-title">Templates de Copywriting para Infoprodutos Black</h2>
+            <p class="card-desc">Estruturas secretas de persuasão e ganchos hipnóticos para ofertas de resposta direta em nichos de alta fricção, com blindagem total contra bloqueios.</p>
+            <ul class="card-bullets">
+              <li>O Conceito de Mecanismo Único que anula objeções</li>
+              <li>Roteiro Matemático dos Primeiros 180 Segundos de VSL</li>
+              <li>Advertoriais e Presells Seguros para Tráfego Frio</li>
+              <li><strong>BÔNUS:</strong> Dicionário de Compliance de Vocabulário Aprovado</li>
+            </ul>
+            <div class="card-pricing">
+              <div class="price-box">
+                <span class="price-original">R$ 197,00</span>
+                <span class="price-current"><small>R$</small> 67,00</span>
+              </div>
+              <span class="price-pix-badge">Pix Imediato</span>
+            </div>
+            <button class="btn-buy" type="button" onclick="openCheckout('copywriting-black')">
+              Comprar com Acesso Imediato ↗
+            </button>
+          </div>
+        </article>
+
+        <!-- Produto 4: Python para Automação -->
+        <article class="book-card" data-ebook-id="python-automacao">
+          <span class="card-top-tag">ENGENHARIA</span>
+          <div class="card-media">
+            <img src="assets/capa-python-automacao.jpg" alt="Capa 3D Guia Avançado de Python para Automação" width="220" height="280" loading="lazy">
+          </div>
+          <div class="card-body">
+            <span class="card-kicker">ENGENHARIA DE SOFTWARE</span>
+            <h2 class="card-title">Guia Avançado de Python para Automação</h2>
+            <p class="card-desc">Construa automações profissionais, resilientes e escaláveis em Python 3.12 que rodam no piloto automático sem quebrar com oscilações de rede.</p>
+            <ul class="card-bullets">
+              <li>Automação Web Assíncrona com Playwright e Anti-Detecção</li>
+              <li>Web Scraping Concorrente com HTTPX e Semáforos</li>
+              <li>Manipulação de Planilhas Gigantes, PDFs e OCR</li>
+              <li><strong>BÔNUS:</strong> Dockerização e Deploy de Pipelines 24/7</li>
+            </ul>
+            <div class="card-pricing">
+              <div class="price-box">
+                <span class="price-original">R$ 127,00</span>
+                <span class="price-current"><small>R$</small> 47,00</span>
+              </div>
+              <span class="price-pix-badge">Pix Imediato</span>
+            </div>
+            <button class="btn-buy" type="button" onclick="openCheckout('python-automacao')">
+              Comprar com Acesso Imediato ↗
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de Checkout Transparente Pix -->
+  <dialog id="checkout-modal" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <button type="button" class="modal-close" onclick="closeCheckout()" aria-label="Fechar checkout">×</button>
+
+      <!-- Etapa 1: Dados do Comprador -->
+      <div id="checkout-step-form">
+        <div class="modal-head">
+          <p class="modal-kicker">CHECKOUT SEGURO & LIBERAÇÃO IMEDIATA</p>
+          <h3 class="modal-title" id="modal-product-title">Esteira de Automação para Negócios Locais</h3>
+          <div class="modal-price-bar">
+            <span>Pagamento via Pix (Sem taxas)</span>
+            <strong id="modal-product-price">R$ 47,00</strong>
+          </div>
+        </div>
+
+        <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)">
+          <input type="hidden" id="form-ebook-id" value="">
+          <div class="form-group">
+            <label for="form-name">Seu Nome Completo</label>
+            <input type="text" id="form-name" placeholder="Ex: Roberto Silva" required>
+          </div>
+          <div class="form-group">
+            <label for="form-email">Seu E-mail (Onde você receberá a chave de acesso)</label>
+            <input type="email" id="form-email" placeholder="Ex: roberto@empresa.com.br" required>
+            <p class="form-hint">O código de acesso exclusivo será enviado para este e-mail.</p>
+          </div>
+          <div class="form-group">
+            <label for="form-cpf">CPF (Obrigatório para emissão do Pix pelo Banco Central)</label>
+            <input type="text" id="form-cpf" placeholder="000.000.000-00" maxlength="14" required>
+          </div>
+          <button type="submit" class="btn-buy" id="btn-submit-order" style="margin-top: 10px;">
+            Gerar Chave Pix para Acesso Imediato ↗
+          </button>
+        </form>
+      </div>
+
+      <!-- Etapa 2: QR Code Pix & Polling -->
+      <div id="checkout-step-pix" class="pix-container">
+        <p class="modal-kicker">PAGAMENTO INSTANTÂNEO</p>
+        <h3 class="modal-title">Escaneie o QR Code ou Copie o Código</h3>
+        <p style="font-size:0.86rem; color:#a4b7c6; margin-top:6px;">Abra o app do seu banco, escolha Pix e aponte a câmera:</p>
+
+        <div class="qr-frame">
+          <img id="pix-qr-img" src="" alt="QR Code Pix para Pagamento">
+        </div>
+
+        <p style="font-size:0.78rem; color:#839db0; margin-bottom:6px;">Ou use o código Pix Copia e Cola:</p>
+        <div class="pix-copia-cola" id="pix-code-text"></div>
+
+        <div class="pix-actions">
+          <button type="button" class="btn-copy" onclick="copyPixCode()">
+            📋 Copiar Chave Pix
+          </button>
+          <button type="button" class="btn-simulate" id="btn-mock-approve" onclick="simulatePaymentApproval()">
+            ⚡ Simular Pagamento Instantâneo (Ambiente de Teste)
+          </button>
+        </div>
+
+        <div class="pulse-status">
+          <span class="status-dot"></span>
+          <span id="polling-status-msg">Aguardando confirmação bancária em tempo real...</span>
+        </div>
+      </div>
+
+      <!-- Etapa 3: Sucesso & Chave Gerada -->
+      <div id="checkout-step-success" class="success-container">
+        <div class="success-icon">✓</div>
+        <p class="modal-kicker" style="color:var(--green)">PAGAMENTO CONFIRMADO</p>
+        <h3 class="modal-title">Seu Acesso foi Liberado!</h3>
+        <p style="font-size:0.88rem; color:#cbdbe4; margin-top:8px;">
+          Enviamos uma cópia das instruções para o seu e-mail. Guarde a sua chave única de acesso:
+        </p>
+
+        <div class="access-key-box">
+          <span>Sua Chave Única de Licença</span>
+          <strong id="success-access-code">CD-XXXX-YYYY</strong>
+        </div>
+
+        <p style="font-size:0.8rem; color:#f59e0b; margin-bottom:18px;">
+          🔒 Esta chave permite <strong>uma sessão ativa por vez</strong>. O uso compartilhado bloqueia o acesso.
+        </p>
+
+        <a href="#" class="btn-buy" id="btn-open-reader-now">
+          Abrir E-book no Leitor Digital Agora ↗
+        </a>
+      </div>
+
+    </div>
+  </dialog>
+
+  <!-- FAQ e Informações de Segurança -->
+  <section class="faq-section">
+    <div class="wrap">
+      <h2 class="faq-title">Dúvidas Frequentes sobre a Compra e Leitura</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>Como e quando recebo meu e-book?</h3>
+          <p>A liberação é instantânea. Logo após o pagamento via Pix ser processado, o sistema exibe seu Código Único de Acesso na tela e envia uma cópia para o seu e-mail com o link direto para o leitor oficial.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Como funciona o leitor protegido no site?</h3>
+          <p>O e-book é aberto diretamente no navegador com uma interface editorial ergonômica, compatível com computadores, tablets e smartphones, sem necessidade de instalar aplicativos pesados.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Como funciona a regra de sessão única?</h3>
+          <p>Para proteger os direitos autorais e evitar pirataria, cada compra possui uma chave individual que permite apenas uma tela aberta por vez. Se você abrir o e-book em outro dispositivo, o acesso anterior é automaticamente pausado.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Tenho garantia se eu não gostar?</h3>
+          <p>Sim! Você conta com 7 dias de garantia incondicional conforme o Código de Defesa do Consumidor. Caso o material não supere suas expectativas, basta solicitar o reembolso que devolvemos 100% do seu valor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="store-footer">
+    <div class="wrap">
+      <p>© 2026 Cássio Diniz — Análise de Sistemas, UI/UX e Design Editorial. Todos os direitos reservados.</p>
+      <p style="margin-top:8px;">
+        <a href="../index.html">Página Principal</a> · 
+        <a href="login.html">Portal do Leitor</a> · 
+        <a href="admin.html">Painel do Administrador</a> · 
+        <a href="https://wa.me/5531993963275" target="_blank" rel="noopener noreferrer">Suporte via WhatsApp: +55 (31) 99396-3275</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const EBOOK_DATA = {
+      'esteira-automacao': {
+        title: 'Esteira de Automação para Negócios Locais',
+        price: 'R$ 47,00',
+        numericPrice: 47.00
+      },
+      'trafego-hiperlocal': {
+        title: 'Manual Prático de Tráfego Pago Hiperlocal',
+        price: 'R$ 37,00',
+        numericPrice: 37.00
+      },
+      'copywriting-black': {
+        title: 'Templates de Copywriting para Infoprodutos Black',
+        price: 'R$ 67,00',
+        numericPrice: 67.00
+      },
+      'python-automacao': {
+        title: 'Guia Avançado de Python para Automação',
+        price: 'R$ 47,00',
+        numericPrice: 47.00
+      }
+    };
+
+    let currentOrderId = null;
+    let pollInterval = null;
+    const checkoutModal = document.getElementById('checkout-modal');
+
+    function openCheckout(ebookId) {
+      const data = EBOOK_DATA[ebookId];
+      if (!data) return;
+
+      document.getElementById('form-ebook-id').value = ebookId;
+      document.getElementById('modal-product-title').innerText = data.title;
+      document.getElementById('modal-product-price').innerText = data.price;
+
+      // Reseta telas
+      document.getElementById('checkout-step-form').style.display = 'block';
+      document.getElementById('checkout-step-pix').style.display = 'none';
+      document.getElementById('checkout-step-success').style.display = 'none';
+
+      checkoutModal.showModal();
+    }
+
+    function closeCheckout() {
+      if (pollInterval) clearInterval(pollInterval);
+      checkoutModal.close();
+    }
+
+    checkoutModal.addEventListener('click', (e) => {
+      if (e.target === checkoutModal) closeCheckout();
+    });
+
+    async function handleCheckoutSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-submit-order');
+      btn.innerText = 'Gerando Pix... Aguarde';
+      btn.disabled = true;
+
+      const ebookId = document.getElementById('form-ebook-id').value;
+      const name = document.getElementById('form-name').value;
+      const email = document.getElementById('form-email').value;
+      const cpf = document.getElementById('form-cpf').value;
+
+      try {
+        const response = await fetch('/api/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ebookId, name, email, cpf })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.error || 'Falha ao processar checkout');
+        }
+
+        currentOrderId = data.orderId;
+
+        // Renderiza etapa do Pix
+        document.getElementById('pix-qr-img').src = data.qrCodeBase64;
+        document.getElementById('pix-code-text').innerText = data.copyPasteCode;
+
+        document.getElementById('checkout-step-form').style.display = 'none';
+        document.getElementById('checkout-step-pix').style.display = 'block';
+
+        // Inicia polling em tempo real
+        startPollingPayment(currentOrderId);
+
+      } catch (err) {
+        alert('Erro ao iniciar compra: ' + err.message);
+      } finally {
+        btn.innerText = 'Gerar Chave Pix para Acesso Imediato ↗';
+        btn.disabled = false;
+      }
+    }
+
+    function copyPixCode() {
+      const code = document.getElementById('pix-code-text').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert('✓ Código Pix Copia e Cola copiado com sucesso! Abra o app do seu banco e cole no Pix.');
+      });
+    }
+
+    function startPollingPayment(orderId) {
+      if (pollInterval) clearInterval(pollInterval);
+
+      pollInterval = setInterval(async () => {
+        try {
+          const resp = await fetch(`/api/status?orderId=${encodeURIComponent(orderId)}`);
+          const data = await resp.json();
+
+          if (data.status === 'approved') {
+            clearInterval(pollInterval);
+            renderSuccess(data);
+          }
+        } catch (e) {
+          console.log('[Polling Status]: Aguardando...');
+        }
+      }, 2500);
+    }
+
+    async function simulatePaymentApproval() {
+      if (!currentOrderId) return;
+      const btn = document.getElementById('btn-mock-approve');
+      btn.innerText = 'Confirmando pagamento...';
+      btn.disabled = true;
+
+      try {
+        const resp = await fetch('/api/status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId: currentOrderId, simulateApproval: true })
+        });
+        const data = await resp.json();
+        if (data.status === 'approved') {
+          if (pollInterval) clearInterval(pollInterval);
+          renderSuccess(data);
+        }
+      } catch (err) {
+        alert('Erro na simulação: ' + err.message);
+      }
+    }
+
+    function renderSuccess(orderData) {
+      document.getElementById('checkout-step-pix').style.display = 'none';
+      document.getElementById('checkout-step-success').style.display = 'block';
+
+      document.getElementById('success-access-code').innerText = orderData.accessCode;
+      
+      const readerBtn = document.getElementById('btn-open-reader-now');
+      readerBtn.href = orderData.redirectUrl || `leitor.html?token=${orderData.accessCode}&email=${encodeURIComponent(orderData.email)}`;
+    }
+  </script>
+</body>
+</html>

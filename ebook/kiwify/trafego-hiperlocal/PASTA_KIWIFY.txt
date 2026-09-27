@@ -1,0 +1,3 @@
+Plataforma: Kiwify
+Ebook: Manual Prático de Tráfego Pago Hiperlocal
+Caminho: ebook/kiwify/trafego-hiperlocal/

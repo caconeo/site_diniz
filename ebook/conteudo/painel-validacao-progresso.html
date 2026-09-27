@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Validação e Progresso — Ebooks SVD Lumex</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --bg: #070d19;
+      --surface: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --primary: #38bdf8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+
+    .top-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 25px;
+    }
+
+    .top-metric-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .top-metric-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .top-metric-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ebook-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px -5px rgba(0,0,0,0.5);
+      transition: transform 0.2s ease;
+    }
+
+    .ebook-card.success { border-left: 6px solid var(--success); }
+    .ebook-card.warning { border-left: 6px solid var(--warning); }
+    .ebook-card.info { border-left: 6px solid var(--primary); }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .ebook-category {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .ebook-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+
+    .badge {
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .badge.success { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
+    .badge.warning { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid var(--warning); }
+    .badge.info { background: rgba(56, 189, 248, 0.2); color: var(--primary); border: 1px solid var(--primary); }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 10px;
+      background: var(--card);
+      border-radius: 9999px;
+      overflow: hidden;
+      margin: 15px 0 8px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      transition: width 0.5s ease;
+    }
+    .progress-bar-fill.success { background: var(--success); }
+    .progress-bar-fill.warning { background: var(--warning); }
+    .progress-bar-fill.info { background: var(--primary); }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat-box {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat-num {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .section-subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      color: #ffffff;
+      margin: 18px 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .check-item {
+      background: rgba(255,255,255,0.03);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .check-item.done { color: #a7f3d0; }
+    .check-item.done span { color: var(--success); font-weight: bold; }
+    .check-item.pending { color: var(--text-muted); }
+    .check-item.pending span { color: #64748b; }
+
+    .pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .pill-asset { background: rgba(56, 189, 248, 0.12); color: var(--primary); border: 1px solid rgba(56, 189, 248, 0.25); }
+    .pill-muted { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+
+    .card-footer {
+      display: flex;
+      gap: 12px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn {
+      padding: 9px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-primary { background: var(--primary); color: #070d19; }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: #334155; }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📊 Painel de Validação e Progresso dos Ebooks</h1>
+      <p class="subtitle">Auditoria de Qualidade e Prontidão Comercial • Fábrica Digital SVD Lumex</p>
+      <div style="color: var(--text-muted); font-size: 0.9rem;">Última Atualização: <strong>27/09/2026 às 14:39:44</strong></div>
+
+      <div class="top-metrics">
+        <div class="top-metric-card">
+          <div class="top-metric-num">2 / 4</div>
+          <div class="top-metric-label">Ebooks Finalizados</div>
+        </div>
+        <div class="top-metric-card">
+          <div class="top-metric-num">72%</div>
+          <div class="top-metric-label">Progresso Geral</div>
+        </div>
+        <div class="top-metric-card">
+          <div class="top-metric-num">26</div>
+          <div class="top-metric-label">Arquivos Produzidos</div>
+        </div>
+        <div class="top-metric-card">
+          <div class="top-metric-num">~28</div>
+          <div class="top-metric-label">Páginas Diagramadas</div>
+        </div>
+      </div>
+    </header>
+
+    
+        <div class="ebook-card success">
+          <div class="card-header">
+            <div>
+              <div class="ebook-category">Automação / WhatsApp / IA / Negócios Locais</div>
+              <h3 class="ebook-title">1. Esteira de Automação para Negócios Locais</h3>
+            </div>
+            <span class="badge success">100% PRONTO</span>
+          </div>
+
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill success" style="width: 100%;"></div>
+          </div>
+          <div class="progress-meta">
+            <span>Progresso da Obra: <strong>100%</strong></span>
+            <span>Arquivos Produzidos: <strong>11 arquivos</strong></span>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-num">62.9 KB</span>
+              <span class="stat-label">Arquivo HTML</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">41.6 KB</span>
+              <span class="stat-label">Arquivo MD</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">6002</span>
+              <span class="stat-label">Palavras</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">~13</span>
+              <span class="stat-label">Páginas Est.</span>
+            </div>
+          </div>
+
+          <div class="section-subtitle">📋 Checklist de Conformidade Comercial</div>
+          <div class="checklist-grid">
+            
+          <div class="check-item done">
+            <span>✓</span> Ficha Catalográfica CIP Oficial
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Sumário Interativo com Links
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Botões de Navegação por Capítulo
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Botão Flutuante de Sumário
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Regras de Impressão (@media print)
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Ilustrações 3D Completas (9/9)
+          </div>
+        
+          </div>
+
+          <div class="section-subtitle">🎨 Ilustrações Homologadas (9/9)</div>
+          <div class="pills-container">
+            <span class="pill pill-asset">🎨 capa-esteira-automacao.jpg</span><span class="pill pill-asset">🎨 infografico-funil-esteira.jpg</span><span class="pill pill-asset">🎨 pilares-esteira-automacao.jpg</span><span class="pill pill-asset">🎨 fluxo-automacao-whatsapp.jpg</span><span class="pill pill-asset">🎨 stack-tecnologica-integrada.jpg</span><span class="pill pill-asset">🎨 roadmap-7-dias-implementacao.jpg</span><span class="pill pill-asset">🎨 playbooks-nichos-locais.jpg</span><span class="pill pill-asset">🎨 blindagem-aquecimento-whatsapp.jpg</span><span class="pill pill-asset">🎨 pack-scripts-conversao.jpg</span>
+          </div>
+
+          <div class="card-footer">
+            <a href="esteira-de-automacao-para-negocios-locais.html" class="btn btn-primary" target="_blank">🌐 Visualizar HTML</a>
+            <a href="esteira-de-automacao-para-negocios-locais.md" class="btn btn-secondary" target="_blank">📝 Ver Markdown</a>
+          </div>
+        </div>
+        
+        <div class="ebook-card success">
+          <div class="card-header">
+            <div>
+              <div class="ebook-category">Tráfego Pago / Google Ads / Meta Ads / Comércio Local</div>
+              <h3 class="ebook-title">2. Manual Prático de Tráfego Pago Hiperlocal</h3>
+            </div>
+            <span class="badge success">100% PRONTO</span>
+          </div>
+
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill success" style="width: 100%;"></div>
+          </div>
+          <div class="progress-meta">
+            <span>Progresso da Obra: <strong>100%</strong></span>
+            <span>Arquivos Produzidos: <strong>9 arquivos</strong></span>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-num">53.5 KB</span>
+              <span class="stat-label">Arquivo HTML</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">25.7 KB</span>
+              <span class="stat-label">Arquivo MD</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">3774</span>
+              <span class="stat-label">Palavras</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">~8</span>
+              <span class="stat-label">Páginas Est.</span>
+            </div>
+          </div>
+
+          <div class="section-subtitle">📋 Checklist de Conformidade Comercial</div>
+          <div class="checklist-grid">
+            
+          <div class="check-item done">
+            <span>✓</span> Ficha Catalográfica CIP Oficial
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Sumário Interativo com Links
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Botões de Navegação por Capítulo
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Botão Flutuante de Sumário
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Regras de Impressão (@media print)
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Ilustrações 3D Completas (7/7)
+          </div>
+        
+          </div>
+
+          <div class="section-subtitle">🎨 Ilustrações Homologadas (7/7)</div>
+          <div class="pills-container">
+            <span class="pill pill-asset">🎨 capa-trafego-hiperlocal.jpg</span><span class="pill pill-asset">🎨 preparacao-terreno-hiperlocal.jpg</span><span class="pill pill-asset">🎨 google-ads-local-search.jpg</span><span class="pill pill-asset">🎨 meta-ads-pin-segmentation.jpg</span><span class="pill pill-asset">🎨 orcamento-70-20-10.jpg</span><span class="pill pill-asset">🎨 rotina-semanal-otimizacao.jpg</span><span class="pill pill-asset">🎨 pack-anuncios-hiperlocais.jpg</span>
+          </div>
+
+          <div class="card-footer">
+            <a href="manual-pratico-trafego-pago-hiperlocal.html" class="btn btn-primary" target="_blank">🌐 Visualizar HTML</a>
+            <a href="manual-pratico-trafego-pago-hiperlocal.md" class="btn btn-secondary" target="_blank">📝 Ver Markdown</a>
+          </div>
+        </div>
+        
+        <div class="ebook-card info">
+          <div class="card-header">
+            <div>
+              <div class="ebook-category">Copywriting / VSL Black / Direct Response / Ofertas</div>
+              <h3 class="ebook-title">3. Templates de Copywriting para Infoprodutos Black</h3>
+            </div>
+            <span class="badge info">PENDENTE</span>
+          </div>
+
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill info" style="width: 44%;"></div>
+          </div>
+          <div class="progress-meta">
+            <span>Progresso da Obra: <strong>44%</strong></span>
+            <span>Arquivos Produzidos: <strong>3 arquivos</strong></span>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-num">19.0 KB</span>
+              <span class="stat-label">Arquivo HTML</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">12.0 KB</span>
+              <span class="stat-label">Arquivo MD</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">1691</span>
+              <span class="stat-label">Palavras</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">~4</span>
+              <span class="stat-label">Páginas Est.</span>
+            </div>
+          </div>
+
+          <div class="section-subtitle">📋 Checklist de Conformidade Comercial</div>
+          <div class="checklist-grid">
+            
+          <div class="check-item pending">
+            <span>○</span> Ficha Catalográfica CIP Oficial
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Sumário Interativo com Links
+          </div>
+          <div class="check-item pending">
+            <span>○</span> Botões de Navegação por Capítulo
+          </div>
+          <div class="check-item pending">
+            <span>○</span> Botão Flutuante de Sumário
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Regras de Impressão (@media print)
+          </div>
+          <div class="check-item pending">
+            <span>○</span> Ilustrações 3D Completas (1/7)
+          </div>
+        
+          </div>
+
+          <div class="section-subtitle">🎨 Ilustrações Homologadas (1/7)</div>
+          <div class="pills-container">
+            <span class="pill pill-asset">🎨 capa-copywriting-black.jpg</span>
+          </div>
+
+          <div class="card-footer">
+            <a href="templates-de-copywriting-para-infoprodutos-black.html" class="btn btn-primary" target="_blank">🌐 Visualizar HTML</a>
+            <a href="templates-de-copywriting-para-infoprodutos-black.md" class="btn btn-secondary" target="_blank">📝 Ver Markdown</a>
+          </div>
+        </div>
+        
+        <div class="ebook-card info">
+          <div class="card-header">
+            <div>
+              <div class="ebook-category">Programação / Python / Web Scraping / APIs / Bots</div>
+              <h3 class="ebook-title">4. Guia Avançado de Python para Automação</h3>
+            </div>
+            <span class="badge info">PENDENTE</span>
+          </div>
+
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill info" style="width: 43%;"></div>
+          </div>
+          <div class="progress-meta">
+            <span>Progresso da Obra: <strong>43%</strong></span>
+            <span>Arquivos Produzidos: <strong>3 arquivos</strong></span>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-num">16.9 KB</span>
+              <span class="stat-label">Arquivo HTML</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">12.5 KB</span>
+              <span class="stat-label">Arquivo MD</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">1455</span>
+              <span class="stat-label">Palavras</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">~3</span>
+              <span class="stat-label">Páginas Est.</span>
+            </div>
+          </div>
+
+          <div class="section-subtitle">📋 Checklist de Conformidade Comercial</div>
+          <div class="checklist-grid">
+            
+          <div class="check-item pending">
+            <span>○</span> Ficha Catalográfica CIP Oficial
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Sumário Interativo com Links
+          </div>
+          <div class="check-item pending">
+            <span>○</span> Botões de Navegação por Capítulo
+          </div>
+          <div class="check-item pending">
+            <span>○</span> Botão Flutuante de Sumário
+          </div>
+          <div class="check-item done">
+            <span>✓</span> Regras de Impressão (@media print)
+          </div>
+          <div class="check-item pending">
+            <span>○</span> Ilustrações 3D Completas (1/8)
+          </div>
+        
+          </div>
+
+          <div class="section-subtitle">🎨 Ilustrações Homologadas (1/8)</div>
+          <div class="pills-container">
+            <span class="pill pill-asset">🎨 capa-python-automacao.jpg</span>
+          </div>
+
+          <div class="card-footer">
+            <a href="guia-avancado-de-python-para-automacao.html" class="btn btn-primary" target="_blank">🌐 Visualizar HTML</a>
+            <a href="guia-avancado-de-python-para-automacao.md" class="btn btn-secondary" target="_blank">📝 Ver Markdown</a>
+          </div>
+        </div>
+        
+
+    <footer>
+      <p>Gerado automaticamente pelo script <code>validar_ebooks.py</code> • SVD Lumex 2026</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,3 @@
+Plataforma: Hotmart
+Ebook: Esteira de Automação para Negócios Locais
+Caminho: ebook/hotmart/esteira-automacao/

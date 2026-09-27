@@ -1,0 +1,12 @@
+# Ambiente e Variáveis Secretas
+.env
+.env.local
+.env.*.local
+
+# Dependências
+node_modules/
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+desktop.ini

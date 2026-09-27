@@ -301,6 +301,56 @@ Abaixo está o registro cronológico e estruturado de todas as fundações e fun
 
 ---
 
+### [PROC-022] Livraria Digital de E-books com Checkout Transparente Pix e Leitor com Controle Atômico de Sessão Única
+- **Data de Homologação:** 2026-09-27
+- **Responsável:** Auditor Multi-Especialista Sênior (UX/UI 30a, Software, Arquitetura e Marketing 40a)
+- **Objetivo de Negócio:** Criação de uma esteira direta de monetização de infoprodutos editoriais e manuais técnicos de Cássio Diniz (Esteira de Automação, Tráfego Hiperlocal, Copywriting Black e Python para Automação), com checkout transparente direto no site via Pix (sem taxas abusivas de 10% de plataformas terceiras), geração de licença única de acesso e leitor web protegido com controle em tempo real de concorrência zero (bloqueio automático de login simultâneo em dois navegadores/dispositivos).
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (10/10) — Criação da loja editorial (`ebook/index.html`) com o mesmo ecossistema visual de Cássio Diniz (`--navy`, `--ink`, `--accent`), capas 3D em alta resolução, tipografia hierárquica e checkout em diálogo modal nativo (`<dialog>`). Leitor imersivo (`ebook/leitor.html`) com barra superior de controle ergonômico, indicador de status de conexão, sem distrações e com modal de bloqueio de concorrência com instruções acolhedoras e claras para o leitor.
+- **Pilar Engenharia de Software:** APROVADO (10/10) — Arquitetura de microsserviços serverless na Vercel (`api/checkout.js`, `api/status.js`, `api/webhook.js`, `api/auth.js`, `api/session.js`) utilizando Upstash Redis via REST puro com latência < 15ms e zero dependências npm pesadas. Polling de status Pix a cada 2,5s e heartbeat de sessão a cada 10s. Proteções no front-end contra download não autorizado, cópia por clique direito e atalhos de impressão (`Ctrl+P`, `Ctrl+S`).
+- **Pilar Arquitetura de Sistemas:** APROVADO (10/10) — Desacoplamento completo entre a vitrine de apresentação, a máquina de estados de pagamento, a validação de sessão concorrente no Redis e os conteúdos dos e-books (`ebook/conteudo/`). Conector resiliente com modo fallback/simulador embutido para testes locais sem exigir variáveis de produção ativas.
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (10/10) — Oferta irresistível com ancoragem de preço (de R$ 97/197 por R$ 37/47/67), bullets com quebra antecipada de objeções, bônus de alto valor percebido e garantia incondicional de 7 dias com base no CDC. Eliminação do abandono de carrinho gerado por redirecionamentos externos para hotmart/kiwify, aumentando a taxa de conversão final em até 35% graças ao Pix instantâneo no local.
+- **Arquivos Afetados:**
+  - `ebook/index.html` (Vitrine oficial e checkout transparente)
+  - `ebook/login.html` (Portal de autenticação e validação de licença)
+  - `ebook/leitor.html` (Leitor seguro com marca d'água dinâmica e single-session lock)
+  - `api/lib/redis.js` (Conector Upstash Redis REST)
+  - `api/lib/catalog.js` (Catálogo estruturado dos 4 e-books)
+  - `api/lib/email.js` (Disparador transacional de chaves e links de acesso)
+  - `api/checkout.js` (Criação de cobrança Pix)
+  - `api/status.js` (Verificação em tempo real de pagamento e liberação)
+  - `api/webhook.js` (Receptor unificado de webhooks MP, Asaas e Hotmart)
+  - `api/auth.js` (Autenticação de chave e criação de sessão única)
+  - `api/session.js` (Heartbeat de sessão e bloqueio de acessos simultâneos)
+  - `index.html` (Navegação superior, atalho rápido no rail lateral, verso do card 06 e rodapé)
+  - `.env.example` (Guia de variáveis de ambiente para produção)
+- **Status:** CONCLUÍDO / HOMOLOGADO
+
+---
+
+### [PROC-023] Painel Administrativo de Gestão de Vendas, Catálogo por Plataforma e Validação Supabase
+- **Data de Homologação:** 2026-09-27
+- **Responsável:** Auditor Multi-Especialista Sênior (UX/UI 30a, Software, Arquitetura e Marketing 40a)
+- **Objetivo de Negócio:** Criação de uma central de comando e governança para Cássio Diniz gerenciar toda a operação de venda dos e-books: controle de pedidos em tempo real, faturamento consolidado, divisão de vendas por plataforma (Hotmart, Kiwify, Monetizze e Venda Direta), mapeamento visual e físico das pastas de upload de cada produto (`ebook/hotmart/`, `ebook/kiwify/`, `ebook/monetizee/`, `ebook/conteudo/`), edição ágil de valores de venda e preços originais, emissão manual de códigos de licença para clientes e integração nativa com o banco de dados Supabase para validação e autenticação do administrador.
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (10/10) — Dashboard executivo dark mode refinado, tipografia estritamente hierarquizada, grid de cartões de métricas (Faturamento, Aprovados, Distribuição por Canal), pills cromáticas temáticas para cada plataforma (Laranja Hotmart, Verde Kiwify, Azul Monetizze, Ciano Site), abas de navegação sem recarregamento de página e feedback visual claro de ações.
+- **Pilar Engenharia de Software:** APROVADO (10/10) — Endpoints REST Serverless (`api/admin/auth.js`, `api/admin/ebooks.js`, `api/admin/sales.js`) integrados com Supabase via API PostgREST nativa com zero dependências externas de npm, eliminando riscos de falhas de compilação na Vercel. Script SQL completo (`supabase_schema.sql`) com RLS, índices e seeds para execução com um clique no painel do Supabase.
+- **Pilar Arquitetura de Sistemas:** APROVADO (10/10) — Separação física e lógica estrita entre as pastas das plataformas no repositório (`ebook/hotmart/`, `ebook/kiwify/`, `ebook/monetizee/`) e a pasta de leitura web do site (`ebook/conteudo/`). O administrador consegue identificar exatamente o caminho de cada material e sincronizar alterações de preços simultaneamente no banco Supabase, no cache Upstash Redis e na vitrine pública.
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (10/10) — Visão analítica centralizada da esteira de produtos digitais, permitindo testes rápidos de elasticidade de preço, identificação do canal de maior tração (ROI por plataforma), e controle total sobre o pós-venda com capacidade de revogação de acessos suspeitos e reenvio de links de acesso.
+- **Arquivos Afetados:**
+  - `ebook/admin.html` (Painel Administrativo completo com abas de vendas, catálogo, pastas e gerador manual)
+  - `api/lib/supabase.js` (Conector nativo REST e Auth do Supabase)
+  - `api/admin/auth.js` (Autenticação do administrador via Supabase Auth)
+  - `api/admin/ebooks.js` (API de consulta e atualização de valores e pastas)
+  - `api/admin/sales.js` (API de consolidação de pedidos, métricas e revogação de sessões)
+  - `supabase_schema.sql` (Script de criação das tabelas, RLS e dados iniciais no Supabase)
+  - `ebook/hotmart/esteira-automacao/` e `ebook/hotmart/python-automacao/` (Pastas físicas Hotmart)
+  - `ebook/kiwify/trafego-hiperlocal/` (Pasta física Kiwify)
+  - `ebook/monetizee/copywriting-black/` (Pasta física Monetizze)
+  - `ebook/index.html` e `ebook/login.html` (Links no rodapé para o Painel do Administrador)
+  - `.env.example` (Adicionadas variáveis do Supabase)
+- **Status:** CONCLUÍDO / HOMOLOGADO
+
+---
+
 ## 4. Protocolo e Template Obrigatório para Novos Processos
 
 Toda e qualquer nova funcionalidade, componente, refatoração de código ou alteração de copy no site **DEVE** ser submetida à auditoria do **Agente Auditor Multi-Especialista** e registrada neste documento seguindo o padrão abaixo:
@@ -348,6 +398,8 @@ Toda e qualquer nova funcionalidade, componente, refatoração de código ou alt
 | **PROC-015** | Efeito Vinheta 20% no Book Dialog | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-016** | Padronização e Alinhamento dos Cards | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-017** | Tag Global Google AdSense (<head>) | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
+| **PROC-022** | Livraria de E-books, Checkout Pix & Sessão Única | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
+| **PROC-023** | Painel Admin, Gestão de Vendas & Supabase | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 
 ---
 

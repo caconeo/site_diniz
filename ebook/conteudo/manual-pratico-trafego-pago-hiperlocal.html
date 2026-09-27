@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual Prático de Tráfego Pago Hiperlocal — Livro Digital Oficial | SVD Lumex</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --bg: #070d19;
+      --surface: #0c1527;
+      --surface-card: #152238;
+      --border: #243552;
+      --primary: #0284c7;
+      --primary-light: #38bdf8;
+      --primary-glow: rgba(56, 189, 248, 0.25);
+      --accent: #f59e0b;
+      --accent-glow: rgba(245, 158, 11, 0.2);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --code-bg: #030712;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .container {
+      max-width: 920px;
+      width: 100%;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 70px 60px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+
+    /* CAPA */
+    .cover-page {
+      text-align: center;
+      padding: 30px 20px 60px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 60px;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: var(--primary-glow);
+      color: var(--primary-light);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 6px 20px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    .cover-image-container {
+      margin: 20px auto 35px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cover-3d-mockup {
+      max-width: 340px;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 45px var(--primary-glow);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: transform 0.4s ease;
+    }
+
+    .cover-3d-mockup:hover {
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    .cover-page h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .cover-page h2 {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--primary-light);
+      max-width: 720px;
+      margin: 0 auto 36px;
+      line-height: 1.5;
+    }
+
+    .cover-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .cover-meta span {
+      background: var(--surface-card);
+      padding: 8px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    /* FICHA CATALOGRÁFICA */
+    .catalog-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      margin: 50px 0 60px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .catalog-card h4 {
+      color: #ffffff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* SUMÁRIO */
+    .toc-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 36px 30px;
+      margin-bottom: 60px;
+    }
+
+    .toc-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      color: var(--primary-light);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toc-card ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .toc-card li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .toc-card li:last-child {
+      border-bottom: none;
+    }
+
+    .toc-card a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .toc-card a:hover {
+      color: var(--primary-light);
+    }
+
+    .toc-card span.page-num {
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    /* SEÇÕES E CAPÍTULOS */
+    .chapter-divider {
+      margin: 60px 0 30px;
+      border-top: 1px solid var(--border);
+    }
+
+    h2.chapter-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-top: 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      line-height: 1.25;
+    }
+
+    h3.section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      color: var(--primary-light);
+      margin-top: 40px;
+      margin-bottom: 16px;
+    }
+
+    h4.subsection-title {
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin-top: 26px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 0 0 24px 28px;
+      color: #cbd5e1;
+      font-size: 1.03rem;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* ILUSTRAÇÕES DE CAPÍTULO */
+    .chapter-figure {
+      margin: 40px auto;
+      text-align: center;
+    }
+
+    .chapter-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7);
+    }
+
+    .chapter-caption {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* CALLOUTS */
+    .callout {
+      background: var(--surface-card);
+      border-left: 4px solid var(--primary-light);
+      border-radius: 0 12px 12px 0;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .callout.alert {
+      border-left-color: var(--accent);
+    }
+
+    .callout-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #ffffff;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* SCRIPTS E COPIES */
+    .script-box {
+      background: var(--code-bg);
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin: 16px 0 32px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      color: #93c5fd;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      max-width: 100%;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .script-box a {
+      color: #38bdf8;
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      text-decoration: underline;
+    }
+
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .script-tag {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary-light);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 24px;
+      margin-bottom: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* TABELAS */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 30px 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+      background: var(--surface-card);
+      border-radius: 10px;
+      overflow: hidden;
+      border: none;
+    }
+
+    th, td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+    }
+
+    /* BARRA DE NAVEGAÇÃO DE CAPÍTULO */
+    .chapter-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin: 45px 0 20px;
+      padding: 16px 22px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .chapter-nav-left, .chapter-nav-right {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chapter-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .chapter-nav-btn:hover {
+      background: var(--primary-glow);
+      color: var(--primary-light);
+      border-color: var(--primary-light);
+      transform: translateY(-2px);
+    }
+
+    .chapter-nav-btn.primary {
+      background: var(--primary-glow);
+      color: var(--primary-light);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .chapter-nav-btn.primary:hover {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    /* BOTÃO FLUTUANTE DE SUMÁRIO */
+    .floating-toc-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(12, 21, 39, 0.9);
+      backdrop-filter: blur(10px);
+      color: var(--primary-light);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      padding: 11px 20px;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .floating-toc-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 30px -5px rgba(56, 189, 248, 0.5);
+    }
+
+    /* CARTÃO DO DESENVOLVEDOR */
+    .developer-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 16px;
+      padding: 36px 32px;
+      margin: 60px 0 35px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(56, 189, 248, 0.08);
+    }
+
+    .developer-badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary-light);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 5px 16px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .developer-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .developer-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .developer-desc strong {
+      color: #ffffff;
+    }
+
+    .developer-action {
+      display: flex;
+      justify-content: center;
+    }
+
+    .developer-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 13px 30px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px -4px rgba(2, 132, 199, 0.4);
+    }
+
+    .developer-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px -4px rgba(56, 189, 248, 0.6);
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      color: #030712;
+    }
+
+    .developer-btn-arrow {
+      transition: transform 0.2s ease;
+    }
+
+    .developer-btn:hover .developer-btn-arrow {
+      transform: translateX(4px);
+    }
+
+    /* RODAPÉ */
+    .footer-page {
+      text-align: center;
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVIDADE MOBILE & TABLET */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px 10px;
+        line-height: 1.7;
+      }
+
+      .container {
+        padding: 32px 18px;
+        border-radius: 14px;
+      }
+
+      .cover-page {
+        padding: 20px 8px 36px;
+        margin-bottom: 36px;
+      }
+
+      .cover-page h1 {
+        font-size: 1.95rem;
+        line-height: 1.2;
+      }
+
+      .cover-page h2 {
+        font-size: 1.1rem;
+        line-height: 1.45;
+        margin-bottom: 24px;
+      }
+
+      .cover-meta {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .cover-meta span {
+        text-align: center;
+        font-size: 0.82rem;
+        padding: 6px 12px;
+      }
+
+      .catalog-card, .toc-card, .callout {
+        padding: 20px 16px;
+        margin: 28px 0;
+      }
+
+      .toc-card h3 {
+        font-size: 1.2rem;
+      }
+
+      .toc-card li {
+        font-size: 0.92rem;
+        gap: 10px;
+      }
+
+      h2.chapter-title {
+        font-size: 1.45rem;
+        line-height: 1.3;
+      }
+
+      h3.section-title {
+        font-size: 1.2rem;
+      }
+
+      h4.subsection-title {
+        font-size: 1.05rem;
+      }
+
+      p {
+        font-size: 0.98rem;
+        text-align: left;
+      }
+
+      ul, ol {
+        margin: 0 0 20px 20px;
+        font-size: 0.98rem;
+      }
+
+      .script-box {
+        padding: 16px 14px;
+        font-size: 0.86rem;
+        margin: 14px 0 24px;
+      }
+
+      .chapter-nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .chapter-nav-left, .chapter-nav-right {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .chapter-nav-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 11px 16px;
+      }
+
+      .floating-toc-btn {
+        bottom: 16px;
+        right: 16px;
+        padding: 9px 15px;
+        font-size: 0.82rem;
+      }
+
+      table {
+        font-size: 0.85rem;
+      }
+
+      th, td {
+        padding: 12px 14px;
+      }
+
+      .developer-card {
+        padding: 26px 18px;
+        margin: 40px 0 24px;
+      }
+
+      .developer-title {
+        font-size: 1.25rem;
+      }
+
+      .developer-desc {
+        font-size: 0.92rem;
+        text-align: center;
+      }
+
+      .developer-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 18px;
+        font-size: 0.88rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px 6px;
+      }
+
+      .container {
+        padding: 24px 12px;
+        border-radius: 10px;
+      }
+
+      .cover-page h1 {
+        font-size: 1.6rem;
+      }
+
+      .cover-page h2 {
+        font-size: 0.98rem;
+      }
+
+      .cover-badge {
+        font-size: 0.75rem;
+        padding: 5px 14px;
+      }
+
+      h2.chapter-title {
+        font-size: 1.3rem;
+      }
+
+      .script-box {
+        padding: 14px 12px;
+        font-size: 0.8rem;
+      }
+
+      .callout {
+        padding: 16px 12px;
+      }
+    }
+
+    /* REGRAS PROFISSIONAIS DE IMPRESSÃO / PDF */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 100% !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 10mm !important;
+      }
+      .cover-page {
+        page-break-after: always;
+        padding-top: 60px !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      .chapter-nav, .floating-toc-btn {
+        display: none !important;
+      }
+      .catalog-card, .toc-card, .callout, .script-box {
+        background: #f8fafc !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+      .developer-card {
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #0f172a !important;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+      }
+      .developer-title {
+        color: #0f172a !important;
+      }
+      .developer-desc {
+        color: #334155 !important;
+      }
+      .developer-btn {
+        background: #e2e8f0 !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+      }
+      .script-box {
+        color: #0369a1 !important;
+      }
+      h1, h2, h3, h4, strong {
+        color: #0f172a !important;
+      }
+      p, li {
+        color: #334155 !important;
+      }
+      .chapter-img, .cover-3d-mockup {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+    }
+  </style>
+</head>
+<body id="topo">
+
+  <!-- BOTÃO FLUTUANTE DE SUMÁRIO -->
+  <a href="#sumario" class="floating-toc-btn" title="Ir rapidamente ao Sumário do Livro">
+    📑 Sumário
+  </a>
+
+  <div class="container">
+
+    <!-- CAPA DO LIVRO -->
+    <header class="cover-page">
+      <div class="cover-badge">Manual Prático Oficial • Edição 2026</div>
+      <h1>Manual Prático de Tráfego Pago Hiperlocal</h1>
+      <h2>Como Dominar o Google Ads e Meta Ads para Atrair Clientes em um Raio de 3 a 15 km do seu Negócio Físico</h2>
+
+      <div class="cover-image-container">
+        <img src="assets/capa-trafego-hiperlocal.jpg" alt="Capa 3D Oficial — Manual Prático de Tráfego Pago Hiperlocal" class="cover-3d-mockup" />
+      </div>
+
+      <div class="cover-meta">
+        <span>🏢 <strong>Editorial:</strong> SVD Lumex & Digital Factory</span>
+        <span>⏱️ <strong>Tempo de Leitura:</strong> 55 minutos</span>
+        <span>🎯 <strong>Foco:</strong> Comércio e Serviços Locais</span>
+        <span>⚡ <strong>Versão:</strong> 1.0 Premium Revisada</span>
+      </div>
+    </header>
+
+    <!-- FICHA CATALOGRÁFICA CIP -->
+    <section class="catalog-card">
+      <h4>Dados Internacionais de Catalogação na Publicação (CIP)</h4>
+      <p>
+        <strong>M294m</strong> Manual Prático de Tráfego Pago Hiperlocal: Como Dominar o Google Ads e Meta Ads para Atrair Clientes em um Raio de 3 a 15 km do seu Negócio Físico / SVD Lumex & Digital Product Factory. — São Paulo, SP: Editora SVD Lumex, 2026.<br><br>
+        <strong>1.</strong> Marketing Digital. <strong>2.</strong> Tráfego Pago Hiperlocal. <strong>3.</strong> Google Ads & Google Maps. <strong>4.</strong> Meta Ads (Instagram e Facebook). <strong>5.</strong> Comércio e Serviços Locais. <strong>I.</strong> SVD Lumex. <strong>II.</strong> Título.<br>
+        <strong>CDD:</strong> 658.872 — Comércio Eletrônico e Marketing de Proximidade.<br>
+        <em>Todos os direitos reservados. Proibida a reprodução parcial ou total por qualquer meio eletrônico ou mecânico sem autorização prévia por escrito.</em>
+      </p>
+    </section>
+
+    <!-- SUMÁRIO GERAL -->
+    <section class="toc-card" id="sumario">
+      <h3>📑 Sumário Geral da Obra</h3>
+      <ul>
+        <li><a href="#apresentacao">Apresentação: A Morte do Panfleto e o Novo Consumidor de Bairro</a> <span class="page-num">pág. 03</span></li>
+        <li><a href="#introducao">Introdução: A Revolução do Tráfego Hiperlocal &amp; O Raio de Ouro</a> <span class="page-num">pág. 05</span></li>
+        <li><a href="#capitulo-1">Capítulo 1: Preparação do Terreno — A Base que 90% Ignora</a> <span class="page-num">pág. 08</span></li>
+        <li><a href="#capitulo-2">Capítulo 2: Google Ads Hiperlocal — Capturando Intenção Imediata</a> <span class="page-num">pág. 14</span></li>
+        <li><a href="#capitulo-3">Capítulo 3: Meta Ads — Despertando Desejo no Bairro</a> <span class="page-num">pág. 21</span></li>
+        <li><a href="#capitulo-4">Capítulo 4: Engenharia de Orçamento e a Regra 70/20/10</a> <span class="page-num">pág. 28</span></li>
+        <li><a href="#capitulo-5">Capítulo 5: O Roteiro Semanal de Otimização em 15 Minutos</a> <span class="page-num">pág. 34</span></li>
+        <li><a href="#capitulo-6">Capítulo 6: O Grande Pack com 20 Modelos de Anúncios Prontos</a> <span class="page-num">pág. 39</span></li>
+        <li><a href="#capitulo-7">Capítulo 7: Guia de Resolução de Problemas — O que Fazer se o Anúncio Não Vender?</a> <span class="page-num">pág. 52</span></li>
+        <li><a href="#conclusao">Conclusão: Dominando a Sua Cidade e Escalando Resultados</a> <span class="page-num">pág. 58</span></li>
+      </ul>
+    </section>
+
+    <!-- APRESENTAÇÃO -->
+    <section id="apresentacao" class="page-break">
+      <div class="chapter-divider"></div>
+      <h2 class="chapter-title">🧭 Apresentação: A Morte do Panfleto e o Novo Consumidor de Bairro</h2>
+      <p>Durante décadas, o marketing para negócios físicos resumia-se a três canais: panfletagem nas esquinas, anúncio de página inteira nas Páginas Amarelas e faixas penduradas na fachada da loja.</p>
+      <p>Esse mundo acabou.</p>
+      <p>Hoje, quando um consumidor precisa trocar o pneu do carro, jantar com a família, consertar o celular que caiu no chão ou agendar uma limpeza de pele, <strong>o primeiro reflexo dele é pegar o smartphone e abrir o Google Maps ou o feed do Instagram</strong>.</p>
+      <p>Se o seu negócio não aparece de forma destacada, profissional e magnética nesse exato momento de busca, para todos os efeitos práticos <strong>sua empresa não existe</strong>.</p>
+      <p>O tráfego pago hiperlocal não é sobre gastar dezenas de milhares de reais como uma multinacional; é sobre colocar uma vitrine luminosa e irresistível na tela dos moradores que passam a poucos passos da sua porta todos os dias.</p>
+
+      <div class="chapter-nav">
+        <div class="chapter-nav-left">
+          <a href="#topo" class="chapter-nav-btn">⬆️ Início do Livro</a>
+          <a href="#sumario" class="chapter-nav-btn">📑 Sumário</a>
+        </div>
+        <div class="chapter-nav-right">
+          <a href="#introducao" class="chapter-nav-btn primary">Avançar: Introdução ➔</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRODUÇÃO -->
+    <section id="introducao" class="page-break">
+      <div class="chapter-divider"></div>
+      <h2 class="chapter-title">🚀 Introdução: A Revolução do Tráfego Hiperlocal</h2>
+      <p>O erro número 1 que pequenos e médios empresários cometem ao subir anúncios no Google Ads ou Gerenciador da Meta é <strong>anunciar para a cidade inteira ou para todo o estado</strong>.</p>
+      <p>Quando você anuncia para uma metrópole de 2 milhões de habitantes sem filtro geográfico fino, seu orçamento de R$ 30 por dia é diluído em um oceano de pessoas que moram a 40 km da sua loja e que <strong>jamais se deslocarão até você para comprar</strong>.</p>
+
+      <div class="callout">
+        <div class="callout-title">📐 A Equação da Decisão Local</div>
+        <p><strong>Decisão de Compra Local = (Proximidade Física + Prova Social Imediata) ÷ Fricção de Contato</strong></p>
+        <p>Quanto mais próximo o cliente estiver e mais fácil for enviar uma mensagem no WhatsApp com 1 toque, menor o custo de aquisição e mais rápida a conversão.</p>
+      </div>
+
+      <h3 class="section-title">A Fórmula do Raio de Ouro (3 km, 5 km e 10 km)</h3>
+      <p>Toda campanha de sucesso para negócio físico é construída em camadas concêntricas de conveniência:</p>
+      <ul>
+        <li><strong>Raio de 3 km (Núcleo Quente):</strong> Onde estão os moradores vizinhos e quem trabalha no bairro. A conversão é altíssima porque a barreira de deslocamento é praticamente zero (a pé ou 5 minutos de carro).</li>
+        <li><strong>Raio de 5 km (Zona de Proximidade):</strong> Abrange os bairros adjacentes. Ideal para serviços que exigem agendamento (consultas médicas, mecânica, estética).</li>
+        <li><strong>Raio de 10 km (Limite de Conveniência):</strong> Aplicável para serviços especializados de ticket mais alto (ex: procedimentos cirúrgicos, buffet de festas, consultoria jurídica especializada).</li>
+      </ul>
+
+      <div class="chapter-nav">
+        <div class="chapter-nav-left">
+          <a href="#apresentacao" class="chapter-nav-btn">⬅️ Apresentação</a>
+          <a href="#sumario" class="chapter-nav-btn">📑 Sumário</a>
+        </div>
+        <div class="chapter-nav-right">
+          <a href="#capitulo-1" class="chapter-nav-btn primary">Avançar: Capítulo 1 ➔</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPÍTULO 1 -->
+    <section id="capitulo-1" class="page-break">
+      <div class="chapter-divider"></div>
+      <h2 class="chapter-title">🛠️ Capítulo 1: Preparação do Terreno — A Base que 90% Ignora</h2>
+      <p>Antes de investir R$ 1,00 em tráfego pago, sua presença digital local precisa estar estruturada. Se você jogar tráfego qualificado para uma presença digital descuidada, o dinheiro escorrerá pelo ralo.</p>
+
+      <div class="chapter-figure">
+        <img src="assets/preparacao-terreno-hiperlocal.jpg" alt="A infraestrutura base do tráfego hiperlocal conectado" class="chapter-img" />
+        <div class="chapter-caption">Figura 1.1: A infraestrutura base do tráfego hiperlocal conectado (Google Meu Negócio, Pixel Meta, QR Codes e WhatsApp).</div>
+      </div>
+
+      <h3 class="section-title">1. Otimização do Perfil da Empresa no Google (Google Meu Negócio)</h3>
+      <p>O Google Ads concede índice de qualidade superior e custos por clique mais baratos para empresas com Perfil validado e ativo:</p>
+      <ul>
+        <li><strong>Nome Oficial sem Palavras-Chave no Título:</strong> Mantenha a razão social ou nome fantasia real para evitar penalizações e suspensões pelo Google.</li>
+        <li><strong>Categoria Primária Precisa:</strong> Define 60% da relevância do ranqueamento algorítmico local no Google Maps.</li>
+        <li><strong>Fotos Reais e Atualizadas Semanalmente:</strong> Fotos da fachada, equipe atendendo, recepção limpa e produtos. Perfis com fotos recentes recebem 42% mais solicitações de rotas no mapa.</li>
+        <li><strong>Resenhas Ativas:</strong> Responda a 100% das avaliações citando o serviço e o bairro (<em>"Ficamos muito felizes em realizar sua revisão automotiva aqui no bairro Centro!"</em>).</li>
+      </ul>
+
+      <h3 class="section-title">2. Links de WhatsApp com Rastreamento Dinâmico (UTMs)</h3>
+      <p>Nunca aponte o tráfego pago para o link cru do WhatsApp. Crie links estruturados com parâmetros de mensagem pré-definida:</p>
+
+      <div class="script-tag">Link de WhatsApp com Parâmetro Pré-Formatado</div>
+      <div class="script-box">https://wa.me/5511999999999?text=Ol%C3%A1!%20Vi%20o%20an%C3%BAncio%20no%20Instagram%20sobre%20a%20Condi%C3%A7%C3%A3o%20Especial%20de%20Checkup%20e%20gostaria%20de%20agendar.</div>
+
+      <p>Com isso, sua equipe sabe instantaneamente de onde o cliente veio e qual oferta ele deseja, agilizando o fechamento.</p>
+
+      <div class="chapter-nav">
+        <div class="chapter-nav-left">
+          <a href="#introducao" class="chapter-nav-btn">⬅️ Introdução</a>
+          <a href="#sumario" class="chapter-nav-btn">📑 Sumário</a>
+        </div>
+        <div class="chapter-nav-right">
+          <a href="#capitulo-2" class="chapter-nav-btn primary">Avançar: Capítulo 2 ➔</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPÍTULO 2 -->
+    <section id="capitulo-2" class="page-break">
+      <div class="chapter-divider"></div>
+      <h2 class="chapter-title">🎯 Capítulo 2: Google Ads Hiperlocal — Capturando Intenção Imediata</h2>
+      <p>O Google Ads é a ferramenta mais poderosa do planeta para capturar clientes que já estão procurando pelo seu serviço agora.</p>
+
+      <div class="chapter-figure">
+        <img src="assets/google-ads-local-search.jpg" alt="A anatomia da pesquisa local no Google e Google Maps" class="chapter-img" />
+        <div class="chapter-caption">Figura 2.1: A anatomia da pesquisa local no Google e Google Maps com extensões de chamada e localização.</div>
+      </div>
+
+      <h3 class="section-title">1. Correspondências de Palavras-Chave Transacionais</h3>
+      <p>Em negócios locais, evite termos genéricos em correspondência ampla (ex: <code>dentista</code>). Utilize apenas:</p>
+      <ul>
+        <li><strong>Correspondência de Frase:</strong> <code>"dentista perto de mim"</code>, <code>"clínica odontológica moema"</code>, <code>"conserto de celular urgente"</code></li>
+        <li><strong>Correspondência Exata:</strong> <code>[troca de bateria automotiva campinas]</code>, <code>[desentupidora 24 horas zona sul]</code></li>
+      </ul>
+
+      <h3 class="section-title">2. Extensão de Local &amp; Anúncios no Google Maps</h3>
+      <p>Vincule sua conta do Google Ads ao Perfil da Empresa. Isso habilita o <strong>Pino Patrocinado no Google Maps</strong>. Quando o usuário navegar pelo mapa na sua região, sua empresa aparecerá com destaque visual roxo e botão direto para "Ligar" ou "Rotas".</p>
+
+      <h3 class="section-title">3. A Grande Lista Negra: 150+ Palavras-Chave Negativas</h3>
+      <p>Para não torrar seu orçamento com curiosos, adicione a lista abaixo nas palavras-chave negativas da campanha:</p>
+
+      <div class="script-tag">Pack de Negativação Imediata (Copie e Cole na Conta)</div>
+      <div class="script-box">grátis, gratuito, download, baixar, curso, curso online, tutorial, pdf, livro, apostila,
+como fazer, faça você mesmo, caseiro, passo a passo, o que é, significado, faculdade,
+estágio, vagas de emprego, trabalhe conosco, currículo, salario, sindicato, concurso,
+prova, gabarito, modelo grátis, pirata, reclame aqui, reclamação, procon, fraude,
+justiça, processo, fórum, endereço antigo, telefone antigo, segunda via, boleto falso,
+mercado livre, shopee, olx, aliexpress, shein, 25 de março, réplica, consórcio grátis</div>
+
+      <div class="chapter-nav">
+        <div class="chapter-nav-left">
+          <a href="#capitulo-1" class="chapter-nav-btn">⬅️ Capítulo 1</a>
+          <a href="#sumario" class="chapter-nav-btn">📑 Sumário</a>
+        </div>
+        <div class="chapter-nav-right">
+          <a href="#capitulo-3" class="chapter-nav-btn primary">Avançar: Capítulo 3 ➔</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPÍTULO 3 -->
+    <section id="capitulo-3" class="page-break">
+      <div class="chapter-divider"></div>
+      <h2 class="chapter-title">📱 Capítulo 3: Meta Ads — Despertando Desejo no Bairro</h2>
+      <p>Enquanto o Google captura quem já está procurando, o Meta Ads (Instagram e Facebook) <strong>cria o desejo imediato</strong> em quem mora ou trabalha perto de você.</p>
+
+      <div class="chapter-figure">
+        <img src="assets/meta-ads-pin-segmentation.jpg" alt="Segmentação concêntrica de pinos de GPS e criativos móveis" class="chapter-img" />
+        <div class="chapter-caption">Figura 3.1: Segmentação de pinos de GPS no Instagram e Facebook com camadas de raio concêntrico.</div>
+      </div>
+
+      <h3 class="section-title">1. A Configuração de Pinos de GPS sem Dispersão</h3>
+      <p>No Gerenciador de Anúncios da Meta:</p>
+      <ol>
+        <li>Em <strong>Localizações</strong>, selecione <strong>"Pessoas que moram nesta localização"</strong> (evite pessoas em trânsito se você não for um hotel ou rodoviária);</li>
+        <li>Solte o pino no endereço exato do seu estabelecimento;</li>
+        <li>Defina o raio ideal para seu nicho:
+          <ul>
+            <li><strong>Restaurantes, Cafés, Salões e Lojas de Rua:</strong> Raio de 2 a 4 km;</li>
+            <li><strong>Clínicas Médicas, Odontológicas e Estética:</strong> Raio de 5 a 8 km;</li>
+            <li><strong>Oficinas Mecânicas e Serviços de Alto Valor:</strong> Raio de 10 a 15 km.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3 class="section-title">2. Os 4 Formatos de Criativos Vencedores</h3>
+      <ul>
+        <li><strong>1. O Vídeo de Bastidores:</strong> Mostre a equipe trabalhando, o ambiente higienizado e a recepção. Gera confiança instantânea.</li>
+        <li><strong>2. A Oferta Relâmpago com Escassez de Bairro:</strong> <em>"Atenção moradores da Vila Mariana: liberamos 10 vagas com condição exclusiva esta semana..."</em></li>
+        <li><strong>3. O Tour Guiado:</strong> <em>"Você sabia que tem uma clínica especializada a 5 minutos da sua casa? Veja como chegar..."</em></li>
+        <li><strong>4. O Antes e Depois Real:</strong> Casos comprovados de clientes reais do mesmo município.</li>
+      </ul>
+
+      <div class="chapter-nav">
+        <div class="chapter-nav-left">
+          <a href="#capitulo-2" class="chapter-nav-btn">⬅️ Capítulo 2</a>
+          <a href="#sumario" class="chapter-nav-btn">📑 Sumário</a>
+        </div>
+        <div class="chapter-nav-right">
+          <a href="#capitulo-4" class="chapter-nav-btn primary">Avançar: Capítulo 4 ➔</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPÍTULO 4 -->
+    <section id="capitulo-4" class="page-break">
+      <div class="chapter-divider"></div>
+      <h2 class="chapter-title">💰 Capítulo 4: Engenharia de Orçamento e a Regra 70/20/10</h2>
+      <p>Você não precisa de fortunas para dominar sua região. Uma verba de <strong>R$ 20 a R$ 40 por dia</strong> é suficiente para manter uma agenda cheia.</p>
+
+      <div class="chapter-figure">
+        <img src="assets/orcamento-70-20-10.jpg" alt="Painel de distribuição orçamentária 70/20/10" class="chapter-img" />
+        <div class="chapter-caption">Figura 4.1: Painel analítico de distribuição orçamentária no modelo 70/20/10 para negócios locais.</div>
+      </div>
+
+      <h3 class="section-title">Como Distribuir um Orçamento Mensal de R$ 900 (R$ 30/dia):</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Fatia</th>
+              <th>Investimento Diário</th>
+              <th>Investimento Mensal</th>
+              <th>Objetivo e Canal Principal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>70%</strong></td>
+              <td>R$ 21,00/dia</td>
+              <td>R$ 630,00</td>
+              <td><strong>Conversão Direta:</strong> Campanhas de Pesquisa no Google Ads ou Mensagens diretas no WhatsApp via Meta Ads.</td>
+            </tr>
+            <tr>
+              <td><strong>20%</strong></td>
+              <td>R$ 6,00/dia</td>
+              <td>R$ 180,00</td>
+              <td><strong>Remarketing Hiperlocal:</strong> Anúncios de quebra de objeção para quem visitou o perfil do Instagram nos últimos 30 dias.</td>
+            </tr>
+            <tr>
+              <td><strong>10%</strong></td>
+              <td>R$ 3,00/dia</td>
+              <td>R$ 90,00</td>
+              <td><strong>Autoridade Local:</strong> Vídeos curtos com depoimentos e bastidores para fixação de marca permanente.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="chapter-nav">
+        <div class="chapter-nav-left">
+          <a href="#capitulo-3" class="chapter-nav-btn">⬅️ Capítulo 3</a>
+          <a href="#sumario" class="chapter-nav-btn">📑 Sumário</a>
+        </div>
+        <div class="chapter-nav-right">
+          <a href="#capitulo-5" class="chapter-nav-btn primary">Avançar: Capítulo 5 ➔</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPÍTULO 5 -->
+    <section id="capitulo-5" class="page-break">
+      <div class="chapter-divider"></div>
+      <h2 class="chapter-title">📅 Capítulo 5: O Roteiro Semanal de Otimização em 15 Minutos</h2>
+      <p>Não perca horas olhando planilhas complicadas. Siga este checklist semanal ágil de 15 minutos:</p>
+
+      <div class="chapter-figure">
+        <img src="assets/rotina-semanal-otimizacao.jpg" alt="O cronograma semanal de otimização de alta performance" class="chapter-img" />
+        <div class="chapter-caption">Figura 5.1: O cronograma semanal de otimização rápida de campanhas hiperlocais.</div>
+      </div>
+
+      <ul>
+        <li><strong>Segunda-feira (Poda de Termos):</strong> Acesse a aba 'Termos de Pesquisa' no Google Ads. Identifique palavras irrelevantes que geraram cliques e negative-as na hora.</li>
+        <li><strong>Quarta-feira (Controle de Fadiga):</strong> No Meta Ads, verifique a métrica de <em>Frequência</em>. Se passar de 3.5 em campanhas locais, troque o vídeo ou a foto do anúncio.</li>
+        <li><strong>Sexta-feira (Injeção de Fim de Semana):</strong> Aumente a verba diária em 20% para os dias e horários em que o comércio recebe maior fluxo de visitantes.</li>
+        <li><strong>Domingo (Auditoria de ROI):</strong> Compare os leads recebidos no WhatsApp com as vendas fechadas no caixa da empresa para calcular seu Custo por Aquisição (CAC).</li>
+      </ul>
+
+      <div class="chapter-nav">
+        <div class="chapter-nav-left">
+          <a href="#capitulo-4" class="chapter-nav-btn">⬅️ Capítulo 4</a>
+          <a href="#sumario" class="chapter-nav-btn">📑 Sumário</a>
+        </div>
+        <div class="chapter-nav-right">
+          <a href="#capitulo-6" class="chapter-nav-btn primary">Avançar: Capítulo 6 ➔</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPÍTULO 6 -->
+    <section id="capitulo-6" class="page-break">
+      <div class="chapter-divider"></div>
+      <h2 class="chapter-title">🎁 Capítulo 6: O Grande Pack com 20 Modelos de Anúncios Prontos</h2>
+      <p>Abaixo estão 20 copies prontas, divididas em 4 grandes categorias, para você copiar, personalizar com os dados da sua empresa e rodar hoje mesmo:</p>
+
+      <div class="chapter-figure">
+        <img src="assets/pack-anuncios-hiperlocais.jpg" alt="Vitrine de criativos e anúncios de alta conversão" class="chapter-img" />
+        <div class="chapter-caption">Figura 6.1: Vitrine de criativos e anúncios mobile de alta conversão para negócios locais.</div>
+      </div>
+
+      <h3 class="section-title">Bloco 1: Clínicas, Odontologia e Estética (5 Modelos)</h3>
+
+      <div class="script-tag">Modelo 01: Odontologia / Checkup Preventivo</div>
+      <div class="script-box">Mora em [Nome do Bairro] e está adiando o cuidado com seu sorriso? 🦷✨
+
+Nossa clínica fica a poucos passos de você, na Rua [Nome], com estacionamento gratuito e atendimento sem dor.
+
+🗓️ Abrimos 5 vagas esta semana para avaliação completa com raio-X incluso.
+Toque no botão abaixo e envie uma mensagem no nosso WhatsApp para garantir seu horário!</div>
+
+      <div class="script-tag">Modelo 02: Estética Avançada / Botox e Rejuvenescimento</div>
+      <div class="script-box">Sua pele merece o melhor cuidado bem pertinho de casa! 🌸
+
+Chega de pegar trânsito para cuidar de você. Aqui na [Nome da Clínica], no coração de [Bairro], nossos procedimentos são realizados por especialistas renomados.
+
+🎁 Condição especial para moradoras da região: agende sua avaliação e ganhe uma máscara revitalizante de cortesia. Toque abaixo!</div>
+
+      <div class="script-tag">Modelo 03: Fisioterapia / Alívio Rápido de Dores</div>
+      <div class="script-box">Travou a coluna ou está com dores que não passam? 🩺
+
+Atendimento prioritário hoje mesmo em [Bairro/Cidade]. Fisioterapeutas especializados prontos para devolver o seu conforto e mobilidade.
+
+Clique no botão abaixo e fale agora com nossa equipe no WhatsApp!</div>
+
+      <div class="script-tag">Modelo 04: Odontopediatria / Cuidado Infantil</div>
+      <div class="script-box">Mamães e papais de [Bairro]: levar os pequenos ao dentista não precisa ser um trauma! 🎈🧸
+
+Aqui na [Nome da Clínica], temos um consultório 100% lúdico e dentistas apaixonados por crianças.
+Agende a consulta do seu filho com carinho e tranquilidade pelo WhatsApp!</div>
+
+      <div class="script-tag">Modelo 05: Harmonização Facial / Autoestima</div>
+      <div class="script-box">Realce seus traços naturais com a clínica mais bem avaliada de [Cidade]! ⭐⭐⭐⭐⭐
+
+Avaliação individualizada com simulação de resultados. Descubra o tratamento perfeito para o seu rosto.
+Toque em 'Enviar Mensagem' e receba o catálogo de procedimentos no WhatsApp!</div>
+
+      <h3 class="section-title">Bloco 2: Gastronomia, Bares e Restaurantes (5 Modelos)</h3>
+
+      <div class="script-tag">Modelo 06: Hamburgueria Artesanal / Delivery e Salão</div>
+      <div class="script-box">Procurando o melhor hambúrguer da região para hoje à noite? 🍔🔥
+
+Carne suculenta grelhada no fogo, queijo derretido e pão brioche fresquinho bem aqui na [Nome da Rua].
+Peça agora pelo WhatsApp e ganhe entrega grátis no primeiro pedido usando o cupom BAIRROVIP!</div>
+
+      <div class="script-tag">Modelo 07: Pizzaria Tradicional / Noite da Pizza</div>
+      <div class="script-box">Sextou no [Nome do Bairro]! 🍕🍕
+
+Massa de fermentação natural de 48h, ingredientes selecionados e aquele queijo puxando... 
+Venha jantar no nosso salão aconchegante ou receba quentinha na sua casa em até 35 minutos. Peça agora pelo link!</div>
+
+      <div class="script-tag">Modelo 08: Restaurante Executivo / Almoço Rápido</div>
+      <div class="script-box">Cansado de comer a mesma coisa no horário de almoço? 🥗🥩
+
+Buffet executivo completo com pratos saudáveis, sobremesa cortesia e rapidez para você voltar ao trabalho sem atrasos.
+Estamos na Rua [Nome]. Venha almoçar com a gente hoje!</div>
+
+      <div class="script-tag">Modelo 09: Café &amp; Confeitaria / Encontros e Café da Tarde</div>
+      <div class="script-box">O cafézinho mais charmoso de [Bairro] está de portas abertas esperando por você! ☕🍰
+
+Tortas artesanais, pão de queijo quentinho e ambiente perfeito para trabalhar ou bater um papo.
+Venha nos visitar hoje mesmo!</div>
+
+      <div class="script-tag">Modelo 10: Bar / Happy Hour com Música ao Vivo</div>
+      <div class="script-box">O Happy Hour oficial da galera de [Bairro] é aqui no [Nome do Bar]! 🍻🎶
+
+Chopp em dobro até as 20h e as melhores porções da região. Chame os amigos do trabalho e venha comemorar!
+Reserve sua mesa pelo WhatsApp para não pegar fila!</div>
+
+      <h3 class="section-title">Bloco 3: Serviços Especializados e Automotivo (5 Modelos)</h3>
+
+      <div class="script-tag">Modelo 11: Auto Center / Troca de Óleo e Revisão</div>
+      <div class="script-box">Vai pegar a estrada ou seu carro precisa de revisão preventiva? 🚗🔧
+
+Aqui no [Nome da Oficina], em frente à praça do [Bairro], fazemos a checagem gratuita de 25 itens de segurança na sua troca de óleo.
+Evite surpresas mecânicas. Agende seu horário pelo WhatsApp!</div>
+
+      <div class="script-tag">Modelo 12: Bateria Automotiva / Socorro Imediato</div>
+      <div class="script-box">Bateria arriou? Não fique a pé em [Cidade/Bairro]! ⚡🚗
+
+Nossa equipe vai até o seu local com entrega, instalação e teste do alternador totalmente grátis. Chegamos em 30 minutos!
+Ligue agora ou chame no WhatsApp!</div>
+
+      <div class="script-tag">Modelo 13: Detalhamento Automotivo / Estética e Lavagem</div>
+      <div class="script-box">Deixe seu carro com brilho de zero km! ✨🚙
+
+Polimento técnico, higienização interna profunda e vitrificação de pintura com os melhores produtos do mercado aqui no [Bairro].
+Envie uma foto do seu carro e receba um orçamento sem compromisso no WhatsApp!</div>
+
+      <div class="script-tag">Modelo 14: Conserto de Celular / Reparo Expresso</div>
+      <div class="script-box">Celular caiu e quebrou a tela? Consertamos em até 40 minutos! 📱⚡
+
+Peças de alta qualidade com garantia de 6 meses bem pertinho de você, na Avenida [Nome].
+Traga seu aparelho ou solicite nosso motoboy leva-e-traz pelo WhatsApp!</div>
+
+      <div class="script-tag">Modelo 15: Chaveiro e Segurança 24 Horas</div>
+      <div class="script-box">Trancado para fora de casa ou do carro em [Bairro]? 🔑🚪
+
+Chaveiro profissional de plantão 24 horas por dia. Chegamos com rapidez e segurança ao seu endereço.
+Salve nosso contato de emergência e chame agora no WhatsApp!</div>
+
+      <h3 class="section-title">Bloco 4: Varejo de Rua e Comércio de Proximidade (5 Modelos)</h3>
+
+      <div class="script-tag">Modelo 16: Loja de Roupas / Moda e Novidades</div>
+      <div class="script-box">Novidades fresquinhas acabaram de chegar na [Nome da Loja]! 👗🛍️
+
+As tendências da estação com a comodidade de comprar a 5 minutos da sua casa ou receber em domicílio pelo motoboy.
+Venha conferir a nova coleção na Rua [Nome] ou chame nossa consultora no WhatsApp!</div>
+
+      <div class="script-tag">Modelo 17: Pet Shop / Banho, Tosa e Consultório</div>
+      <div class="script-box">Seu pet merece todo o carinho do mundo! 🐶🐱✨
+
+Banho quentinho, tosa profissional com produtos hipoalergênicos e clínica veterinária aqui no [Bairro].
+Temos serviço de Taxi-Dog para buscar e levar seu melhor amigo. Agende pelo WhatsApp!</div>
+
+      <div class="script-tag">Modelo 18: Ótica / Armações e Exame de Vista</div>
+      <div class="script-box">Está com dificuldade para ler ou quer renovar o visual dos seus óculos? 👓👀
+
+Mais de 500 modelos de armações modernas com lentes de alta precisão. Atendimento acolhedor pertinho de você.
+Venha fazer seu teste de visão gratuito na [Nome da Ótica]!</div>
+
+      <div class="script-tag">Modelo 19: Farmácia de Manipulação / Fórmulas Personalizadas</div>
+      <div class="script-box">Sua receita médica com precisão farmacêutica e entrega rápida em [Bairro]! 💊🌿
+
+Envie uma foto da sua receita no nosso WhatsApp e receba seu orçamento em menos de 10 minutos com frete grátis.
+Clique abaixo e envie agora!</div>
+
+      <div class="script-tag">Modelo 20: Papelaria e Presentes / Presente Perfeito</div>
+      <div class="script-box">Procurando um presente especial ou material de escritório sem ir ao shopping? 🎁📚
+
+Itens exclusivos, embalagens para presente e o melhor atendimento do bairro aqui na [Nome da Loja].
+Venha nos visitar na Rua [Nome]!</div>
+
+      <div class="chapter-nav">
+        <div class="chapter-nav-left">
+          <a href="#capitulo-5" class="chapter-nav-btn">⬅️ Capítulo 5</a>
+          <a href="#sumario" class="chapter-nav-btn">📑 Sumário</a>
+        </div>
+        <div class="chapter-nav-right">
+          <a href="#capitulo-7" class="chapter-nav-btn primary">Avançar: Capítulo 7 ➔</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPÍTULO 7 -->
+    <section id="capitulo-7" class="page-break">
+      <div class="chapter-divider"></div>
+      <h2 class="chapter-title">🛠️ Capítulo 7: Guia de Resolução de Problemas — O que Fazer se o Anúncio Não Vender?</h2>
+      <p>Toda campanha de tráfego pago para negócios locais pode passar por oscilações. Se os resultados não estiverem satisfatórios, aplique este diagnóstico:</p>
+
+      <div class="callout alert">
+        <div class="callout-title">⚠️ Diagnóstico 1: Muitos cliques, mas ninguém manda mensagem no WhatsApp</div>
+        <p><strong>Causa Provável:</strong> A mensagem pré-preenchida do WhatsApp está ausente ou confusa, ou a página de destino (landing page) demora mais de 3 segundos para carregar no celular do cliente.</p>
+        <p><strong>Solução:</strong> Simplifique o destino. Em vez de enviar o usuário para um site pesado, aponte a campanha do Instagram diretamente para o botão de WhatsApp (Click-to-WhatsApp) com saudação clara.</p>
+      </div>
+
+      <div class="callout alert">
+        <div class="callout-title">⚠️ Diagnóstico 2: O lead chega no WhatsApp, mas reclama do preço</div>
+        <p><strong>Causa Provável:</strong> Falta de ancoragem de valor no anúncio ou atendimento despreparado que responde apenas com o valor numérico frio.</p>
+        <p><strong>Solução:</strong> Nunca passe o preço isoladamente. Apresente primeiro tudo o que está incluso (garantia, materiais premium, suporte cortesia) antes de falar o valor financeiro.</p>
+      </div>
+
+      <div class="callout alert">
+        <div class="callout-title">⚠️ Diagnóstico 3: A campanha estava vendendo bem e de repente parou</div>
+        <p><strong>Causa Provável:</strong> Fadiga de criativo. Como o público do bairro é finito (ex: 30.000 pessoas), os mesmos usuários já viram o mesmo anúncio 5 ou 6 vezes.</p>
+        <p><strong>Solução:</strong> Troque imediatamente a foto ou o vídeo do anúncio. Mantenha a mesma oferta, mas mude o ângulo visual (ex: troque a foto estática do produto por um vídeo dos bastidores).</p>
+      </div>
+
+      <div class="chapter-nav">
+        <div class="chapter-nav-left">
+          <a href="#capitulo-6" class="chapter-nav-btn">⬅️ Capítulo 6</a>
+          <a href="#sumario" class="chapter-nav-btn">📑 Sumário</a>
+        </div>
+        <div class="chapter-nav-right">
+          <a href="#conclusao" class="chapter-nav-btn primary">Avançar: Conclusão ➔</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONCLUSÃO -->
+    <section id="conclusao" class="page-break">
+      <div class="chapter-divider"></div>
+      <h2 class="chapter-title">🚀 Conclusão: Dominando a Sua Cidade e Escalando Resultados</h2>
+      <p>O tráfego pago hiperlocal não é mágica; é <strong>matemática, conveniência e consistência</strong>.</p>
+      <p>Quando você alinha uma presença impecável no Google Meu Negócio, campanhas de intenção no Google Ads com palavras-chave negativas, anúncios visuais de raio curto no Meta Ads e um atendimento ágil no WhatsApp, seu negócio se torna a referência incontestável da sua região.</p>
+      <p>Aplique os ensinamentos deste manual com disciplina, otimize suas campanhas semanalmente e transforme a sua empresa na escolha número 1 de todos os moradores do seu bairro!</p>
+
+      <div class="chapter-nav">
+        <div class="chapter-nav-left">
+          <a href="#capitulo-7" class="chapter-nav-btn">⬅️ Capítulo 7</a>
+          <a href="#sumario" class="chapter-nav-btn">📑 Sumário</a>
+        </div>
+        <div class="chapter-nav-right">
+          <a href="#topo" class="chapter-nav-btn primary">⬆️ Voltar ao Topo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE O DESENVOLVEDOR & CONTATO -->
+    <div class="developer-card" id="sobre-o-desenvolvedor">
+      <div class="developer-badge">👨‍💻 Criação & Engenharia Digital</div>
+      <h3 class="developer-title">Sobre o Desenvolvedor</h3>
+      <p class="developer-desc">
+        Este manual prático e seu ecossistema de estratégias hiperlocais foram concebidos e estruturados por <strong>Diniz</strong> — especialista em tráfego pago de alta conversão, automações comerciais e arquiteturas de vendas digitais.
+      </p>
+      <div class="developer-action">
+        <a href="https://designerdiniz.vercel.app/" target="_blank" rel="noopener noreferrer" class="developer-btn">
+          <span>🌐 Conhecer Portfólio & Contato Oficial</span>
+          <span class="developer-btn-arrow">➔</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="footer-page">
+      <p>© 2026 <strong>SVD Lumex</strong>. Todos os direitos reservados.</p>
+      <p>Manual Prático de Tráfego Pago Hiperlocal • Desenvolvido e Homologado pela Fábrica Digital SVD Lumex.</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

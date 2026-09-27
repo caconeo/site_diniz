@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leitor Digital Oficial — Cássio Diniz</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23101c2b'/><text x='16' y='21' font-family='sans-serif' font-weight='800' font-size='14' fill='%2367d5c5' text-anchor='middle'>CD</text></svg>">
+  <style>
+    :root {
+      --bar-bg: #101c2b;
+      --bar-border: rgba(103, 213, 197, 0.2);
+      --accent: #67d5c5;
+      --text: #f1f6f8;
+      --green: #10b981;
+      --red: #ef4444;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #090e17;
+      color: var(--text);
+    }
+
+    /* Top Reader Navigation Bar */
+    .reader-topbar {
+      height: 60px;
+      background: var(--bar-bg);
+      border-bottom: 1px solid var(--bar-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: relative;
+      z-index: 50;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .book-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .back-btn {
+      color: #9cb2c2;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      transition: all 0.2s;
+    }
+    .back-btn:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+    .book-title-display {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.01em;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .reader-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .session-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+      color: #a4cbd4;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .btn-logout {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #9cb2c2;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-logout:hover {
+      border-color: #ef4444;
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Content Area & Watermark */
+    .reader-content-frame {
+      width: 100%;
+      height: calc(100% - 60px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    iframe#ebook-viewport {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #090e17;
+    }
+
+    /* Dynamic DRM Watermark Layer */
+    .drm-watermark-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 40;
+      opacity: 0.055;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-around;
+      justify-content: space-around;
+      overflow: hidden;
+      user-select: none;
+    }
+    .watermark-item {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fff;
+      transform: rotate(-22deg);
+      padding: 40px 30px;
+      white-space: nowrap;
+      letter-spacing: 0.08em;
+    }
+
+    /* Security Modal: Concurrent Session Lock */
+    .lock-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 12, 18, 0.96);
+      backdrop-filter: blur(14px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .lock-card {
+      background: #141f2e;
+      border: 2px solid #ef4444;
+      border-radius: 20px;
+      padding: clamp(30px, 6vw, 44px);
+      max-width: 480px;
+      width: 100%;
+      color: #fff;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(239, 68, 68, 0.25);
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .lock-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(239, 68, 68, 0.15);
+      border: 2px solid #ef4444;
+      color: #ef4444;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .lock-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .lock-text {
+      font-size: 0.92rem;
+      color: #cbdbe4;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .lock-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-resume {
+      background: var(--accent);
+      color: #101c2b;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-resume:hover { background: #8ae2d5; }
+    .btn-exit {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #9cb2c2;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .btn-exit:hover { color: #fff; border-color: #fff; }
+
+    @media (max-width: 680px) {
+      .session-badge { display: none; }
+      .reader-topbar { padding: 0 14px; }
+      .book-title-display { font-size: 0.88rem; max-width: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="reader-topbar">
+    <div class="book-info">
+      <a href="index.html" class="back-btn">← Loja</a>
+      <span class="book-title-display" id="reader-book-title">Carregando e-book oficial...</span>
+    </div>
+
+    <div class="reader-controls">
+      <div class="session-badge">
+        <span class="status-dot"></span>
+        <span id="session-status-text">Sessão Exclusiva Ativa</span>
+      </div>
+      <button type="button" class="btn-logout" onclick="logoutSession()">Encerrar Sessão</button>
+    </div>
+  </header>
+
+  <!-- Content Frame -->
+  <main class="reader-content-frame">
+    <!-- Watermark Layer -->
+    <div class="drm-watermark-overlay" id="watermark-layer" aria-hidden="true"></div>
+
+    <!-- Sandboxed Content Viewport -->
+    <iframe id="ebook-viewport" title="Visualizador Oficial do E-book" sandbox="allow-same-origin allow-scripts"></iframe>
+  </main>
+
+  <!-- Lock Modal: Concurrent Session Violation -->
+  <div class="lock-overlay" id="session-lock-modal">
+    <div class="lock-card">
+      <div class="lock-icon">🔒</div>
+      <h2 class="lock-title">Sessão Bloqueada</h2>
+      <p class="lock-text">
+        Detectamos que seu código de acesso acabou de ser aberto em outro dispositivo ou navegador.
+        <br><br>
+        Por segurança e respeito aos direitos autorais da obra, é autorizado apenas <strong>um acesso ativo por vez</strong>.
+      </p>
+      <div class="lock-actions">
+        <button type="button" class="btn-resume" onclick="reclaimSession()">
+          Retomar Acesso Aqui (Encerrar o Outro)
+        </button>
+        <a href="index.html" class="btn-exit">Sair e Voltar à Loja</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let heartbeatInterval = null;
+    let accessCode = sessionStorage.getItem('cd_access_code');
+    let sessionToken = sessionStorage.getItem('cd_session_token');
+    let customerEmail = sessionStorage.getItem('cd_customer_email') || 'leitor@autorizado.com';
+    let ebookId = sessionStorage.getItem('cd_ebook_id');
+    let contentFile = sessionStorage.getItem('cd_content_file');
+    let ebookTitle = sessionStorage.getItem('cd_ebook_title');
+
+    const EBOOK_MAP = {
+      'esteira-automacao': {
+        title: 'Esteira de Automação para Negócios Locais',
+        file: 'conteudo/esteira-de-automacao-para-negocios-locais.html'
+      },
+      'trafego-hiperlocal': {
+        title: 'Manual Prático de Tráfego Pago Hiperlocal',
+        file: 'conteudo/manual-pratico-trafego-pago-hiperlocal.html'
+      },
+      'copywriting-black': {
+        title: 'Templates de Copywriting para Infoprodutos Black',
+        file: 'conteudo/templates-de-copywriting-para-infoprodutos-black.html'
+      },
+      'python-automacao': {
+        title: 'Guia Avançado de Python para Automação',
+        file: 'conteudo/guia-avancado-de-python-para-automacao.html'
+      }
+    };
+
+    // Inicialização ao carregar
+    window.addEventListener('DOMContentLoaded', async () => {
+      // 1. Verifica se veio com token/email na URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlToken = urlParams.get('token');
+      const urlEmail = urlParams.get('email');
+
+      if (urlToken) {
+        accessCode = urlToken;
+        if (urlEmail) customerEmail = urlEmail;
+      }
+
+      // Se não temos sessão nem token, redireciona para login
+      if (!accessCode) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Se ainda não temos sessionToken, autentica agora
+      if (!sessionToken || urlToken) {
+        const ok = await authenticateWithServer(customerEmail, accessCode);
+        if (!ok) return;
+      }
+
+      setupReader();
+      startHeartbeat();
+      generateWatermark();
+      setupAntiPiracy();
+    });
+
+    async function authenticateWithServer(email, code) {
+      try {
+        const resp = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, accessCode: code })
+        });
+        const data = await resp.json();
+        if (!resp.ok || !data.authenticated) {
+          alert('Erro de autenticação: ' + (data.error || 'Código inválido'));
+          window.location.href = 'login.html';
+          return false;
+        }
+
+        sessionToken = data.sessionToken;
+        accessCode = data.accessCode;
+        customerEmail = data.email;
+        ebookId = data.ebookId;
+        contentFile = data.contentFile;
+        ebookTitle = data.ebookTitle;
+
+        sessionStorage.setItem('cd_session_token', sessionToken);
+        sessionStorage.setItem('cd_access_code', accessCode);
+        sessionStorage.setItem('cd_customer_email', customerEmail);
+        sessionStorage.setItem('cd_ebook_id', ebookId);
+        sessionStorage.setItem('cd_content_file', contentFile);
+        sessionStorage.setItem('cd_ebook_title', ebookTitle);
+
+        return true;
+      } catch (err) {
+        // Fallback local se estiver offline ou em simulação
+        console.warn('Servidor offline ou sem credenciais. Usando sessão local simulada.');
+        sessionToken = 'local_' + Date.now();
+        if (!ebookId) ebookId = 'esteira-automacao';
+        return true;
+      }
+    }
+
+    function setupReader() {
+      const info = EBOOK_MAP[ebookId] || EBOOK_MAP['esteira-automacao'];
+      document.getElementById('reader-book-title').innerText = ebookTitle || info.title;
+      document.title = `${info.title} — Leitor Cássio Diniz`;
+
+      const targetFile = contentFile ? `conteudo/${contentFile}` : info.file;
+      document.getElementById('ebook-viewport').src = targetFile;
+    }
+
+    function generateWatermark() {
+      const container = document.getElementById('watermark-layer');
+      container.innerHTML = '';
+      const text = `${customerEmail} · Licença ${accessCode} · Uso Exclusivo`;
+      
+      // Cria repetições diagonais para inibir fotografias de tela
+      for (let i = 0; i < 24; i++) {
+        const div = document.createElement('div');
+        div.className = 'watermark-item';
+        div.innerText = text;
+        container.appendChild(div);
+      }
+    }
+
+    // Heartbeat de Concorrência: a cada 10 segundos
+    function startHeartbeat() {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+
+      heartbeatInterval = setInterval(async () => {
+        try {
+          const resp = await fetch('/api/session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accessCode, sessionToken })
+          });
+
+          // Se a sessão foi invalidada por outro login (403)
+          if (resp.status === 403) {
+            triggerLockScreen();
+          }
+        } catch (e) {
+          // Erro de rede pontual não bloqueia imediatamente
+        }
+      }, 10000);
+    }
+
+    function triggerLockScreen() {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+      document.getElementById('session-lock-modal').style.display = 'flex';
+      // Desativa o viewport
+      document.getElementById('ebook-viewport').src = 'about:blank';
+    }
+
+    async function reclaimSession() {
+      const btn = document.querySelector('.btn-resume');
+      btn.innerText = 'Restabelecendo sessão...';
+      const ok = await authenticateWithServer(customerEmail, accessCode);
+      if (ok) {
+        document.getElementById('session-lock-modal').style.display = 'none';
+        setupReader();
+        startHeartbeat();
+      }
+    }
+
+    function logoutSession() {
+      if (confirm('Deseja realmente encerrar sua sessão de leitura?')) {
+        sessionStorage.clear();
+        window.location.href = 'index.html';
+      }
+    }
+
+    function setupAntiPiracy() {
+      // Bloqueio de clique direito
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+      // Bloqueio de atalhos de impressão e salvamento
+      document.addEventListener('keydown', (e) => {
+        if (
+          (e.ctrlKey || e.metaKey) && 
+          (e.key === 'p' || e.key === 's' || e.key === 'u' || e.key === 'P' || e.key === 'S' || e.key === 'U')
+        ) {
+          e.preventDefault();
+          alert('A impressão e exportação deste e-book são protegidas por direitos autorais.');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

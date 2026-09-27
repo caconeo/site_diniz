@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia Avançado de Python para Automação — Ebook Oficial</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap');
+
+    :root {
+      --bg: #070d14;
+      --surface: #0d1520;
+      --card: #131f2e;
+      --border: #1e3148;
+      --primary: #38bdf8;
+      --primary-hover: #0284c7;
+      --python-yellow: #facc15;
+      --python-blue: #60a5fa;
+      --accent: #10b981;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --code-bg: #03080f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 60px 50px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    /* CAPA */
+    .cover {
+      text-align: center;
+      padding: 50px 20px 60px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 50px;
+    }
+
+    .cover-image-container {
+      margin: 25px auto 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cover-3d-mockup {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(56, 189, 248, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 6px 18px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .cover h2 {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 36px;
+    }
+
+    .cover-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .cover-meta span {
+      background: var(--card);
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    /* SUMÁRIO */
+    .toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 50px;
+    }
+
+    .toc h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      color: var(--python-yellow);
+      margin-bottom: 18px;
+    }
+
+    .toc ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .toc li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .toc li:last-child {
+      border-bottom: none;
+    }
+
+    .toc a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    /* CONTEÚDO */
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      color: #ffffff;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--python-yellow);
+      margin-top: 30px;
+      margin-bottom: 14px;
+    }
+
+    p {
+      margin-bottom: 18px;
+      color: #cbd5e1;
+    }
+
+    ul, ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+      color: #cbd5e1;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    blockquote {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
+      font-style: italic;
+      color: #f8fafc;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 0.88rem;
+      color: #38bdf8;
+      margin-bottom: 24px;
+      line-height: 1.55;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--python-yellow);
+    }
+
+    .callout {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 30px 0;
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* CARTÃO DO DESENVOLVEDOR */
+    .developer-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 16px;
+      padding: 36px 32px;
+      margin: 60px 0 35px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.08);
+    }
+
+    .developer-badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 5px 16px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .developer-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .developer-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .developer-desc strong {
+      color: #ffffff;
+    }
+
+    .developer-action {
+      display: flex;
+      justify-content: center;
+    }
+
+    .developer-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #030712;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 13px 30px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.4);
+    }
+
+    .developer-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px -4px rgba(16, 185, 129, 0.6);
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      color: #000000;
+    }
+
+    .developer-btn-arrow {
+      transition: transform 0.2s ease;
+    }
+
+    .developer-btn:hover .developer-btn-arrow {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 18px;
+      }
+      .developer-card {
+        padding: 26px 18px;
+        margin: 40px 0 24px;
+      }
+      .developer-title {
+        font-size: 1.25rem;
+      }
+      .developer-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* IMPRESSÃO / PDF */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+      }
+      .container {
+        max-width: 100% !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 20px !important;
+      }
+      .cover h1 {
+        color: #000000 !important;
+      }
+      h2, h3 {
+        color: #0f172a !important;
+      }
+      p, li {
+        color: #334155 !important;
+      }
+      pre {
+        background: #f8fafc !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+      code {
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
+      }
+      blockquote {
+        background: #f8fafc !important;
+        color: #1e293b !important;
+        border-left: 4px solid #0284c7 !important;
+      }
+      .callout, .toc {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- CAPA -->
+    <div class="cover">
+      <div class="cover-badge">Python 3.12 & Async Engineering</div>
+      <div class="cover-image-container">
+        <img src="assets/capa-python-automacao.jpg" alt="Capa 3D Oficial — Guia Avançado de Python para Automação" class="cover-3d-mockup" />
+      </div>
+      <h1>Guia Avançado de Python para Automação</h1>
+      <h2>Construindo Scripts Resilientes, Web Scrapers Assíncronos, Bots de Processamento e Pipelines no Piloto Automático</h2>
+      <div class="cover-meta">
+        <span>✍️ Autor: SVD Lumex & Digital Product Factory</span>
+        <span>📅 1ª Edição — 2026</span>
+        <span>🐍 Engenharia & Automação</span>
+      </div>
+    </div>
+
+    <!-- SUMÁRIO -->
+    <div class="toc">
+      <h3>📑 Sumário do Guia</h3>
+      <ul>
+        <li><a href="#intro">Introdução: A Filosofia da Automação Profissional</a> <span>Pág. 03</span></li>
+        <li><a href="#cap1">Capítulo 1: Automação Web Moderna com Playwright Assíncrono</a> <span>Pág. 08</span></li>
+        <li><a href="#cap2">Capítulo 2: Extração de Dados em Larga Escala (Async Scrapers)</a> <span>Pág. 15</span></li>
+        <li><a href="#cap3">Capítulo 3: Engenharia de Documentos: Excel, PDFs e OCR</a> <span>Pág. 22</span></li>
+        <li><a href="#cap4">Capítulo 4: Integração de APIs, Webhooks e Notificadores</a> <span>Pág. 29</span></li>
+        <li><a href="#cap5">Capítulo 5: Dockerização, Orquestração e Deploy 24/7</a> <span>Pág. 35</span></li>
+        <li><a href="#checklist">Checklist: Os 5 Mandamentos da Automação Blindada</a> <span>Pág. 41</span></li>
+      </ul>
+    </div>
+
+    <!-- INTRO -->
+    <h2 id="intro">🧭 Introdução: A Filosofia da Automação Profissional</h2>
+    <p>Automatizar com excelência não significa apenas criar um script de 20 linhas que roda no seu computador pessoal e quebra no dia seguinte. Automação profissional exige:</p>
+    <ul>
+      <li><strong>Idempotência:</strong> A capacidade de executar a mesma rotina múltiplas vezes sem duplicar registros ou corromper dados.</li>
+      <li><strong>Resiliência:</strong> Quedas de conexão e timeouts devem ser tolerados com tentativas automáticas e espaçamento crescente (<em>Exponential Backoff</em>).</li>
+      <li><strong>Observabilidade:</strong> Logs claros e estruturados que revelam exatamente o que o robô fez a cada segundo.</li>
+    </ul>
+
+    <pre>
++-------------------------------------------------------------+
+|              O CICLO DA AUTOMAÇÃO BLINDADA                  |
+|                                                             |
+|   [ Gatilho ] ──> [ Validação de Entrada (Pydantic) ]       |
+|                            │                                |
+|                            ▼                                |
+|        [ Execução Assíncrona com Circuit Breaker ]           |
+|                            │                                |
+|         ┌──────────────────┴──────────────────┐             |
+|         ▼                                     ▼             |
+|   ( Sucesso )                           ( Falha Transitória )
+|   Salvar Estado                         Retry com Backoff   |
+|   Notificar Sucesso                     Alerta no Telegram  |
++-------------------------------------------------------------+</pre>
+
+    <!-- CAP 1 -->
+    <h2 id="cap1">🚀 Capítulo 1: Automação Web Moderna com Playwright Assíncrono</h2>
+    <p>O Selenium foi o pioneiro, mas o <strong>Playwright</strong> tornou-se a escolha moderna devido ao suporte nativo a operações assíncronas, controle granular de múltiplos contextos e velocidade até 4x superior.</p>
+
+    <pre>
+import asyncio
+from playwright.async_api import async_playwright
+
+async def run_automation():
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(
+            headless=True,
+            args=["--disable-blink-features=AutomationControlled"]
+        )
+        context = await browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...",
+            viewport={"width": 1920, "height": 1080}
+        )
+        page = await context.new_page()
+        
+        await page.goto("https://painel.empresa.com", wait_until="networkidle")
+        await page.fill("#usuario", "operador_sistema")
+        await page.fill("#senha", "ChaveSegura2026!")
+        await page.click("button[type='submit']")
+        
+        await page.wait_for_url("**/dashboard")
+        await page.screenshot(path="dashboard_auditoria.png", full_page=True)
+        
+        await context.close()
+        await browser.close()
+
+if __name__ == "__main__":
+    asyncio.run(run_automation())</pre>
+
+    <!-- CAP 2 -->
+    <h2 id="cap2">⚡ Capítulo 2: Extração de Dados em Larga Escala (Async Scrapers)</h2>
+    <p>Para consultar milhares de URLs sem estourar a memória ou ser bloqueado por excesso de requisições, o uso de <code>httpx</code> associado a <code>asyncio.Semaphore</code> garante concorrência controlada.</p>
+
+    <div class="callout">
+      <div class="callout-title">⚙️ Concorrência com Semáforos</div>
+      <p>Um semáforo limita a quantidade máxima de requisições ativas simultaneamente (ex: 20 conexões simultâneas), permitindo disparar 5.000 requisições sem estourar o limite de conexões do servidor ou a memória RAM.</p>
+    </div>
+
+    <!-- CAP 3 -->
+    <h2 id="cap3">📊 Capítulo 3: Engenharia de Documentos: Excel, PDFs e OCR</h2>
+    <p>Com as bibliotecas <code>pandas</code>, <code>openpyxl</code> e <code>pdfplumber</code>, tarefas manuais que levariam horas diárias são executadas em segundos com precisão matemática.</p>
+
+    <!-- CAP 4 -->
+    <h2 id="cap4">🤖 Capítulo 4: Integração de APIs, Webhooks e Notificadores</h2>
+    <p>Um bom robô nunca opera no escuro. Configure alertas no Telegram ou Discord para ser avisado sobre execuções concluídas ou exceções críticas.</p>
+
+    <!-- CHECKLIST -->
+    <h2 id="checklist">📋 Checklist: Os 5 Mandamentos da Automação Blindada</h2>
+    <ul>
+      <li>[ ] <strong>Gestão de Segredos:</strong> Nenhuma senha ou chave de API salva diretamente no código fonte; uso obrigatório de <code>.env</code>.</li>
+      <li>[ ] <strong>Timeouts Explícitos:</strong> Nenhuma chamada de rede ou busca de seletor web sem tempo limite definido.</li>
+      <li>[ ] <strong>Mecanismo de Retry:</strong> Tratamento automático com backoff exponencial para falhas temporárias de conexão.</li>
+      <li>[ ] <strong>Logs Rotativos:</strong> Gravação de logs com limite máximo de tamanho de arquivo.</li>
+      <li>[ ] <strong>Isolamento com Containers:</strong> Execução encapsulada em imagens Docker para evitar divergências de ambiente entre desenvolvimento e produção.</li>
+    </ul>
+
+    <!-- SOBRE O DESENVOLVEDOR & CONTATO -->
+    <div class="developer-card" id="sobre-o-desenvolvedor">
+      <div class="developer-badge">👨‍💻 Criação & Engenharia Digital</div>
+      <h3 class="developer-title">Sobre o Desenvolvedor</h3>
+      <p class="developer-desc">
+        Este guia prático e seus scripts avançados foram concebidos e estruturados por <strong>Diniz</strong> — especialista em desenvolvimento Python, automação de processos, web scraping e arquitetura de bots resilientes.
+      </p>
+      <div class="developer-action">
+        <a href="https://designerdiniz.vercel.app/" target="_blank" rel="noopener noreferrer" class="developer-btn">
+          <span>🌐 Conhecer Portfólio & Contato Oficial</span>
+          <span class="developer-btn-arrow">➔</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p>© 2026 SVD Lumex & Digital Product Factory — Todos os direitos reservados.</p>
+      <p><em>Dica de Impressão: Pressione <strong>Ctrl + P</strong> no navegador e selecione <strong>"Salvar como PDF"</strong> para gerar o arquivo final formatado.</em></p>
+    </div>
+  </div>
+
+</body>
+</html>

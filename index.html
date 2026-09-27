@@ -183,7 +183,7 @@
   </style>
 </head>
 <body>
-  <div class="top" id="inicio"><canvas id="matrix-canvas" aria-hidden="true"></canvas><div class="top-grid-overlay" aria-hidden="true"></div><header class="nav wrap"><a class="brand" href="#inicio" aria-label="Cássio Diniz, início">Cássio<span>.</span> Diniz</a><nav class="navlinks" aria-label="Navegação principal"><a href="#servicos">Serviços</a><a href="#sobre">Sobre</a><a href="#metodo">Como trabalho</a><a href="#contato">Contato</a></nav></header>
+  <div class="top" id="inicio"><canvas id="matrix-canvas" aria-hidden="true"></canvas><div class="top-grid-overlay" aria-hidden="true"></div><header class="nav wrap"><a class="brand" href="#inicio" aria-label="Cássio Diniz, início">Cássio<span>.</span> Diniz</a><nav class="navlinks" aria-label="Navegação principal"><a href="#servicos">Serviços</a><a href="#sobre">Sobre</a><a href="#metodo">Como trabalho</a><a href="#contato">Contato</a><a href="ebook/index.html" class="nav-ebook-link" style="color:var(--accent);font-weight:750;display:inline-flex;align-items:center;gap:6px">E-books <span style="font-size:0.65rem;background:var(--accent);color:var(--navy);padding:2px 6px;border-radius:10px;font-weight:800;line-height:1">NOVO</span></a></nav></header>
     <main><section class="hero wrap" aria-labelledby="hero-title"><div><p class="eyebrow">Analista de Sistemas Sênior · UI/UX Designer</p><h1 id="hero-title">Ideias que viram <em>experiências digitais.</em></h1><p class="lede">Sou Cássio Diniz. Uno análise de sistemas, design de interfaces e mais de 30 anos de experiência em design gráfico para criar soluções digitais com clareza e propósito.</p><div class="hero-actions"><a class="btn" href="#servicos">Conheça meus serviços <span aria-hidden="true" style="margin-left:14px">↗</span></a><a class="textlink" href="#sobre">Minha trajetória</a><a class="textlink" href="#contato">Entre em contato</a></div></div><div class="hero-mark" aria-label="Cássio Diniz — Estratégia, design e tecnologia. Do conceito à experiência."><span class="mark-caption mark-caption-top">ESTRATÉGIA / DESIGN / TECNOLOGIA</span><div class="hero-art" aria-hidden="true"><div class="hero-art-scan" aria-hidden="true"></div><span class="art-center">C<span style="color:var(--accent)">D</span></span></div><span class="mark-caption mark-caption-bottom">DO CONCEITO À EXPERIÊNCIA</span></div></section></main>
   </div>
   <div class="stat-strip"><div class="stats wrap"><div class="stat"><strong>30+ anos</strong><span>de experiência em design gráfico</span></div><div class="stat"><strong>Visão completa</strong><span>da análise à interface</span></div><div class="stat"><strong>Digital + visual</strong><span>soluções em diferentes formatos</span></div></div></div>
@@ -282,9 +282,13 @@
       <span>05</span>
       <span class="rail-tooltip">Contato</span>
     </a>
+    <a href="ebook/index.html" class="rail-link" aria-label="Ir para Livraria Digital de E-books" style="border-color:rgba(103,213,197,0.4)">
+      <span>📚</span>
+      <span class="rail-tooltip">Livraria Digital</span>
+    </a>
   </nav>
 
-  <footer><div class="footer-inner wrap"><strong>Cássio Diniz</strong><span>Analista de Sistemas Sênior · UI/UX Designer · Designer Gráfico</span></div></footer>
+  <footer><div class="footer-inner wrap"><strong>Cássio Diniz</strong><span>Analista de Sistemas Sênior · UI/UX Designer · Designer Gráfico</span><div style="margin-top:8px"><a href="ebook/index.html" style="color:var(--accent);text-decoration:none;font-weight:700">Livraria Digital & E-books ↗</a></div></div></footer>
 <script>
 const services = {
   sistemas: {tag:'01 / TECNOLOGIA',title:'Desenvolvimento de sistemas',description:'Soluções digitais para organizar processos, reunir informações e facilitar a tomada de decisão.',examples:['Portal de solicitações com acompanhamento de etapas e perfis de acesso.','Painel de indicadores e relatórios para apoiar a gestão.','Sistema de cadastro e consulta com fluxos adaptados à equipe.']},
@@ -292,7 +296,7 @@ const services = {
   sites: {tag:'03 / WEB',title:'Sites e convites virtuais',description:'Experiências web para apresentar conteúdo, serviços ou eventos.',examples:['Site institucional responsivo com serviços e informações organizados.','Convite digital com programação, localização e confirmação de presença.','Página de apresentação de produto ou campanha.']},
   mobile: {tag:'04 / MOBILE',title:'Aplicativos mobile',description:'Interfaces e funcionalidades pensadas para o uso cotidiano no celular.',examples:['Aplicativo de serviços com consulta e acompanhamento de solicitações.','Área pessoal com notificações e histórico.','Protótipo de aplicativo para validar a experiência antes do desenvolvimento.']},
   integracao: {tag:'05 / CONEXÕES',title:'Integração entre interfaces',description:'Conexão de sistemas e canais para reduzir retrabalho e manter informações coerentes.',examples:['Integração de cadastros entre portal e sistema interno.','Fluxo de notificações entre atendimento, painel e usuário.','Interface única de consulta a informações vindas de diferentes fontes.']},
-  conteudo: {tag:'06 / CONTEÚDO',title:'E-books e podcasts',description:'Conteúdo digital desenvolvido com estrutura, identidade e atenção à experiência de leitura ou escuta.',examples:['E-book ilustrado com capítulos, diagramas e projeto editorial.','Identidade visual e peças de divulgação para uma série de podcast.','Roteiro e estrutura de episódios para conteúdo educativo.']},
+  conteudo: {tag:'06 / CONTEÚDO',title:'E-books e podcasts',description:'Conteúdo digital desenvolvido com estrutura, identidade e atenção à experiência de leitura ou escuta.',storeLink:'ebook/index.html',examples:['E-book ilustrado com capítulos, diagramas e projeto editorial.','Identidade visual e peças de divulgação para uma série de podcast.','Roteiro e estrutura de episódios para conteúdo educativo.']},
   maquetes: {tag:'07 / VISUALIZAÇÃO',title:'Maquetes virtuais e renderização',description:'Visualização de conceitos e protótipos para apresentar uma ideia com mais clareza.',video:'videos/maquete_eletronica.mp4',examples:['Maquete virtual para explorar organização espacial e materiais.','Renderizações de protótipos sob diferentes ângulos.','Peças visuais para apresentação de conceito ou produto.']},
   grafico: {tag:'08 / IDENTIDADE',title:'Design gráfico',description:'Comunicação visual para organizar mensagens e criar peças com personalidade.',examples:['Identidade visual com aplicações digitais e impressas.','Materiais editoriais e peças para campanhas.','Apresentações e infográficos para comunicar informações complexas.']},
   fotografia: {tag:'09 / FOTOGRAFIA',title:'Fotografia de produtos',description:'Imagens profissionais com iluminação, enquadramento e tratamento dedicados para destacar a qualidade dos seus produtos em todos os pontos de contato.',examples:['Fotos em fundo neutro e composições ambientadas para catálogos impressos e e-commerce.','Imagens em alta definição otimizadas para websites, landing pages e vitrines digitais.','Enquadramentos editoriais e conceituais para ilustrar e-books, manuais e apresentações comerciais.']}
@@ -407,6 +411,17 @@ function buildCardBack(back, item, card) {
   vBtn.textContent = '▶ Ver modelo em vídeo';
   vBtn.addEventListener('click', e => { e.stopPropagation(); openVideoModal(item.video, item.title + ' — Modelo de Criação', vBtn); });
   back.appendChild(vBtn);
+ }
+ if (item.storeLink) {
+  const sBtn = document.createElement('a');
+  sBtn.href = item.storeLink;
+  sBtn.className = 'btn-video-example cb-video-btn';
+  sBtn.style.background = 'rgba(103,213,197,0.18)';
+  sBtn.style.borderColor = 'var(--accent)';
+  sBtn.style.color = '#fff';
+  sBtn.style.textDecoration = 'none';
+  sBtn.innerHTML = '📚 Visitar Nossa Livraria Digital ↗';
+  back.appendChild(sBtn);
  }
  // CTA button (uses button + window.open to avoid nested interactive content issues)
  const cta = document.createElement('button');
