@@ -12,9 +12,11 @@ CREATE TABLE IF NOT EXISTS public.admin_users (
     created_at TIMESTAMPTZ DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- Inserir usuário administrador inicial de referência
+-- Inserir usuário administrador principal
 INSERT INTO public.admin_users (email, full_name, role)
-VALUES ('admin@cassiodiniz.com.br', 'Cássio Diniz (Admin Master)', 'superadmin')
+VALUES 
+    ('cassiordcosta@gmail.com', 'Cássio Diniz', 'superadmin'),
+    ('admin@cassiodiniz.com.br', 'Cássio Diniz (Admin Master)', 'superadmin')
 ON CONFLICT (email) DO NOTHING;
 
 -- 2. TABELA DE E-BOOKS E MAPEAMENTO DE PASTAS POR PLATAFORMA

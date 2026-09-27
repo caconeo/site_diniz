@@ -420,23 +420,18 @@
   <!-- Login View -->
   <section id="admin-login-view">
     <div class="login-card">
-      <span class="pill pill-site" style="margin-bottom: 12px;">Autenticação Supabase</span>
+      <span class="pill pill-site" style="margin-bottom: 12px;">Acesso Restrito</span>
       <h2>Painel Administrativo</h2>
-      <p>Acesse com suas credenciais de administrador para gerenciar e-books, vendas e sessões.</p>
+      <p>Área interna de governança da livraria, catálogo e controle de pedidos.</p>
 
       <form id="admin-login-form" onsubmit="handleLoginSubmit(event)">
         <div class="form-group">
           <label for="admin-email">E-mail do Administrador</label>
-          <input type="email" id="admin-email" value="admin@cassiodiniz.com.br" required>
+          <input type="email" id="admin-email" value="cassiordcosta@gmail.com" placeholder="cassiordcosta@gmail.com" autocomplete="username" required>
         </div>
         <div class="form-group">
           <label for="admin-password">Senha de Acesso</label>
-          <input type="password" id="admin-password" value="admin123" required>
-        </div>
-        <div class="form-group">
-          <label for="admin-anon-key">Chave de API / Anon Key do Supabase</label>
-          <input type="text" id="admin-anon-key" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNubnNpYWh2aG9zdXNkcXRxdnhvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5NTUwMjYsImV4cCI6MjEwNTUzMTAyNn0.FuhcsBj1NXEYkJyBAOou0cq5-6fTw717eeeXI5vxUqo" style="font-family:monospace; font-size:0.8rem;">
-          <small style="color:var(--muted); font-size:0.72rem; display:block; margin-top:4px;">Projeto Conectado: <code>https://cnnsiahvhosusdqtqvxo.supabase.co</code></small>
+          <input type="password" id="admin-password" placeholder="Digite sua senha cadastrada no Supabase" autocomplete="current-password" required>
         </div>
         <button type="submit" class="btn-submit" id="btn-login-submit">
           Entrar no Painel ↗
@@ -707,19 +702,14 @@
       btn.innerText = 'Validando no Supabase...';
       btn.disabled = true;
 
-      const email = document.getElementById('admin-email').value;
+      const email = document.getElementById('admin-email').value.trim();
       const password = document.getElementById('admin-password').value;
-      const anonKey = document.getElementById('admin-anon-key')?.value?.trim() || sessionStorage.getItem('cd_supabase_anon_key') || '';
-
-      if (anonKey) {
-        sessionStorage.setItem('cd_supabase_anon_key', anonKey);
-      }
 
       try {
         const resp = await fetch('/api/admin/auth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, anonKey })
+          body: JSON.stringify({ email, password })
         });
         const data = await resp.json();
 

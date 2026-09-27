@@ -351,6 +351,24 @@ Abaixo está o registro cronológico e estruturado de todas as fundações e fun
 
 ---
 
+### [PROC-024] Ocultação Pública do Login Administrativo e Autenticação Nativa Supabase (cassiordcosta@gmail.com)
+- **Data de Homologação:** 2026-09-27
+- **Responsável:** Auditor Multi-Especialista Sênior (UX/UI 30a, Software, Arquitetura e Marketing 40a)
+- **Objetivo de Negócio:** Remoção completa de links públicos de acesso ao painel administrativo nas áreas visíveis do site (rodapé da vitrine de e-books e tela de login de alunos), blindando o endpoint contra curiosos ou tentativas de brute-force. Implementação de autenticação nativa com o Supabase Auth para o administrador registrado (`cassiordcosta@gmail.com`), validação direta de credenciais criptografadas e eliminação de campos expostos de API keys na interface.
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (10/10) — Interface de autenticação restrita limpa, elegante e minimalista. Removidos campos redundantes de token e credenciais de teste. Formulário direto com campos padrão de e-mail e senha com feedback dinâmico de carregamento e mensagens de erro contextualizadas.
+- **Pilar Engenharia de Software:** APROVADO (10/10) — Validação Serverless (`api/admin/auth.js` e `api/lib/supabase.js`) chamando a API nativa `/auth/v1/token?grant_type=password` do Supabase. Tratamento específico de erros retornados pela API (como `invalid_credentials` ou `email_not_confirmed`). Restrição restrita de sessão a e-mails administrativos autorizados.
+- **Pilar Arquitetura de Sistemas:** APROVADO (10/10) — Princípio de menor privilégio e segurança por obscuridade na camada de rotas: o painel administrativo não é referenciado em nenhum hiperlink do site público, permanecendo acessível apenas via rota direta privada protegida por autenticação.
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (10/10) — O isolamento da rota administrativa preserva o foco comercial da vitrine e do leitor do aluno, transmitindo seriedade, sofisticação e segurança institucional aos compradores.
+- **Arquivos Afetados:**
+  - `ebook/index.html` (Removido link público para o painel admin no rodapé)
+  - `ebook/login.html` (Removido link público para o painel admin na tela de login de alunos)
+  - `ebook/admin.html` (Interface limpa, remoção de chaves e campos de mock, formulário focado no Supabase Auth)
+  - `api/lib/supabase.js` (Integração com Supabase Auth grant_type=password e autorização de `cassiordcosta@gmail.com`)
+  - `supabase_schema.sql` (Adicionado cassiordcosta@gmail.com como superadmin no schema)
+- **Status:** CONCLUÍDO / HOMOLOGADO
+
+---
+
 ## 4. Protocolo e Template Obrigatório para Novos Processos
 
 Toda e qualquer nova funcionalidade, componente, refatoração de código ou alteração de copy no site **DEVE** ser submetida à auditoria do **Agente Auditor Multi-Especialista** e registrada neste documento seguindo o padrão abaixo:

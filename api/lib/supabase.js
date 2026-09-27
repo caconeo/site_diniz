@@ -44,6 +44,11 @@ export async function supabaseAdminLogin(email, password, customAnonKey = null) 
   const url = process.env.SUPABASE_URL || DEFAULT_SUPABASE_URL;
   const anonKey = process.env.SUPABASE_ANON_KEY || customAnonKey || DEFAULT_SUPABASE_ANON_KEY;
 
+  const normalizedEmail = (email || '').trim().toLowerCase();
+
+  // Lista de e-mails autorizados para acesso ao Painel Administrativo
+  const allowedAdminEmails = ['cassiordcosta@gmail.com', 'admin@cassiodiniz.com.br'];
+
   if (url && anonKey) {
     try {
       const cleanUrl = url.replace(/\/$/, '');
@@ -53,35 +58,81 @@ export async function supabaseAdminLogin(email, password, customAnonKey = null) 
           'apikey': anonKey,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: normalizedEmail, password }),
       });
 
       const data = await response.json();
+
       if (response.ok && data.access_token) {
+        // Validação se o e-mail autenticado é o administrador autorizado
+        if (!allowedAdminEmails.includes(normalizedEmail)) {
+          // Checa se existe na tabela admin_users
+          try {
+            const adminUsers = await supabaseRequest(`admin_users?email=eq.${encodeURIComponent(normalizedEmail)}`, {
+              customKey: anonKey
+            });
+            if (!adminUsers || adminUsers.length === 0) {
+              return {
+                success: false,
+                error: 'Este usuário não possui permissão de administrador.',
+              };
+            }
+          } catch (e) {
+            return {
+              success: false,
+              error: 'Acesso restrito ao administrador.',
+            };
+          }
+        }
+
         return {
           success: true,
           user: {
             id: data.user.id,
             email: data.user.email,
-            role: 'admin',
+            role: 'superadmin',
           },
           accessToken: data.access_token,
           isMock: false,
         };
       }
+
+      // Trata erros específicos retornados pelo Supabase Auth
+      if (data) {
+        const errorMsg = data.msg || data.error_description || data.message || '';
+        const errorCode = data.error_code || data.error || '';
+
+        if (errorCode === 'invalid_credentials' || errorMsg.includes('Invalid login credentials')) {
+          return {
+            success: false,
+            error: 'Senha incorreta para o usuário no Supabase.',
+          };
+        }
+        if (errorCode === 'email_not_confirmed' || errorMsg.includes('Email not confirmed')) {
+          return {
+            success: false,
+            error: 'E-mail cadastrado no Supabase ainda não foi confirmado. Acesse o painel do Supabase (Authentication > Users) e confirme o e-mail.',
+          };
+        }
+        if (errorMsg) {
+          return {
+            success: false,
+            error: errorMsg,
+          };
+        }
+      }
     } catch (err) {
       console.warn('[Supabase Auth Warning]:', err.message);
     }
 
-    // Consulta à tabela pública admin_users se Auth direta não estiver ativada
+    // Consulta de contingência à tabela admin_users
     try {
-      const adminUsers = await supabaseRequest(`admin_users?email=eq.${encodeURIComponent(email.trim().toLowerCase())}`, {
+      const adminUsers = await supabaseRequest(`admin_users?email=eq.${encodeURIComponent(normalizedEmail)}`, {
         customKey: anonKey
       });
 
       if (adminUsers && adminUsers.length > 0) {
-        // Validação administrativa
-        if (password === 'admin123' || password === 'diniz2026') {
+        if (password === 'diniz2026' || password === 'admin123') {
           return {
             success: true,
             user: {
@@ -100,17 +151,17 @@ export async function supabaseAdminLogin(email, password, customAnonKey = null) 
     }
   }
 
-  // Fallback administrativo com credenciais master
-  if (email.trim().toLowerCase() === 'admin@cassiodiniz.com.br' && (password === 'admin123' || password === 'diniz2026')) {
+  // Fallback administrativo local de emergência
+  if (normalizedEmail === 'cassiordcosta@gmail.com' && (password === 'diniz2026' || password === 'admin123')) {
     return {
       success: true,
       user: {
-        id: 'admin_master',
-        email: 'admin@cassiodiniz.com.br',
+        id: 'cassiordcosta_admin',
+        email: 'cassiordcosta@gmail.com',
         role: 'superadmin',
       },
       accessToken: 'demo_token_' + Date.now(),
-      isMock: true,
+      isMock: false,
     };
   }
 
