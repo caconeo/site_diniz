@@ -249,7 +249,7 @@
   <!-- Topbar -->
   <header class="reader-topbar">
     <div class="book-info">
-      <a href="index.html" class="back-btn">← Loja</a>
+      <a href="/ebook/" class="back-btn">← Loja</a>
       <span class="book-title-display" id="reader-book-title">Carregando e-book oficial...</span>
     </div>
 
@@ -285,7 +285,7 @@
         <button type="button" class="btn-resume" onclick="reclaimSession()">
           Retomar Acesso Aqui (Encerrar o Outro)
         </button>
-        <a href="index.html" class="btn-exit">Sair e Voltar à Loja</a>
+        <a href="/ebook/" class="btn-exit">Sair e Voltar à Loja</a>
       </div>
     </div>
   </div>
@@ -302,19 +302,19 @@
     const EBOOK_MAP = {
       'esteira-automacao': {
         title: 'Esteira de Automação para Negócios Locais',
-        file: 'conteudo/esteira-de-automacao-para-negocios-locais.html'
+        file: '/ebook/conteudo/esteira-de-automacao-para-negocios-locais.html'
       },
       'trafego-hiperlocal': {
         title: 'Manual Prático de Tráfego Pago Hiperlocal',
-        file: 'conteudo/manual-pratico-trafego-pago-hiperlocal.html'
+        file: '/ebook/conteudo/manual-pratico-trafego-pago-hiperlocal.html'
       },
       'copywriting-black': {
         title: 'Templates de Copywriting para Infoprodutos Black',
-        file: 'conteudo/templates-de-copywriting-para-infoprodutos-black.html'
+        file: '/ebook/conteudo/templates-de-copywriting-para-infoprodutos-black.html'
       },
       'python-automacao': {
         title: 'Guia Avançado de Python para Automação',
-        file: 'conteudo/guia-avancado-de-python-para-automacao.html'
+        file: '/ebook/conteudo/guia-avancado-de-python-para-automacao.html'
       }
     };
 
@@ -332,7 +332,7 @@
 
       // Se não temos sessão nem token, redireciona para login
       if (!accessCode) {
-        window.location.href = 'login.html';
+        window.location.href = '/ebook/login.html';
         return;
       }
 
@@ -358,7 +358,7 @@
         const data = await resp.json();
         if (!resp.ok || !data.authenticated) {
           alert('Erro de autenticação: ' + (data.error || 'Código inválido'));
-          window.location.href = 'login.html';
+          window.location.href = '/ebook/login.html';
           return false;
         }
 
@@ -391,7 +391,7 @@
       document.getElementById('reader-book-title').innerText = ebookTitle || info.title;
       document.title = `${info.title} — Leitor Cássio Diniz`;
 
-      const targetFile = contentFile ? `conteudo/${contentFile}` : info.file;
+      const targetFile = contentFile ? (`/ebook/conteudo/${contentFile.replace(/^conteudo\//, '')}`) : info.file;
       document.getElementById('ebook-viewport').src = targetFile;
     }
 

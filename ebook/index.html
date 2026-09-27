@@ -648,13 +648,13 @@
   <!-- Header Nav -->
   <header class="store-header">
     <div class="wrap header-inner">
-      <a href="../index.html" class="brand-link" aria-label="Voltar para a página inicial de Cássio Diniz">
+      <a href="/" class="brand-link" aria-label="Voltar para a página inicial de Cássio Diniz">
         Cássio<span>.</span> Diniz
         <span class="brand-tag">Livraria Digital</span>
       </a>
       <div class="nav-actions">
-        <a href="../index.html" style="color:#a4cbd4; font-size:0.86rem; text-decoration:none; font-weight:600;">← Voltar ao Início</a>
-        <a href="login.html" class="btn-portal">
+        <a href="/" style="color:#a4cbd4; font-size:0.86rem; text-decoration:none; font-weight:600;">← Voltar ao Início</a>
+        <a href="/ebook/login.html" class="btn-portal">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
           Acessar Meu E-book
         </a>
@@ -689,7 +689,7 @@
         <article class="book-card" data-ebook-id="esteira-automacao">
           <span class="card-top-tag">MAIS VENDIDO</span>
           <div class="card-media">
-            <img src="assets/capa-esteira-automacao.jpg" alt="Capa 3D Esteira de Automação para Negócios Locais" width="220" height="280" loading="lazy">
+            <img src="/ebook/assets/capa-esteira-automacao.jpg" alt="Capa 3D Esteira de Automação para Negócios Locais" width="220" height="280" loading="lazy">
           </div>
           <div class="card-body">
             <span class="card-kicker">AUTOMAÇÃO COMERCIAL & IA</span>
@@ -718,7 +718,7 @@
         <article class="book-card" data-ebook-id="trafego-hiperlocal">
           <span class="card-top-tag">ALTO ROI</span>
           <div class="card-media">
-            <img src="assets/capa-trafego-hiperlocal.jpg" alt="Capa 3D Manual Prático de Tráfego Pago Hiperlocal" width="220" height="280" loading="lazy">
+            <img src="/ebook/assets/capa-trafego-hiperlocal.jpg" alt="Capa 3D Manual Prático de Tráfego Pago Hiperlocal" width="220" height="280" loading="lazy">
           </div>
           <div class="card-body">
             <span class="card-kicker">TRÁFEGO PAGO REGIONAL</span>
@@ -747,7 +747,7 @@
         <article class="book-card" data-ebook-id="copywriting-black">
           <span class="card-top-tag">ALTA ESCALA</span>
           <div class="card-media">
-            <img src="assets/capa-copywriting-black.jpg" alt="Capa 3D Templates de Copywriting para Infoprodutos Black" width="220" height="280" loading="lazy">
+            <img src="/ebook/assets/capa-copywriting-black.jpg" alt="Capa 3D Templates de Copywriting para Infoprodutos Black" width="220" height="280" loading="lazy">
           </div>
           <div class="card-body">
             <span class="card-kicker">COPYWRITING & PERSUASÃO</span>
@@ -776,7 +776,7 @@
         <article class="book-card" data-ebook-id="python-automacao">
           <span class="card-top-tag">ENGENHARIA</span>
           <div class="card-media">
-            <img src="assets/capa-python-automacao.jpg" alt="Capa 3D Guia Avançado de Python para Automação" width="220" height="280" loading="lazy">
+            <img src="/ebook/assets/capa-python-automacao.jpg" alt="Capa 3D Guia Avançado de Python para Automação" width="220" height="280" loading="lazy">
           </div>
           <div class="card-body">
             <span class="card-kicker">ENGENHARIA DE SOFTWARE</span>
@@ -926,9 +926,9 @@
     <div class="wrap">
       <p>© 2026 Cássio Diniz — Análise de Sistemas, UI/UX e Design Editorial. Todos os direitos reservados.</p>
       <p style="margin-top:8px;">
-        <a href="../index.html">Página Principal</a> · 
-        <a href="login.html">Portal do Leitor</a> · 
-        <a href="admin.html">Painel do Administrador</a> · 
+        <a href="/">Página Principal</a> · 
+        <a href="/ebook/login.html">Portal do Leitor</a> · 
+        <a href="/ebook/admin.html">Painel do Administrador</a> · 
         <a href="https://wa.me/5531993963275" target="_blank" rel="noopener noreferrer">Suporte via WhatsApp: +55 (31) 99396-3275</a>
       </p>
     </div>
@@ -1085,7 +1085,7 @@
       document.getElementById('success-access-code').innerText = orderData.accessCode;
       
       const readerBtn = document.getElementById('btn-open-reader-now');
-      readerBtn.href = orderData.redirectUrl || `leitor.html?token=${orderData.accessCode}&email=${encodeURIComponent(orderData.email)}`;
+      readerBtn.href = orderData.redirectUrl || `/ebook/leitor.html?token=${orderData.accessCode}&email=${encodeURIComponent(orderData.email)}`;
     }
   </script>
 </body>
