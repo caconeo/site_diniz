@@ -64,6 +64,7 @@ export default async function handler(req, res) {
           original_price: customData?.original_price !== undefined ? customData.original_price : defaultData.originalPrice,
           platform: customData?.platform || folderInfo.platform,
           folder_path: customData?.folder_path || folderInfo.folder_path,
+          hotmart_url: customData?.hotmart_url || defaultData.hotmartUrl || `https://pay.hotmart.com/${id}`,
           content_file: defaultData.contentFile,
           cover: defaultData.cover,
           lead: defaultData.lead,
@@ -77,7 +78,7 @@ export default async function handler(req, res) {
 
     // 2. POST / PUT: Atualiza valores, plataforma e caminho da pasta do e-book
     if (req.method === 'POST' || req.method === 'PUT') {
-      const { id, price, original_price, platform, folder_path, status, title } = req.body || {};
+      const { id, price, original_price, platform, folder_path, status, title, hotmart_url } = req.body || {};
 
       if (!id) {
         return res.status(400).json({ error: 'ID do e-book é obrigatório.' });
@@ -93,6 +94,7 @@ export default async function handler(req, res) {
       if (folder_path) updatePayload.folder_path = folder_path;
       if (status) updatePayload.status = status;
       if (title) updatePayload.title = title;
+      if (hotmart_url !== undefined) updatePayload.hotmart_url = hotmart_url;
 
       // Tenta persistir no Supabase se configurado
       let supabaseOk = false;

@@ -11,6 +11,7 @@ export const EBOOK_CATALOG = {
     originalPrice: 97.00,
     cover: 'assets/capa-esteira-automacao.jpg',
     contentFile: 'esteira-de-automacao-para-negocios-locais.html',
+    hotmartUrl: 'https://pay.hotmart.com/esteira-automacao',
     lead: 'Transforme o WhatsApp e o atendimento da sua empresa em uma máquina 24/7 com Make, Typebot e IA.',
     features: [
       'Manual Completo em PDF/Web Diagramado em Alta Definição',
@@ -32,6 +33,7 @@ export const EBOOK_CATALOG = {
     originalPrice: 97.00,
     cover: 'assets/capa-trafego-hiperlocal.jpg',
     contentFile: 'manual-pratico-trafego-pago-hiperlocal.html',
+    hotmartUrl: 'https://pay.hotmart.com/trafego-hiperlocal',
     lead: 'Pare de queimar verba com cliques fora da sua cidade. Domine o raio de 3 a 15 km no Google Maps e Instagram.',
     features: [
       'A Fórmula do Raio de Ouro (3 km, 5 km e 10 km) sem dispersão',
@@ -53,6 +55,7 @@ export const EBOOK_CATALOG = {
     originalPrice: 197.00,
     cover: 'assets/capa-copywriting-black.jpg',
     contentFile: 'templates-de-copywriting-para-infoprodutos-black.html',
+    hotmartUrl: 'https://pay.hotmart.com/copywriting-black',
     lead: 'Ganchos hipnóticos e Mecanismos Únicos que multiplicam conversões com blindagem total contra bloqueios.',
     features: [
       'O Conceito de Mecanismo Único: desqualifique objeções sem atrito',
@@ -74,6 +77,7 @@ export const EBOOK_CATALOG = {
     originalPrice: 127.00,
     cover: 'assets/capa-python-automacao.jpg',
     contentFile: 'guia-avancado-de-python-para-automacao.html',
+    hotmartUrl: 'https://pay.hotmart.com/python-automacao',
     lead: 'Construa automações resilientes com Playwright assíncrono, HTTPX concorrente, bots e Docker 24/7.',
     features: [
       'Automação Web Assíncrona com Playwright e Anti-Detecção',

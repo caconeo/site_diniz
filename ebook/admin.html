@@ -723,6 +723,10 @@
           <label>Caminho da Pasta Física</label>
           <input type="text" id="edit-folder" required>
         </div>
+        <div class="form-group">
+          <label>Link de Checkout Hotmart (URL Oficial)</label>
+          <input type="url" id="edit-hotmart-url" placeholder="https://pay.hotmart.com/...">
+        </div>
         <button type="submit" class="btn-submit">Salvar Alterações</button>
       </form>
     </div>
@@ -921,6 +925,7 @@
       document.getElementById('edit-orig-price').value = eb.original_price || '';
       document.getElementById('edit-platform').value = eb.platform || 'hotmart';
       document.getElementById('edit-folder').value = eb.folder_path || `ebook/${eb.platform}/${eb.id}/`;
+      document.getElementById('edit-hotmart-url').value = eb.hotmart_url || `https://pay.hotmart.com/${eb.id}`;
 
       document.getElementById('edit-ebook-modal').showModal();
     }
@@ -946,12 +951,13 @@
       const original_price = document.getElementById('edit-orig-price').value;
       const platform = document.getElementById('edit-platform').value;
       const folder_path = document.getElementById('edit-folder').value;
+      const hotmart_url = document.getElementById('edit-hotmart-url').value;
 
       try {
         const resp = await fetch('/api/admin/ebooks', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id, title, price, original_price, platform, folder_path })
+          body: JSON.stringify({ id, title, price, original_price, platform, folder_path, hotmart_url })
         });
         const data = await resp.json();
         if (data.success) {

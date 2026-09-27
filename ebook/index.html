@@ -706,10 +706,10 @@
                 <span class="price-original">R$ 97,00</span>
                 <span class="price-current"><small>R$</small> 47,00</span>
               </div>
-              <span class="price-pix-badge">Pix Imediato</span>
+              <span class="price-pix-badge" style="background:rgba(228,67,34,0.15); color:#ff6e4e; border-color:rgba(228,67,34,0.35);">Checkout Hotmart</span>
             </div>
-            <button class="btn-buy" type="button" onclick="openCheckout('esteira-automacao')">
-              Comprar com Acesso Imediato ↗
+            <button class="btn-buy" type="button" onclick="openHotmartCheckout('esteira-automacao')">
+              Comprar na Hotmart ↗
             </button>
           </div>
         </article>
@@ -735,10 +735,10 @@
                 <span class="price-original">R$ 97,00</span>
                 <span class="price-current"><small>R$</small> 37,00</span>
               </div>
-              <span class="price-pix-badge">Pix Imediato</span>
+              <span class="price-pix-badge" style="background:rgba(228,67,34,0.15); color:#ff6e4e; border-color:rgba(228,67,34,0.35);">Checkout Hotmart</span>
             </div>
-            <button class="btn-buy" type="button" onclick="openCheckout('trafego-hiperlocal')">
-              Comprar com Acesso Imediato ↗
+            <button class="btn-buy" type="button" onclick="openHotmartCheckout('trafego-hiperlocal')">
+              Comprar na Hotmart ↗
             </button>
           </div>
         </article>
@@ -764,10 +764,10 @@
                 <span class="price-original">R$ 197,00</span>
                 <span class="price-current"><small>R$</small> 67,00</span>
               </div>
-              <span class="price-pix-badge">Pix Imediato</span>
+              <span class="price-pix-badge" style="background:rgba(228,67,34,0.15); color:#ff6e4e; border-color:rgba(228,67,34,0.35);">Checkout Hotmart</span>
             </div>
-            <button class="btn-buy" type="button" onclick="openCheckout('copywriting-black')">
-              Comprar com Acesso Imediato ↗
+            <button class="btn-buy" type="button" onclick="openHotmartCheckout('copywriting-black')">
+              Comprar na Hotmart ↗
             </button>
           </div>
         </article>
@@ -793,10 +793,10 @@
                 <span class="price-original">R$ 127,00</span>
                 <span class="price-current"><small>R$</small> 47,00</span>
               </div>
-              <span class="price-pix-badge">Pix Imediato</span>
+              <span class="price-pix-badge" style="background:rgba(228,67,34,0.15); color:#ff6e4e; border-color:rgba(228,67,34,0.35);">Checkout Hotmart</span>
             </div>
-            <button class="btn-buy" type="button" onclick="openCheckout('python-automacao')">
-              Comprar com Acesso Imediato ↗
+            <button class="btn-buy" type="button" onclick="openHotmartCheckout('python-automacao')">
+              Comprar na Hotmart ↗
             </button>
           </div>
         </article>
@@ -805,94 +805,46 @@
     </div>
   </main>
 
-  <!-- Modal de Checkout Transparente Pix -->
-  <dialog id="checkout-modal" aria-labelledby="modal-title">
-    <div class="modal-box">
-      <button type="button" class="modal-close" onclick="closeCheckout()" aria-label="Fechar checkout">×</button>
+  <!-- Modal de Redirecionamento Oficial Hotmart -->
+  <dialog id="hotmart-checkout-modal" aria-labelledby="modal-hotmart-title">
+    <div class="modal-box" style="text-align: center; max-width: 520px;">
+      <button type="button" class="modal-close" onclick="closeHotmartModal()" aria-label="Fechar">×</button>
 
-      <!-- Etapa 1: Dados do Comprador -->
-      <div id="checkout-step-form">
-        <div class="modal-head">
-          <p class="modal-kicker">CHECKOUT SEGURO & LIBERAÇÃO IMEDIATA</p>
-          <h3 class="modal-title" id="modal-product-title">Esteira de Automação para Negócios Locais</h3>
-          <div class="modal-price-bar">
-            <span>Pagamento via Pix (Sem taxas)</span>
-            <strong id="modal-product-price">R$ 47,00</strong>
-          </div>
-        </div>
-
-        <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)">
-          <input type="hidden" id="form-ebook-id" value="">
-          <div class="form-group">
-            <label for="form-name">Seu Nome Completo</label>
-            <input type="text" id="form-name" placeholder="Ex: Roberto Silva" required>
-          </div>
-          <div class="form-group">
-            <label for="form-email">Seu E-mail (Onde você receberá a chave de acesso)</label>
-            <input type="email" id="form-email" placeholder="Ex: roberto@empresa.com.br" required>
-            <p class="form-hint">O código de acesso exclusivo será enviado para este e-mail.</p>
-          </div>
-          <div class="form-group">
-            <label for="form-cpf">CPF (Obrigatório para emissão do Pix pelo Banco Central)</label>
-            <input type="text" id="form-cpf" placeholder="000.000.000-00" maxlength="14" required>
-          </div>
-          <button type="submit" class="btn-buy" id="btn-submit-order" style="margin-top: 10px;">
-            Gerar Chave Pix para Acesso Imediato ↗
-          </button>
-        </form>
+      <div style="margin-bottom: 16px;">
+        <span class="pill pill-hotmart" style="font-size: 0.8rem; padding: 6px 14px; background: rgba(228,67,34,0.18); color: #ff6e4e; border: 1px solid rgba(228,67,34,0.4); border-radius: 20px; font-weight: 800; letter-spacing: 0.05em;">
+          🔒 CHECKOUT OFICIAL HOTMART
+        </span>
       </div>
 
-      <!-- Etapa 2: QR Code Pix & Polling -->
-      <div id="checkout-step-pix" class="pix-container">
-        <p class="modal-kicker">PAGAMENTO INSTANTÂNEO</p>
-        <h3 class="modal-title">Escaneie o QR Code ou Copie o Código</h3>
-        <p style="font-size:0.86rem; color:#a4b7c6; margin-top:6px;">Abra o app do seu banco, escolha Pix e aponte a câmera:</p>
-
-        <div class="qr-frame">
-          <img id="pix-qr-img" src="" alt="QR Code Pix para Pagamento">
-        </div>
-
-        <p style="font-size:0.78rem; color:#839db0; margin-bottom:6px;">Ou use o código Pix Copia e Cola:</p>
-        <div class="pix-copia-cola" id="pix-code-text"></div>
-
-        <div class="pix-actions">
-          <button type="button" class="btn-copy" onclick="copyPixCode()">
-            📋 Copiar Chave Pix
-          </button>
-          <button type="button" class="btn-simulate" id="btn-mock-approve" onclick="simulatePaymentApproval()">
-            ⚡ Simular Pagamento Instantâneo (Ambiente de Teste)
-          </button>
-        </div>
-
-        <div class="pulse-status">
-          <span class="status-dot"></span>
-          <span id="polling-status-msg">Aguardando confirmação bancária em tempo real...</span>
-        </div>
+      <h3 class="modal-title" id="modal-hotmart-title" style="font-size: 1.35rem; margin-bottom: 8px;">Esteira de Automação para Negócios Locais</h3>
+      <div class="modal-price-bar" style="display:inline-flex; align-items:center; gap:12px; background: rgba(255,255,255,0.04); padding: 8px 18px; border-radius: 8px; margin-bottom: 20px;">
+        <span style="color:#94a3b8; font-size:0.85rem;">Valor Promocional:</span>
+        <strong id="modal-hotmart-price" style="color:var(--accent); font-size:1.35rem;">R$ 47,00</strong>
       </div>
 
-      <!-- Etapa 3: Sucesso & Chave Gerada -->
-      <div id="checkout-step-success" class="success-container">
-        <div class="success-icon">✓</div>
-        <p class="modal-kicker" style="color:var(--green)">PAGAMENTO CONFIRMADO</p>
-        <h3 class="modal-title">Seu Acesso foi Liberado!</h3>
-        <p style="font-size:0.88rem; color:#cbdbe4; margin-top:8px;">
-          Enviamos uma cópia das instruções para o seu e-mail. Guarde a sua chave única de acesso:
+      <div style="background: rgba(14, 23, 36, 0.7); border: 1px solid rgba(103, 213, 197, 0.2); border-radius: 12px; padding: 18px; text-align: left; margin-bottom: 24px; font-size: 0.88rem; color: #cbdbe4;">
+        <p style="margin-bottom: 10px; display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--green); font-weight:bold;">✓</span> <strong>Pagamento 100% Blindado:</strong> Processado pela Hotmart
         </p>
-
-        <div class="access-key-box">
-          <span>Sua Chave Única de Licença</span>
-          <strong id="success-access-code">CD-XXXX-YYYY</strong>
-        </div>
-
-        <p style="font-size:0.8rem; color:#f59e0b; margin-bottom:18px;">
-          🔒 Esta chave permite <strong>uma sessão ativa por vez</strong>. O uso compartilhado bloqueia o acesso.
+        <p style="margin-bottom: 10px; display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--green); font-weight:bold;">✓</span> <strong>Formas de Pagamento:</strong> Pix instantâneo, Cartão em até 12x ou Boleto
         </p>
+        <p style="margin-bottom: 10px; display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--green); font-weight:bold;">✓</span> <strong>Garantia Incondicional:</strong> 7 dias para testar sem risco
+        </p>
+        <p style="display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--green); font-weight:bold;">✓</span> <strong>Acesso Exclusivo:</strong> Licença individual para o Leitor Web Protegido
+        </p>
+      </div>
 
-        <a href="#" class="btn-buy" id="btn-open-reader-now">
-          Abrir E-book no Leitor Digital Agora ↗
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <a id="btn-hotmart-direct" href="#" target="_blank" rel="noopener noreferrer" class="btn-buy" style="background:#e44322; color:#fff; font-weight:800; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; padding:14px; font-size:1rem; border-radius:10px; box-shadow: 0 10px 25px rgba(228,67,34,0.35);">
+          Ir para Pagamento Seguro na Hotmart ↗
+        </a>
+        <a id="btn-whatsapp-support" href="https://wa.me/5531993963275" target="_blank" rel="noopener noreferrer" style="background:transparent; border:1px solid rgba(103, 213, 197, 0.3); color:var(--accent); font-weight:700; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; padding:10px; font-size:0.86rem; border-radius:8px;">
+          💬 Dúvidas sobre o conteúdo? Fale direto no WhatsApp
         </a>
       </div>
-
     </div>
   </dialog>
 
@@ -938,153 +890,73 @@
       'esteira-automacao': {
         title: 'Esteira de Automação para Negócios Locais',
         price: 'R$ 47,00',
-        numericPrice: 47.00
+        numericPrice: 47.00,
+        hotmartUrl: 'https://pay.hotmart.com/esteira-automacao'
       },
       'trafego-hiperlocal': {
         title: 'Manual Prático de Tráfego Pago Hiperlocal',
         price: 'R$ 37,00',
-        numericPrice: 37.00
+        numericPrice: 37.00,
+        hotmartUrl: 'https://pay.hotmart.com/trafego-hiperlocal'
       },
       'copywriting-black': {
         title: 'Templates de Copywriting para Infoprodutos Black',
         price: 'R$ 67,00',
-        numericPrice: 67.00
+        numericPrice: 67.00,
+        hotmartUrl: 'https://pay.hotmart.com/copywriting-black'
       },
       'python-automacao': {
         title: 'Guia Avançado de Python para Automação',
         price: 'R$ 47,00',
-        numericPrice: 47.00
+        numericPrice: 47.00,
+        hotmartUrl: 'https://pay.hotmart.com/python-automacao'
       }
     };
 
-    let currentOrderId = null;
-    let pollInterval = null;
-    const checkoutModal = document.getElementById('checkout-modal');
+    const hotmartModal = document.getElementById('hotmart-checkout-modal');
 
-    function openCheckout(ebookId) {
+    // Sincroniza dinamicamente valores e links atualizados do Supabase/Painel Admin
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('/api/admin/ebooks')
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.ebooks) {
+            data.ebooks.forEach(eb => {
+              if (EBOOK_DATA[eb.id]) {
+                if (eb.price) EBOOK_DATA[eb.id].price = `R$ ${parseFloat(eb.price).toFixed(2).replace('.', ',')}`;
+                if (eb.hotmart_url) EBOOK_DATA[eb.id].hotmartUrl = eb.hotmart_url;
+              }
+            });
+          }
+        })
+        .catch(err => console.log('[Ebooks Sync]: Usando valores padrão do catálogo'));
+
+      if (hotmartModal) {
+        hotmartModal.addEventListener('click', (e) => {
+          if (e.target === hotmartModal) closeHotmartModal();
+        });
+      }
+    });
+
+    function openHotmartCheckout(ebookId) {
       const data = EBOOK_DATA[ebookId];
       if (!data) return;
 
-      document.getElementById('form-ebook-id').value = ebookId;
-      document.getElementById('modal-product-title').innerText = data.title;
-      document.getElementById('modal-product-price').innerText = data.price;
+      document.getElementById('modal-hotmart-title').innerText = data.title;
+      document.getElementById('modal-hotmart-price').innerText = data.price;
 
-      // Reseta telas
-      document.getElementById('checkout-step-form').style.display = 'block';
-      document.getElementById('checkout-step-pix').style.display = 'none';
-      document.getElementById('checkout-step-success').style.display = 'none';
+      const hotmartLink = data.hotmartUrl || `https://pay.hotmart.com/${ebookId}`;
+      const btnHotmart = document.getElementById('btn-hotmart-direct');
+      btnHotmart.href = hotmartLink;
 
-      checkoutModal.showModal();
+      const waText = encodeURIComponent(`Olá Cássio! Gostaria de saber mais e adquirir o e-book "${data.title}" via Hotmart.`);
+      document.getElementById('btn-whatsapp-support').href = `https://wa.me/5531993963275?text=${waText}`;
+
+      hotmartModal.showModal();
     }
 
-    function closeCheckout() {
-      if (pollInterval) clearInterval(pollInterval);
-      checkoutModal.close();
-    }
-
-    checkoutModal.addEventListener('click', (e) => {
-      if (e.target === checkoutModal) closeCheckout();
-    });
-
-    async function handleCheckoutSubmit(e) {
-      e.preventDefault();
-      const btn = document.getElementById('btn-submit-order');
-      btn.innerText = 'Gerando Pix... Aguarde';
-      btn.disabled = true;
-
-      const ebookId = document.getElementById('form-ebook-id').value;
-      const name = document.getElementById('form-name').value;
-      const email = document.getElementById('form-email').value;
-      const cpf = document.getElementById('form-cpf').value;
-
-      try {
-        const response = await fetch('/api/checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ebookId, name, email, cpf })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok || !data.success) {
-          throw new Error(data.error || 'Falha ao processar checkout');
-        }
-
-        currentOrderId = data.orderId;
-
-        // Renderiza etapa do Pix
-        document.getElementById('pix-qr-img').src = data.qrCodeBase64;
-        document.getElementById('pix-code-text').innerText = data.copyPasteCode;
-
-        document.getElementById('checkout-step-form').style.display = 'none';
-        document.getElementById('checkout-step-pix').style.display = 'block';
-
-        // Inicia polling em tempo real
-        startPollingPayment(currentOrderId);
-
-      } catch (err) {
-        alert('Erro ao iniciar compra: ' + err.message);
-      } finally {
-        btn.innerText = 'Gerar Chave Pix para Acesso Imediato ↗';
-        btn.disabled = false;
-      }
-    }
-
-    function copyPixCode() {
-      const code = document.getElementById('pix-code-text').innerText;
-      navigator.clipboard.writeText(code).then(() => {
-        alert('✓ Código Pix Copia e Cola copiado com sucesso! Abra o app do seu banco e cole no Pix.');
-      });
-    }
-
-    function startPollingPayment(orderId) {
-      if (pollInterval) clearInterval(pollInterval);
-
-      pollInterval = setInterval(async () => {
-        try {
-          const resp = await fetch(`/api/status?orderId=${encodeURIComponent(orderId)}`);
-          const data = await resp.json();
-
-          if (data.status === 'approved') {
-            clearInterval(pollInterval);
-            renderSuccess(data);
-          }
-        } catch (e) {
-          console.log('[Polling Status]: Aguardando...');
-        }
-      }, 2500);
-    }
-
-    async function simulatePaymentApproval() {
-      if (!currentOrderId) return;
-      const btn = document.getElementById('btn-mock-approve');
-      btn.innerText = 'Confirmando pagamento...';
-      btn.disabled = true;
-
-      try {
-        const resp = await fetch('/api/status', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ orderId: currentOrderId, simulateApproval: true })
-        });
-        const data = await resp.json();
-        if (data.status === 'approved') {
-          if (pollInterval) clearInterval(pollInterval);
-          renderSuccess(data);
-        }
-      } catch (err) {
-        alert('Erro na simulação: ' + err.message);
-      }
-    }
-
-    function renderSuccess(orderData) {
-      document.getElementById('checkout-step-pix').style.display = 'none';
-      document.getElementById('checkout-step-success').style.display = 'block';
-
-      document.getElementById('success-access-code').innerText = orderData.accessCode;
-      
-      const readerBtn = document.getElementById('btn-open-reader-now');
-      readerBtn.href = orderData.redirectUrl || `/ebook/leitor.html?token=${orderData.accessCode}&email=${encodeURIComponent(orderData.email)}`;
+    function closeHotmartModal() {
+      if (hotmartModal) hotmartModal.close();
     }
   </script>
 </body>

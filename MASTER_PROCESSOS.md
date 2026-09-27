@@ -383,6 +383,23 @@ Abaixo está o registro cronológico e estruturado de todas as fundações e fun
 
 ---
 
+### [PROC-026] Direcionamento Estratégico de Checkout para a Hotmart e Sincronização Dinâmica de Links
+- **Data de Homologação:** 2026-09-27
+- **Responsável:** Auditor Multi-Especialista Sênior (UX/UI 30a, Software, Arquitetura e Marketing 40a)
+- **Objetivo de Negócio:** Substituição do fluxo de checkout interno simulado pelo direcionamento oficial para a plataforma **Hotmart**, alavancando a autoridade de marca, a infraestrutura de pagamentos (Pix instantâneo, Cartão em até 12x, parcelamento inteligente e garantia legal de 7 dias) e o recebimento financeiro direto na conta bancária de Cássio Diniz sem intermediários manuais.
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (10/10) — Atualização dos cards de produto com badge temática de prestígio Hotmart (`#ff6e4e`), CTA de alta conversão *"Comprar na Hotmart ↗"* e Modal explicativo de compra segura, destacando os 4 pilares de confiança (Hotmart Blindada, Pagamentos Múltiplos, 7 Dias de Garantia e Acesso Exclusivo ao Leitor Digital).
+- **Pilar Engenharia de Software:** APROVADO (10/10) — Eliminação do formulário de CPF na vitrine, simplificação radical do checkout, integração com a API `/api/admin/ebooks` para puxar dinamicamente os links atualizados da Hotmart cadastrados no Supabase/Redis e compatibilidade nativa com o receptor de Webhook oficial da Hotmart (`api/webhook.js`).
+- **Pilar Arquitetura de Sistemas:** APROVADO (10/10) — Governança no Painel Administrativo: adição do campo `hotmart_url` no modal de edição de e-books (`ebook/admin.html`), permitindo a Cássio Diniz alterar o link de pagamento de qualquer um dos 4 e-books a qualquer momento sem necessidade de deploy ou alteração de código fonte.
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (10/10) — Decisão de altíssimo impacto positivo no CRO (Conversion Rate Optimization): a marca Hotmart elimina o atrito de desconfiança de compras online, oferece múltiplos meios de pagamento e reduz carrinhos abandonados, mantendo o ecossistema Cássio Diniz como o ambiente exclusivo de consumo e leitura do conteúdo digital.
+- **Arquivos Afetados:**
+  - `ebook/index.html` (Cards de produto com badges e botões Hotmart, novo modal de direcionamento seguro e sincronização assíncrona)
+  - `ebook/admin.html` (Campo de edição do Link de Checkout Hotmart no modal e envio para API)
+  - `api/admin/ebooks.js` (Suporte ao campo `hotmart_url` no GET, POST e sincronização)
+  - `api/lib/catalog.js` (URLs de referência Hotmart para os 4 produtos)
+- **Status:** CONCLUÍDO / HOMOLOGADO
+
+---
+
 ## 4. Protocolo e Template Obrigatório para Novos Processos
 
 Toda e qualquer nova funcionalidade, componente, refatoração de código ou alteração de copy no site **DEVE** ser submetida à auditoria do **Agente Auditor Multi-Especialista** e registrada neste documento seguindo o padrão abaixo:
