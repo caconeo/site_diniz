@@ -876,8 +876,9 @@
     async function loadEbooksData() {
       try {
         const anonKey = sessionStorage.getItem('cd_supabase_anon_key') || '';
-        const resp = await fetch('/api/admin/ebooks', {
-          headers: { 'x-supabase-key': anonKey }
+        const resp = await fetch('/api/admin/ebooks?_t=' + Date.now(), {
+          headers: { 'x-supabase-key': anonKey },
+          cache: 'no-store'
         });
         const data = await resp.json();
         if (data.success) {
@@ -945,13 +946,18 @@
 
     async function handleSaveEbook(e) {
       e.preventDefault();
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const origText = submitBtn.innerText;
+      submitBtn.innerText = 'Gravando no Supabase...';
+      submitBtn.disabled = true;
+
       const id = document.getElementById('edit-ebook-id').value;
-      const title = document.getElementById('edit-title').value;
+      const title = document.getElementById('edit-title').value.trim();
       const price = document.getElementById('edit-price').value;
       const original_price = document.getElementById('edit-orig-price').value;
       const platform = document.getElementById('edit-platform').value;
-      const folder_path = document.getElementById('edit-folder').value;
-      const hotmart_url = document.getElementById('edit-hotmart-url').value;
+      const folder_path = document.getElementById('edit-folder').value.trim();
+      const hotmart_url = document.getElementById('edit-hotmart-url').value.trim();
 
       try {
         const resp = await fetch('/api/admin/ebooks', {
@@ -960,13 +966,19 @@
           body: JSON.stringify({ id, title, price, original_price, platform, folder_path, hotmart_url })
         });
         const data = await resp.json();
-        if (data.success) {
-          alert('✓ E-book atualizado com sucesso no Supabase e na Loja!');
-          closeEditModal();
-          loadEbooksData();
+
+        if (!resp.ok || !data.success) {
+          throw new Error(data.error || 'Falha ao salvar no banco');
         }
+
+        alert(data.message || '✓ E-book gravado com sucesso no Banco de Dados Supabase!');
+        closeEditModal();
+        await loadEbooksData();
       } catch (err) {
         alert('Erro ao salvar e-book: ' + err.message);
+      } finally {
+        submitBtn.innerText = origText;
+        submitBtn.disabled = false;
       }
     }
 

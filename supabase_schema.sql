@@ -34,10 +34,14 @@ CREATE TABLE IF NOT EXISTS public.ebooks (
     content_file TEXT NOT NULL,
     lead TEXT,
     features JSONB DEFAULT '[]'::jsonb,
+    hotmart_url TEXT,
     status TEXT NOT NULL DEFAULT 'active', -- 'active', 'draft'
     created_at TIMESTAMPTZ DEFAULT timezone('utc'::text, now()) NOT NULL,
     updated_at TIMESTAMPTZ DEFAULT timezone('utc'::text, now()) NOT NULL
 );
+
+-- Garantir adição da coluna hotmart_url caso a tabela já tenha sido criada anteriormente
+ALTER TABLE public.ebooks ADD COLUMN IF NOT EXISTS hotmart_url TEXT;
 
 -- 3. SEED DOS 4 E-BOOKS OFICIAIS COM SUAS RESPECTIVAS PASTAS
 INSERT INTO public.ebooks (id, title, short_title, kicker, badge, price, original_price, cover, platform, folder_path, content_file, lead, features)

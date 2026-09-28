@@ -400,6 +400,22 @@ Abaixo está o registro cronológico e estruturado de todas as fundações e fun
 
 ---
 
+### [PROC-027] Correção de Persistência no Banco Supabase e Eliminação de Cache Estático de E-books
+- **Data de Homologação:** 2026-09-27
+- **Responsável:** Auditor Multi-Especialista Sênior (UX/UI 30a, Software, Arquitetura e Marketing 40a)
+- **Objetivo de Negócio:** Corrigir falha silenciosa que impedia a gravação real de edições de valores, títulos, pastas e links de checkout no banco de dados Supabase. Eliminar discrepâncias entre a mensagem de confirmação do modal e o estado persistido no banco, assegurando que todas as alterações feitas pelo administrador se reflitam imediatamente e perpetuamente no painel e na vitrine da loja.
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (10/10) — Feedback de carregamento no botão (*"Gravando no Supabase..."* com disable temporário para evitar cliques duplos), mensagens de erro e sucesso precisas e re-renderização instantânea da tabela após fechamento do modal.
+- **Pilar Engenharia de Software:** APROVADO (10/10) — Descoberta da causa raiz: o payload de atualização incluía campos ausentes no schema cache do PostgREST (`hotmart_url`), causando HTTP 400 silenciado pelo try/catch. Implementação de payload estrito com colunas canônicas (`title`, `short_title`, `price`, `original_price`, `platform`, `folder_path`, `status`, `updated_at`), fallback inteligente com tolerância a novas colunas, cabeçalhos `Cache-Control: no-store` na API e parâmetro anti-cache timestamp (`?_t=...`) no frontend.
+- **Pilar Arquitetura de Sistemas:** APROVADO (10/10) — Integridade referencial restaurada: a API só devolve status 200 de sucesso quando o Supabase confirma formalmente a atualização de linhas (`savedInSupabase: true`). Atualização do script [supabase_schema.sql](file:///g:/My%20Drive/Projeto%20Antigravity%20-%20Sites/site_diniz/site_diniz/supabase_schema.sql) com a instrução `ALTER TABLE public.ebooks ADD COLUMN IF NOT EXISTS hotmart_url TEXT;`.
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (10/10) — Garantia total de governança para o estrategista: qualquer ajuste em preços, promoções relâmpago ou troca de links Hotmart passa a entrar em vigor no exato segundo em que é salvo.
+- **Arquivos Afetados:**
+  - `api/admin/ebooks.js` (Cache-Control no-store, payload estrito com fallback resiliente e retorno rigoroso de erros)
+  - `ebook/admin.html` (Tratamento estrito de `resp.ok`, loading states e cache-busting timestamp na listagem)
+  - `supabase_schema.sql` (Adicionado comando DDL para coluna `hotmart_url`)
+- **Status:** CONCLUÍDO / HOMOLOGADO
+
+---
+
 ## 4. Protocolo e Template Obrigatório para Novos Processos
 
 Toda e qualquer nova funcionalidade, componente, refatoração de código ou alteração de copy no site **DEVE** ser submetida à auditoria do **Agente Auditor Multi-Especialista** e registrada neste documento seguindo o padrão abaixo:
