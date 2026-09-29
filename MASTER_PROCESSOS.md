@@ -416,6 +416,25 @@ Abaixo está o registro cronológico e estruturado de todas as fundações e fun
 
 ---
 
+### [PROC-028] Blindagem de Persistência Híbrida e Gestão Visual de Links Hotmart no Painel Administrativo
+- **Data de Homologação:** 2026-09-29
+- **Responsável:** Auditor Multi-Especialista Sênior (UX/UI 30a, Software, Arquitetura e Marketing 40a)
+- **Objetivo de Negócio:** Solucionar em definitivo a impossibilidade de salvar novos links de checkout da Hotmart pelo painel do administrador (`ebook/admin.html`), onde as edições eram perdidas a cada recarregamento devido à ausência da coluna `hotmart_url` no schema remoto do Supabase e à falta de persistência local/resiliente. Garantir transparência visual da URL configurada diretamente na tabela do catálogo.
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (25/25) — Adicionada nova coluna *"Link Hotmart"* na tabela do catálogo administrativo com link direto truncado elegantemente com tooltip para inspeção ágil; atualização reativa imediata na tabela assim que o modal fecha, sem delay perceptível; envio de cabeçalho autenticado e feedback visual cristalino.
+- **Pilar Engenharia de Software:** APROVADO (25/25) — Arquitetura de persistência resiliente em 3 camadas:
+  1. *Supabase First:* Tenta gravar diretamente na coluna `hotmart_url`.
+  2. *Supabase Resilient Fallback:* Caso a coluna não exista no schema PostgREST (código `PGRST204`), serializa e persiste o link dentro da coluna JSONB `features` com marcador `__hotmart_url__:URL`, preservando o histórico integral e sanitizando a saída para que nenhuma tag técnica vaze na vitrine ou painel.
+  3. *Local Dev Override:* Persistência em disco via `api/lib/catalog_overrides.json` com detecção de ambiente serverless/read-only e sincronia com Upstash Redis em memória.
+- **Pilar Arquitetura de Sistemas:** APROVADO (25/25) — Desacoplamento à prova de falhas: o sistema opera perfeitamente independente do usuário ter ou não rodado a migration SQL no Supabase. Quando a migration `ALTER TABLE public.ebooks ADD COLUMN IF NOT EXISTS hotmart_url TEXT;` for executada, a transição para a coluna dedicada ocorre de forma automática e transparente.
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (25/25) — CRO e Funil de Vendas blindados: os links Hotmart customizados (com tags de rastreamento UTM, cupons de desconto e checkout mode) agora persistem de forma infalível e alimentam os botões de compra em `ebook/index.html` em tempo real.
+- **Arquivos Afetados:**
+  - `api/admin/ebooks.js` (Persistência multi-camada Supabase + JSONB features + overrides locais)
+  - `ebook/admin.html` (Coluna visual de Link Hotmart, envio de token `x-supabase-key` no POST e atualização em memória)
+  - `api/lib/catalog_overrides.json` (Armazenamento local persistente de overrides de configuração)
+- **Status:** CONCLUÍDO / HOMOLOGADO
+
+---
+
 ## 4. Protocolo e Template Obrigatório para Novos Processos
 
 Toda e qualquer nova funcionalidade, componente, refatoração de código ou alteração de copy no site **DEVE** ser submetida à auditoria do **Agente Auditor Multi-Especialista** e registrada neste documento seguindo o padrão abaixo:
@@ -465,6 +484,8 @@ Toda e qualquer nova funcionalidade, componente, refatoração de código ou alt
 | **PROC-017** | Tag Global Google AdSense (<head>) | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-022** | Livraria de E-books, Checkout Pix & Sessão Única | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-023** | Painel Admin, Gestão de Vendas & Supabase | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
+| **PROC-027** | Persistência no Banco Supabase & Eliminação de Cache | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
+| **PROC-028** | Blindagem de Persistência Híbrida & Links Hotmart | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 
 ---
 

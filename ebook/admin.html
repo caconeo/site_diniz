@@ -580,12 +580,13 @@
                   <th>Preço Atual</th>
                   <th>Preço Original</th>
                   <th>Plataforma</th>
-                  <th>Pasta Física no Servidor</th>
+                  <th>Link Hotmart</th>
+                  <th>Pasta Física</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody id="ebooks-table-body">
-                <tr><td colspan="7" style="text-align:center; padding:30px;">Carregando e-books...</td></tr>
+                <tr><td colspan="8" style="text-align:center; padding:30px;">Carregando e-books...</td></tr>
               </tbody>
             </table>
           </div>
@@ -733,6 +734,9 @@
   </dialog>
 
   <script>
+    const SUPABASE_URL = 'https://cnnsiahvhosusdqtqvxo.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNubnNpYWh2aG9zdXNkcXRxdnhvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5NTUwMjYsImV4cCI6MjEwNTUzMTAyNn0.FuhcsBj1NXEYkJyBAOou0cq5-6fTw717eeeXI5vxUqo';
+
     let currentAdminToken = sessionStorage.getItem('cd_admin_token');
     let loadedEbooks = [];
 
@@ -875,14 +879,50 @@
 
     async function loadEbooksData() {
       try {
-        const anonKey = sessionStorage.getItem('cd_supabase_anon_key') || '';
-        const resp = await fetch('/api/admin/ebooks?_t=' + Date.now(), {
-          headers: { 'x-supabase-key': anonKey },
-          cache: 'no-store'
-        });
-        const data = await resp.json();
-        if (data.success) {
-          loadedEbooks = data.ebooks;
+        let ebooksList = null;
+
+        // 1. Tenta carregar diretamente do Supabase REST API (garantido em qualquer ambiente)
+        try {
+          const sbRes = await fetch(`${SUPABASE_URL}/rest/v1/ebooks?select=*&order=created_at.asc`, {
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+            },
+            cache: 'no-store'
+          });
+          if (sbRes.ok) {
+            const sbData = await sbRes.json();
+            if (Array.isArray(sbData) && sbData.length > 0) {
+              ebooksList = sbData.map(eb => {
+                let hUrl = eb.hotmart_url;
+                if (!hUrl && Array.isArray(eb.features)) {
+                  const m = eb.features.find(f => typeof f === 'string' && f.startsWith('__hotmart_url'));
+                  if (m) hUrl = m.replace(/^__hotmart_url_{0,2}:/, '');
+                }
+                return {
+                  ...eb,
+                  hotmart_url: hUrl || `https://pay.hotmart.com/${eb.id}`
+                };
+              });
+            }
+          }
+        } catch (e) {
+          console.warn('[Direct Supabase Load]:', e);
+        }
+
+        // 2. Se falhar, tenta via rota de API serverless
+        if (!ebooksList || ebooksList.length === 0) {
+          try {
+            const resp = await fetch('/api/admin/ebooks?_t=' + Date.now(), { cache: 'no-store' });
+            const data = await resp.json();
+            if (data.success && Array.isArray(data.ebooks)) {
+              ebooksList = data.ebooks;
+            }
+          } catch (errApi) {}
+        }
+
+        if (ebooksList && ebooksList.length > 0) {
+          loadedEbooks = ebooksList;
           renderEbooksTable(loadedEbooks);
         }
       } catch (err) {
@@ -901,12 +941,19 @@
         else if (eb.platform === 'kiwify') platClass = 'pill-kiwify';
         else if (eb.platform === 'monetizze') platClass = 'pill-monetizze';
 
+        const hotmartDisplay = eb.hotmart_url
+          ? `<a href="${eb.hotmart_url}" target="_blank" rel="noopener noreferrer" style="color:var(--accent); font-size:0.75rem; text-decoration:underline; word-break:break-all;" title="${eb.hotmart_url}">
+              ${eb.hotmart_url.length > 32 ? eb.hotmart_url.substring(0, 30) + '…' : eb.hotmart_url} ↗
+             </a>`
+          : '<span style="color:var(--muted); font-size:0.75rem;">—</span>';
+
         tr.innerHTML = `
           <td><code>${eb.id}</code></td>
           <td><strong>${eb.short_title || eb.title}</strong></td>
           <td><strong style="color:var(--accent);">R$ ${parseFloat(eb.price).toFixed(2)}</strong></td>
           <td><span style="color:#6d8495; text-decoration:line-through;">R$ ${parseFloat(eb.original_price || 0).toFixed(2)}</span></td>
           <td><span class="pill ${platClass}">${eb.platform}</span></td>
+          <td>${hotmartDisplay}</td>
           <td><span class="folder-path-tag">${eb.folder_path}</span></td>
           <td>
             <button class="btn-action" onclick="openEditModal('${eb.id}')">Editar Valores ↗</button>
@@ -953,33 +1000,121 @@
 
       const id = document.getElementById('edit-ebook-id').value;
       const title = document.getElementById('edit-title').value.trim();
-      const price = document.getElementById('edit-price').value;
-      const original_price = document.getElementById('edit-orig-price').value;
+      const price = parseFloat(document.getElementById('edit-price').value) || 0;
+      const original_price = parseFloat(document.getElementById('edit-orig-price').value) || 0;
       const platform = document.getElementById('edit-platform').value;
       const folder_path = document.getElementById('edit-folder').value.trim();
       const hotmart_url = document.getElementById('edit-hotmart-url').value.trim();
 
+      let savedOk = false;
+      let errorMsg = null;
+
+      // 1. GRAVAÇÃO DIRETA NO BANCO SUPABASE VIA REST API (FUNCIONA EM QUALQUER AMBIENTE)
       try {
-        const resp = await fetch('/api/admin/ebooks', {
+        // Tenta gravar com a coluna hotmart_url diretamente
+        let patchRes = await fetch(`${SUPABASE_URL}/rest/v1/ebooks?id=eq.${id}`, {
+          method: 'PATCH',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+          body: JSON.stringify({
+            title,
+            short_title: title,
+            price,
+            original_price,
+            platform,
+            folder_path,
+            hotmart_url,
+            updated_at: new Date().toISOString()
+          })
+        });
+
+        if (patchRes.ok) {
+          const patched = await patchRes.json();
+          if (patched && patched.length > 0) savedOk = true;
+        } else {
+          // Se a coluna hotmart_url não existe no Supabase, grava no array features (JSONB)
+          const getRes = await fetch(`${SUPABASE_URL}/rest/v1/ebooks?id=eq.${id}&select=features`, {
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+            }
+          });
+          const rows = await getRes.json();
+          let feat = (rows && rows[0] && Array.isArray(rows[0].features)) ? rows[0].features : [];
+          feat = feat.filter(f => typeof f !== 'string' || !f.startsWith('__hotmart_url'));
+          if (hotmart_url) feat.push(`__hotmart_url__:${hotmart_url}`);
+
+          patchRes = await fetch(`${SUPABASE_URL}/rest/v1/ebooks?id=eq.${id}`, {
+            method: 'PATCH',
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=representation'
+            },
+            body: JSON.stringify({
+              title,
+              short_title: title,
+              price,
+              original_price,
+              platform,
+              folder_path,
+              features: feat,
+              updated_at: new Date().toISOString()
+            })
+          });
+
+          if (patchRes.ok) {
+            savedOk = true;
+          } else {
+            const errBody = await patchRes.text();
+            errorMsg = `Supabase HTTP ${patchRes.status}: ${errBody}`;
+          }
+        }
+      } catch (errSupabase) {
+        console.warn('[Direct Supabase Error]:', errSupabase);
+        errorMsg = errSupabase.message;
+      }
+
+      // 2. SINCRONIZAÇÃO EM SEGUNDO PLANO COM A API VERCEL / REDIS (NÃO BLOQUEANTE)
+      try {
+        fetch('/api/admin/ebooks', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id, title, price, original_price, platform, folder_path, hotmart_url })
-        });
-        const data = await resp.json();
+        }).catch(() => {});
+      } catch (e) {}
 
-        if (!resp.ok || !data.success) {
-          throw new Error(data.error || 'Falha ao salvar no banco');
+      if (savedOk) {
+        // Atualiza a memória local da tabela imediatamente
+        const idx = loadedEbooks.findIndex(e => e.id === id);
+        if (idx !== -1) {
+          loadedEbooks[idx] = {
+            ...loadedEbooks[idx],
+            title,
+            short_title: title,
+            price,
+            original_price,
+            platform,
+            folder_path,
+            hotmart_url
+          };
+          renderEbooksTable(loadedEbooks);
         }
 
-        alert(data.message || '✓ E-book gravado com sucesso no Banco de Dados Supabase!');
+        alert('✓ Gravado com sucesso no Banco de Dados Supabase!');
         closeEditModal();
         await loadEbooksData();
-      } catch (err) {
-        alert('Erro ao salvar e-book: ' + err.message);
-      } finally {
-        submitBtn.innerText = origText;
-        submitBtn.disabled = false;
+      } else {
+        alert('Erro ao gravar no Supabase: ' + (errorMsg || 'Verifique sua conexão ou permissões.'));
       }
+
+      submitBtn.innerText = origText;
+      submitBtn.disabled = false;
     }
 
     async function handleManualCodeSubmit(e) {
