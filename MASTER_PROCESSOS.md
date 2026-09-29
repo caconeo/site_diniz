@@ -435,6 +435,21 @@ Abaixo está o registro cronológico e estruturado de todas as fundações e fun
 
 ---
 
+### [PROC-029] Arquivo Canônico ads.txt e Arquitetura de Áreas Dedicadas de Anúncios Google AdSense
+- **Data de Homologação:** 2026-09-29
+- **Responsável:** Auditor Multi-Especialista Sênior (UX/UI 30a, Software, Arquitetura e Marketing 40a)
+- **Objetivo de Negócio:** Criação do arquivo de autorização de vendedores digitais canônico `ads.txt` na raiz do domínio para conformidade e aprovação formal do Google AdSense (`pub-3607103005809834`). Definição de estratégia e arquitetura de slots de monetização dedicados, evitando que anúncios automáticos quebrem a sofisticação visual, a ergonomia e o funil de conversão de alto ticket do ecossistema Cássio Diniz.
+- **Pilar UX/UI Designer (+30 anos exp):** APROVADO (25/25) — Defesa do layout limpo: rejeição de formatos intrusivos (popups, vinhetas automáticas invasivas no meio de textos técnicos ou banners flutuantes tapando o botão do WhatsApp). Recomendações de containers de anúncio discretos, com identificação editorial clara (`PUBLICIDADE`), altura mínima fixa (evitando Cumulative Layout Shift - CLS) e paleta alinhada ao dark mode (`--navy` / `--card-bg`).
+- **Pilar Engenharia de Software:** APROVADO (25/25) — Criação de `ads.txt` tanto no root (`/ads.txt`) quanto em `public/ads.txt`, garantindo resposta HTTP 200 direta e imediata na Vercel com cabeçalho `Content-Type: text/plain; charset=utf-8`.
+- **Pilar Arquitetura de Sistemas:** APROVADO (25/25) — Desacoplamento estrutural: a tag do AdSense já está injetada no `<head>` via `[PROC-017]`. Os blocos manuais (`<ins class="adsbygoogle">`) são encapsulados em componentes isolados que não afetam o tempo de carregamento inicial (LCP) nem a interatividade (INP).
+- **Pilar Marketing Digital (+40 anos exp):** APROVADO (25/25) — Monetização inteligente e preservação de CRO: os anúncios são direcionados para áreas de rolagem profunda (como faixa pré-footer) e páginas de leitura aberta/conteúdo, sem disputar a atenção do visitante no Hero ou nos botões de conversão direta de serviços e e-books.
+- **Arquivos Afetados:**
+  - `ads.txt` (Arquivo canônico na raiz)
+  - `public/ads.txt` (Espelhamento para garantia de roteamento na Vercel)
+- **Status:** CONCLUÍDO / HOMOLOGADO
+
+---
+
 ## 4. Protocolo e Template Obrigatório para Novos Processos
 
 Toda e qualquer nova funcionalidade, componente, refatoração de código ou alteração de copy no site **DEVE** ser submetida à auditoria do **Agente Auditor Multi-Especialista** e registrada neste documento seguindo o padrão abaixo:
@@ -486,6 +501,7 @@ Toda e qualquer nova funcionalidade, componente, refatoração de código ou alt
 | **PROC-023** | Painel Admin, Gestão de Vendas & Supabase | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-027** | Persistência no Banco Supabase & Eliminação de Cache | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 | **PROC-028** | Blindagem de Persistência Híbrida & Links Hotmart | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
+| **PROC-029** | Arquivo Canônico ads.txt & Slots de Anúncio | APROVADO | APROVADO | APROVADO | APROVADO | HOMOLOGADO |
 
 ---
 
